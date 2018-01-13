@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sydney</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://meem67.github.io/blog/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/assembler.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Sydney</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://meem67.github.io/blog/">Home</a></li>
+                            
+                                <li><a href="https://meem67.github.io/blog/about">About</a></li>
+                            
+                                <li><a href="https://meem67.github.io/blog/tags/">Tags</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:me@example.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23B/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23B/"><i class="fa fa-twitter"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://meem67.github.io/blog/posts/microcorruption/sydney/">Sydney</a></h4>
+    <h5>March 22, 2017</h5>
+    
+    <a href="https://meem67.github.io/blogtags/microcorruption"><kbd class="item-tag">Microcorruption</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><p><h3 id="Sydney">Sydney</h3>
+Here we have four &lsquo;cmp&rsquo; instructions on two bytes of r15, respectively incrementing the offset by two each time. The first &lsquo;cmp&rsquo; checks, whether the first two bytes are 0x466a, the next two #0x6158 and so on.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-assembler" data-lang="assembler">448a &lt;check_password&gt;
+448a:  bf90 6a46 0000 cmp	#0x466a, 0x0(r15)
+4490:  0d20           jnz	$+0x1c
+4492:  bf90 5861 0200 cmp	#0x6158, 0x2(r15)
+4498:  0920           jnz	$+0x14
+449a:  bf90 6741 0400 cmp	#0x4167, 0x4(r15)
+44a0:  0520           jne	#0x44ac &lt;check_password+0x22&gt;
+44a2:  1e43           mov	#0x1, r14
+44a4:  bf90 6363 0600 cmp	#0x6363, 0x6(r15)
+44aa:  0124           jeq	#0x44ae &lt;check_password+0x24&gt;
+44ac:  0e43           clr	r14
+44ae:  0f4e           mov	r14, r15
+44b0:  3041           ret</code></pre></div></p>
+
+<p>We can either look for the corresponding ascii representation or write the hex representation in swapped order, as we have a little endian format here:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;6a46586167416363&#34;</span><span style="color:#f92672">.</span>decode(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;hex&#39;</span>)
+jFXagAcc</code></pre></div></p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

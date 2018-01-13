@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>nullcon HackIM - Write Up</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://meem67.github.io/blog/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/assembler.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">nullcon HackIM - Write Up</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://meem67.github.io/blog/">Home</a></li>
+                            
+                                <li><a href="https://meem67.github.io/blog/about">About</a></li>
+                            
+                                <li><a href="https://meem67.github.io/blog/tags/">Tags</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:me@example.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23B/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23B/"><i class="fa fa-twitter"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://meem67.github.io/blog/posts/ctfs/2017-02-12-nullcon_writeups/">nullcon HackIM - Write Up</a></h4>
+    <h5>February 12, 2017</h5>
+    
+    <a href="https://meem67.github.io/blogtags/ctf"><kbd class="item-tag">CTF</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><p>This CTF was powered by WalmartLabs <a href="http://ctf.nullcon.net/">(<a href="http://ctf.nullcon.net">http://ctf.nullcon.net</a>)</a> focusing a lot of different areas. It began on Friday, 10 Feb. 2017, 17:30 CET and last until Sunday, 12 Feb. 2017, 05:30 CET.</p>
+
+<p><h2 id="Programming">Programming</h2>
+<h3 id="Programming1">Programming Question 1</h3></p>
+
+<p>This challenge provided a file full of RGB codes, obviously pixels. So the task was basically writing a program, which reads the codes and generates an image out of this. With the use of <a href="https://pillow.readthedocs.io/en/4.0.x/">Phyton Image Library</a> this task could be achieved easily.</p>
+
+<p>We had a total of 528.601 pixels - so this lead to an image size of 929 x 569.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+<span style="color:#f92672">from</span> ast <span style="color:#f92672">import</span> literal_eval <span style="color:#66d9ef">as</span> make_tuple
+
+img <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>new(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;RGB&#39;</span>, (<span style="color:#ae81ff">929</span>, <span style="color:#ae81ff">569</span>))
+pixels <span style="color:#f92672">=</span> img<span style="color:#f92672">.</span>load()
+
+f <span style="color:#f92672">=</span> open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;pixels.txt&#34;</span>)
+img<span style="color:#f92672">.</span>putdata(make_tuple(f<span style="color:#f92672">.</span>read()))
+img<span style="color:#f92672">.</span>show()</code></pre></div>
+
+<p>Executing this script results in the folloging flag:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">flag{Pil_PIL_PIL}</code></pre></div></p>
+
+<p><h2 id="Cryptography">Cryptography</h2>
+<h3 id="Crypto2">Crypto Question 2</h3></p>
+
+<p>In this task the flag was basically the variables a and b, meeting the following equations of <a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange">Diffie–Hellman key exchange: </a></p>
+
+
+<figure >
+    
+        <img src="https://meem67.github.io/blog/images/nullcon_ctf_crypto_2_1.png" />
+    
+    
+</figure>
+
+
+<p>I&rsquo;ve written a python script, which brute forces the solution. Surely, the code is not optimal, but it works and is sufficient for a CTF.</p>
+
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">g <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+q <span style="color:#f92672">=</span> <span style="color:#ae81ff">541</span>
+a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#66d9ef">while</span> (a <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">and</span> b <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1000</span>):
+    <span style="color:#66d9ef">while</span> ((g<span style="color:#f92672">**</span>a) <span style="color:#f92672">%</span> q <span style="color:#f92672">!=</span> <span style="color:#ae81ff">298</span>):
+        a<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+
+    <span style="color:#66d9ef">while</span> ((g<span style="color:#f92672">**</span>b) <span style="color:#f92672">%</span> q <span style="color:#f92672">!=</span> <span style="color:#ae81ff">330</span>):
+        b<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+        
+    <span style="color:#66d9ef">if</span> (((g<span style="color:#f92672">**</span>a)<span style="color:#f92672">**</span>b) <span style="color:#f92672">%</span> q <span style="color:#f92672">==</span> <span style="color:#ae81ff">399</span>):
+        <span style="color:#66d9ef">print</span> a, b
+        a<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+        b<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span> </code></pre></div>
+Now I just needed to enter a valid combination of my findings.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">flag{<span style="color:#ae81ff">170</span>,<span style="color:#ae81ff">808</span>}</code></pre></div></p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

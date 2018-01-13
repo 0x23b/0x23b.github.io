@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>AlexCTF - Write Up</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://meem67.github.io/blog/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/assembler.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">AlexCTF - Write Up</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://meem67.github.io/blog/">Home</a></li>
+                            
+                                <li><a href="https://meem67.github.io/blog/about">About</a></li>
+                            
+                                <li><a href="https://meem67.github.io/blog/tags/">Tags</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:me@example.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23B/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23B/"><i class="fa fa-twitter"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://meem67.github.io/blog/posts/ctfs/2017-02-03-alex_ctf_writeups/">AlexCTF - Write Up</a></h4>
+    <h5>February 3, 2017</h5>
+    
+    <a href="https://meem67.github.io/blogtags/ctf"><kbd class="item-tag">CTF</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><p>This CTF was organized by Faculty of Engineering Alexandria University Egypt <a href="https://ctf.oddcoder.com/">(<a href="https://ctf.oddcoder.com/">https://ctf.oddcoder.com/</a>)</a> focusing Reverse Engineering, Cryptography, Forensics and Scripting. It began on Friday, 03 Feb. 2017, 10:00 UTC and last until Monday, 06 Feb. 2017, 10:00 UTC. Thanks so far to the organizers.</p>
+
+<p><h2 id="Cryptography">Cryptography</h2>
+<h3 id="Cryptography1">CR1: Ultracoded</h3></p>
+
+<p>A file full of ZERO&rsquo;s and ONE&rsquo;s? Lets try to replace them with numbers and send them trough a binary to ascii converter:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"> Li0gLi0uLiAuIC0uLi0gLS4tLiAtIC4uLS4gLSAuLi4uIC4tLS0tIC4uLi4uIC0tLSAuLS0tLSAuLi4gLS0tIC4uLi4uIC4uLSAuLS0uIC4uLi0tIC4tLiAtLS0gLi4uLi4gLiAtLi0uIC4tLiAuLi4tLSAtIC0tLSAtIC0uLi0gLQ<span style="color:#f92672">==</span></code></pre></div>
+Mh.. This looks like base64! Let&rsquo;s use another decoder:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">.-</span> <span style="color:#f92672">.-..</span> <span style="color:#f92672">.</span> <span style="color:#f92672">-..-</span> <span style="color:#f92672">-.-.</span> <span style="color:#f92672">-</span> <span style="color:#f92672">..-.</span> <span style="color:#f92672">-</span> <span style="color:#f92672">....</span> <span style="color:#f92672">.----</span> <span style="color:#f92672">.....</span> <span style="color:#f92672">---</span> <span style="color:#f92672">.----</span> <span style="color:#f92672">...</span> <span style="color:#f92672">---</span> <span style="color:#f92672">.....</span> <span style="color:#f92672">..-</span> 
+<span style="color:#f92672">.--.</span> <span style="color:#f92672">...--</span> <span style="color:#f92672">.-.</span> <span style="color:#f92672">---</span> <span style="color:#f92672">.....</span> <span style="color:#f92672">.</span> <span style="color:#f92672">-.-.</span> <span style="color:#f92672">.-.</span> <span style="color:#f92672">...--</span> <span style="color:#f92672">-</span> <span style="color:#f92672">---</span> <span style="color:#f92672">-</span> <span style="color:#f92672">-..-</span> <span style="color:#f92672">-</span></code></pre></div>
+The morse code decoder reveals the flag! As special character&rsquo;s cannot be displayed with morse code, we have to adjust the flag:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">alexctf{th15_1s_5up3r_5ecr3t_txt}</code></pre></div>
+<h2 id="Scripting">Scripting</h2>
+<h3 id="Scripting1">SC1: Math bot</h3>
+This one was fairly easy. I started with trying and finding out, which input leads to which output.
+
+<figure >
+    
+        <img src="https://meem67.github.io/blog/images/alex_ctf_scripting_1_1.jpg" />
+    
+    
+</figure>
+</p>
+
+<p>When I gave the correct answer to a calculation, I immediately received the second question. After a while I started to automate my manual effort and writing the script &lsquo;alex_ctf_scripting_solver.py&rsquo; using pwntools. As I didn&rsquo;t know, how many questions I will face, I tested with 10 questions increasing to 20 afterwards. When I increased the number of questions to 1000, I finally got to the last question at 250. Now I just needed to adjust my script to print out the rest of the stream. Et voila!
+
+<figure >
+    
+        <img src="https://meem67.github.io/blog/images/alex_ctf_scripting_1_2.jpg" />
+    
+    
+</figure>
+</p>
+
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+
+r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;195.154.53.62&#39;</span>,<span style="color:#ae81ff">7331</span>)
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">251</span>):
+    r<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Question  </span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> :</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> i)
+    calc <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;=&#39;</span>, drop<span style="color:#f92672">=</span>True)
+    <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (i , str(eval(calc)))
+    r<span style="color:#f92672">.</span>send(str(eval(calc)) <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+
+<span style="color:#66d9ef">print</span> r<span style="color:#f92672">.</span>recvall()</code></pre></div>
+<b>Note: Never use eval in productive coding !!!</b></p>
+
+<p><h2 id="Forensik">Forensik</h2>
+<h3 id="Forensik3">Fore3: USB probing</h3></p>
+
+<p>The only thing we need to solve this challange is Wireshark! After importing the &lsquo;.pcap&rsquo; file into Wireshark I began to scroll down and quickly saw a suspicious content:
+
+<figure >
+    
+        <img src="https://meem67.github.io/blog/images/alex_ctf_forensik_3_1.jpg" />
+    
+    
+</figure>
+</p>
+
+<p>After this I decided to export the content as &lsquo;.png&rsquo; file.
+
+<figure >
+    
+        <img src="https://meem67.github.io/blog/images/alex_ctf_forensik_3_2.jpg" />
+    
+    
+</figure>
+</p>
+
+<p>Just open the file - bam!
+
+<figure >
+    
+        <img src="https://meem67.github.io/blog/images/alex_ctf_forensik_3_3.jpg" />
+    
+    
+</figure>
+</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

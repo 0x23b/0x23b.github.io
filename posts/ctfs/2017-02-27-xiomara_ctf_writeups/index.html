@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Xiomara CTF 2017 - Write Up</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://meem67.github.io/blog/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/assembler.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Xiomara CTF 2017 - Write Up</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://meem67.github.io/blog/">Home</a></li>
+                            
+                                <li><a href="https://meem67.github.io/blog/about">About</a></li>
+                            
+                                <li><a href="https://meem67.github.io/blog/tags/">Tags</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:me@example.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23B/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23B/"><i class="fa fa-twitter"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://meem67.github.io/blog/posts/ctfs/2017-02-27-xiomara_ctf_writeups/">Xiomara CTF 2017 - Write Up</a></h4>
+    <h5>February 28, 2017</h5>
+    
+    <a href="https://meem67.github.io/blogtags/ctf"><kbd class="item-tag">CTF</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><p>Xiomara CTF is the second edition of the Annual CTF conducted as part of Anokha 2017, the annual technical fest of Amrita School of Engineering, Coimbatore. With challenges from a wide range of topics like Web, Forensic, Crypto, Reverse Engineering and Android, Xiomara will definitely put your skills to test. So far the description of this event, in which I just participated for a few challanges.</p>
+
+<p><h2 id="Web">Web Exploitation</h2>
+<h3 id="NoFlags">No Flags?</h3>
+Here we can directly gather the login credentials from the source code:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">password</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;53cure&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">username</span><span style="color:#f92672">==</span><span style="color:#e6db74">&#34;@nokh@&#34;</span>) {
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;Awesome!&#34;</span>);
+             window.<span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#34;secureflag.html&#34;</span>);
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;Oh swap!You are close. Why cant you try again?&#34;</span>);
+    }</code></pre></div></p>
+
+<p>Opening the next page shows only a trolling image and nothing else. Download and open the image with notepad++ and scroll to the bottom: xiomara{50_y0u<em>ar3</em>@_h@ck3r}</p>
+
+<p><h3 id="Lulz">Lulz</h3>
+Clicking on the link to the task opens a page, which obviously wants to troll us - but glad we have NoScript installed. So we are able to view the source code and find the js-file. When displaying the script, we can directly see a function called &ldquo;catch_me&rdquo;, which has brackets in an obscure formation. This looks like a esoteric programming language. After googling we learn, that it&rsquo;s called <a href="https://en.wikipedia.org/wiki/JSFuck">JSFuck</a>.</p>
+
+<p>The rest is easy: Fortunately the browser terminal understands this, so we get the flag, whereas we have to write the first character in small letters: xiomara{i_4gr33_Y0U_4r3_a_Flash!}</p>
+
+<p><h3 id="Easy">Easy Login?</h3>
+At this task &ldquo;robots.txt&rdquo; shows a few directories, whereas all of them show ASCII arts.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">User-agent:*
+Disallow: /flags/
+Disallow: /more_flags/
+Disallow: /more_and_more_flags/
+Disallow: /no_flag/</code></pre></div>
+When looking at the last one, we can see an interesting contrast to the other ones. We see weird characters, which are encoded by the following function:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">encode</span>(<span style="color:#a6e22e">str</span>) {
+	<span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/http:/g</span>, <span style="color:#e6db74">&#34;^^^&#34;</span>);
+	<span style="color:#a6e22e">str</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/bin/g</span>, <span style="color:#e6db74">&#34;*^$#!&#34;</span>)
+	<span style="color:#a6e22e">str</span><span style="color:#f92672">=</span> <span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/com/g</span>, <span style="color:#e6db74">&#34;*%=_()&#34;</span>);
+	<span style="color:#a6e22e">str</span><span style="color:#f92672">=</span> <span style="color:#a6e22e">str</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/paste/g</span>, <span style="color:#e6db74">&#34;~~@;;&#34;</span>);
+}</code></pre></div>
+After decoding the string, we get <a><a href="http://pastebin.com/SwzEKazp">http://pastebin.com/SwzEKazp</a></a>. Hoping to find the flag there I directly jumped to the link but only faced disappointment, as I saw the text, that the page was removed. I googled a bit and came to the idea to use the <a href="https://archive.org/web/">wayback machine</a>, which was the correct answer. Searching the history revealed a snapshot with a base64 encoded string. Decode and finish: xiomara{1_4m_mr_r0b07}</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

