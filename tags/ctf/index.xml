@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ctf on 0x23B&#39;s blog</title>
-    <link>https://0x23b.github.io/blog/tags/ctf/</link>
+    <link>https://0x23b.github.io/tags/ctf/</link>
     <description>Recent content in Ctf on 0x23B&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 27 Mar 2017 20:21:00 +0100</lastBuildDate>
     
-	<atom:link href="https://0x23b.github.io/blog/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://0x23b.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>VolgaCTF 2017 Quals - Write Up</title>
-      <link>https://0x23b.github.io/blog/posts/ctfs/2017-03-27-volga_writeups/</link>
+      <link>https://0x23b.github.io/posts/ctfs/2017-03-27-volga_writeups/</link>
       <pubDate>Mon, 27 Mar 2017 20:21:00 +0100</pubDate>
       
-      <guid>https://0x23b.github.io/blog/posts/ctfs/2017-03-27-volga_writeups/</guid>
+      <guid>https://0x23b.github.io/posts/ctfs/2017-03-27-volga_writeups/</guid>
       <description>URL: https://quals.2017.volgactf.ru
 Duration: Fr, 24 March 2017, 15:00 UTC - So, 26 March 2017, 15:00 UTC
 Cryptography VC (50) Here we had the following two .png files:
@@ -25,10 +25,10 @@ from PIL import Imagei1 = Image.open(&amp;#34;A.png&amp;#34;)i2 = Image.open(&
     
     <item>
       <title>EasyCTF 2017 - Write Up</title>
-      <link>https://0x23b.github.io/blog/posts/ctfs/2017-03-14-easyctf_writeups/</link>
+      <link>https://0x23b.github.io/posts/ctfs/2017-03-14-easyctf_writeups/</link>
       <pubDate>Tue, 14 Mar 2017 15:41:00 +0100</pubDate>
       
-      <guid>https://0x23b.github.io/blog/posts/ctfs/2017-03-14-easyctf_writeups/</guid>
+      <guid>https://0x23b.github.io/posts/ctfs/2017-03-14-easyctf_writeups/</guid>
       <description>EasyCTF (https://www.easyctf.com/) was held between Mon, 13 March 2017, 20:00 CET � Mon, 20 March 2017, 20:00 CET. It used to be a CTF for beginners and veterans, in which I participated.
 Cryptography Flip my letters We have given a flag easyctf{r_wlmg_vevm_mvvw_zm_zhxrr_gzyov}  with the hint What happens if you turn the alphabet upside down?
 So I&amp;rsquo;ve written a small python script, which reverses the alphabet and dumps the corresponding letters:</description>
@@ -36,30 +36,30 @@ So I&amp;rsquo;ve written a small python script, which reverses the alphabet and
     
     <item>
       <title>Xiomara CTF 2017 - Write Up</title>
-      <link>https://0x23b.github.io/blog/posts/ctfs/2017-02-27-xiomara_ctf_writeups/</link>
+      <link>https://0x23b.github.io/posts/ctfs/2017-02-27-xiomara_ctf_writeups/</link>
       <pubDate>Tue, 28 Feb 2017 20:19:00 +0100</pubDate>
       
-      <guid>https://0x23b.github.io/blog/posts/ctfs/2017-02-27-xiomara_ctf_writeups/</guid>
+      <guid>https://0x23b.github.io/posts/ctfs/2017-02-27-xiomara_ctf_writeups/</guid>
       <description>Xiomara CTF is the second edition of the Annual CTF conducted as part of Anokha 2017, the annual technical fest of Amrita School of Engineering, Coimbatore. With challenges from a wide range of topics like Web, Forensic, Crypto, Reverse Engineering and Android, Xiomara will definitely put your skills to test. So far the description of this event, in which I just participated for a few challanges.
 Web Exploitation No Flags? Here we can directly gather the login credentials from the source code: if (password == &amp;#34;53cure&amp;#34; &amp;amp;&amp;amp; username==&amp;#34;@nokh@&amp;#34;) {alert(&amp;#34;Awesome!</description>
     </item>
     
     <item>
       <title>BSidesSF - Write Up</title>
-      <link>https://0x23b.github.io/blog/posts/ctfs/2017-02-16-bsidessf_writeups/</link>
+      <link>https://0x23b.github.io/posts/ctfs/2017-02-16-bsidessf_writeups/</link>
       <pubDate>Thu, 16 Feb 2017 00:31:00 +0100</pubDate>
       
-      <guid>https://0x23b.github.io/blog/posts/ctfs/2017-02-16-bsidessf_writeups/</guid>
+      <guid>https://0x23b.github.io/posts/ctfs/2017-02-16-bsidessf_writeups/</guid>
       <description>The BSides San Francisco CTF (https://scoreboard.ctf.bsidessf.com) was held in parallel with the BSides San Francisco conference, lasting from Sunday, 12 Feb. 2017 13:00 CET until Tuesday, 14 Feb. 2017 13:00 CET. It was a fun CTF, where I was focused on Web Challenges.
 Web easyauth Here we face a login page with the hint to login with the credentials guest/guest. Also we are provided the auth.php, where we can see, how the cookies were set.</description>
     </item>
     
     <item>
       <title>nullcon HackIM - Write Up</title>
-      <link>https://0x23b.github.io/blog/posts/ctfs/2017-02-12-nullcon_writeups/</link>
+      <link>https://0x23b.github.io/posts/ctfs/2017-02-12-nullcon_writeups/</link>
       <pubDate>Sun, 12 Feb 2017 15:45:00 +0100</pubDate>
       
-      <guid>https://0x23b.github.io/blog/posts/ctfs/2017-02-12-nullcon_writeups/</guid>
+      <guid>https://0x23b.github.io/posts/ctfs/2017-02-12-nullcon_writeups/</guid>
       <description>This CTF was powered by WalmartLabs (http://ctf.nullcon.net) focusing a lot of different areas. It began on Friday, 10 Feb. 2017, 17:30 CET and last until Sunday, 12 Feb. 2017, 05:30 CET.
 Programming Programming Question 1
 This challenge provided a file full of RGB codes, obviously pixels. So the task was basically writing a program, which reads the codes and generates an image out of this. With the use of Phyton Image Library this task could be achieved easily.</description>
@@ -67,10 +67,10 @@ This challenge provided a file full of RGB codes, obviously pixels. So the task 
     
     <item>
       <title>AlexCTF - Write Up</title>
-      <link>https://0x23b.github.io/blog/posts/ctfs/2017-02-03-alex_ctf_writeups/</link>
+      <link>https://0x23b.github.io/posts/ctfs/2017-02-03-alex_ctf_writeups/</link>
       <pubDate>Fri, 03 Feb 2017 21:17:00 +0100</pubDate>
       
-      <guid>https://0x23b.github.io/blog/posts/ctfs/2017-02-03-alex_ctf_writeups/</guid>
+      <guid>https://0x23b.github.io/posts/ctfs/2017-02-03-alex_ctf_writeups/</guid>
       <description>This CTF was organized by Faculty of Engineering Alexandria University Egypt (https://ctf.oddcoder.com/) focusing Reverse Engineering, Cryptography, Forensics and Scripting. It began on Friday, 03 Feb. 2017, 10:00 UTC and last until Monday, 06 Feb. 2017, 10:00 UTC. Thanks so far to the organizers.
 Cryptography CR1: Ultracoded
 A file full of ZERO&amp;rsquo;s and ONE&amp;rsquo;s? Lets try to replace them with numbers and send them trough a binary to ascii converter: Li0gLi0uLiAuIC0uLi0gLS4tLiAtIC4uLS4gLSAuLi4uIC4tLS0tIC4uLi4uIC0tLSAuLS0tLSAuLi4gLS0tIC4uLi4uIC4uLSAuLS0uIC4uLi0tIC4tLiAtLS0gLi4uLi4gLiAtLi0uIC4tLiAuLi4tLSAtIC0tLSAtIC0uLi0gLQ== Mh.</description>
