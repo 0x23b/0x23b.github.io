@@ -5,7 +5,7 @@
     <link>https://0x23b.github.io/</link>
     <description>Recent content on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 12 Jan 2018 23:59:00 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://0x23b.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,11 +13,125 @@
     <item>
       <title>About</title>
       <link>https://0x23b.github.io/about/</link>
-      <pubDate>Fri, 12 Jan 2018 23:59:00 +0100</pubDate>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0100</pubDate>
       
       <guid>https://0x23b.github.io/about/</guid>
-      <description>I am currently working as a Senior Security Tester at one of the biggest software vendors in the world. I started my career after graduating from university as a Developer, doing some low level networking and configuration stuff in the kernel, where I developed in C/C++, Java and some Python.
-Most of my spare time I am spending on CTF&amp;rsquo;s and/or further education. CTF&amp;rsquo;s offer a great opportunity to educate one in this area in a short time.</description>
+      <description>Senior penetration tester and Capture The Flag player Former developer Hack The Box and Vulnhub addict</description>
+    </item>
+    
+    <item>
+      <title>HTB Valentine - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2018-07-29-htb_valentine_writeups/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2018-07-29-htb_valentine_writeups/</guid>
+      <description>IP: 10.10.10.79 OS: Linux
+Nmap 123456789101112131415161718192021222324252627 root@kali:~/HTB/Valentine# nmap -sC -sV 10.10.10.79 -oA nmapStarting Nmap 7.70 ( https://nmap.org ) at 2018-05-10 17:07 EDTNmap scan report for 10.10.10.79Host is up (0.042s latency).Not shown: 997 closed portsPORT STATE SERVICE VERSION22/tcp open ssh OpenSSH 5.9p1 Debian 5ubuntu1.10 (Ubuntu Linux; protocol 2.0)| ssh-hostkey: | 1024 96:4c:51:42:3c:ba:22:49:20:4d:3e:ec:90:cc:fd:0e (DSA)| 2048 46:bf:1f:cc:92:4f:1d:a0:42:b3:d2:16:a8:58:31:33 (RSA)|_ 256 e6:2b:25:19:cb:7e:54:cb:0a:b9:ac:16:98:c6:7d:a9 (ECDSA)80/tcp open http Apache httpd 2.</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 3 - Write Up</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_3_writeups/</link>
+      <pubDate>Wed, 18 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_3_writeups/</guid>
+      <description>Summary asdasd
+Netdiscover root@kali:~# netdiscover Currently scanning: 192.168.60.0/16 | Screen View: Unique Hosts 3 Captured ARP Req/Rep packets, from 3 hosts. Total size: 180 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.56.1 0a:00:27:00:00:04 1 60 Unknown vendor 192.168.56.11 08:00:27:5f:6f:ed 1 60 PCS Systemtechnik GmbH 192.168.56.12 08:00:27:40:1a:b5 1 60 PCS Systemtechnik GmbH  Nmap root@kali:~/vulnhub/kioptrix3# nmap -sC -sV -oA nmap 192.168.56.12 Starting Nmap 7.70 ( https://nmap.</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 2 - Write Up</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_2_writeups/</link>
+      <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_2_writeups/</guid>
+      <description>Summary Easy machine, which is vulnerable to SQL injection, that gives the possibility to get a reverse shell. While on the machine, we can execute a kernel exploit, that gives us root privileges.
+Netdiscover root@kali:~# netdiscover Currently scanning: 192.168.81.0/16 | Screen View: Unique Hosts 4 Captured ARP Req/Rep packets, from 3 hosts. Total size: 240 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.56.13 08:00:27:07:11:52 2 120 PCS Systemtechnik GmbH 192.</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 1 - Write Up</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_1_writeups/</link>
+      <pubDate>Mon, 16 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_1_writeups/</guid>
+      <description>Summary Very easy machine which is vulnerable to remote code exeuction on samba. Maybe there are different ways too, but I haven&amp;rsquo;t tried out right now.
+Netdiscover root@kali:~# netdiscover Currently scanning: 192.168.116.0/16 | Screen View: Unique Hosts 6 Captured ARP Req/Rep packets, from 4 hosts. Total size: 360 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.56.1 0a:00:27:00:00:04 1 60 Unknown vendor 192.168.56.11 08:00:27:6d:28:27 2 120 PCS Systemtechnik GmbH 192.</description>
+    </item>
+    
+    <item>
+      <title>HTB Nibbles - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2018-07-04-htb_nibbles_writeups/</link>
+      <pubDate>Wed, 04 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2018-07-04-htb_nibbles_writeups/</guid>
+      <description>IP: 10.10.10.75 OS: Linux
+Nmap 123456789101112131415161718 root@kali:~/HTB/Nibbles# nmap -sC -sV -oA nmap 10.10.10.75# Nmap 7.70 scan initiated Wed Jul 4 17:55:06 2018 as: nmap -sC -sV -oA nmap 10.10.10.75Nmap scan report for 10.10.10.75Host is up (0.028s latency).Not shown: 998 closed portsPORT STATE SERVICE VERSION22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0)| ssh-hostkey: | 2048 c4:f8:ad:e8:f8:04:77:de:cf:15:0d:63:0a:18:7e:49 (RSA)| 256 22:8f:b1:97:bf:0f:17:08:fc:7e:2c:8f:e9:77:3a:48 (ECDSA)|_ 256 e6:ac:27:a3:b5:a9:f1:12:3c:34:a5:5d:5b:eb:3d:e9 (ED25519)80/tcp open http Apache httpd 2.</description>
+    </item>
+    
+    <item>
+      <title>Training Resources</title>
+      <link>https://0x23b.github.io/posts/2018-07-04-training_resources/</link>
+      <pubDate>Tue, 03 Jul 2018 23:36:00 +0100</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/2018-07-04-training_resources/</guid>
+      <description>Here I want to share the resources, which I&amp;rsquo;am using for practice:
+Hacking  Hack The Box VulnHub Root Me CTF Time OverTheWire Exploit Exercises Microcorruption PentesterLab 
+Coding  Hackerrank Coding Game Code Fights 
+Others  Cybrary Linux Journey</description>
+    </item>
+    
+    <item>
+      <title>HTB Chatterbox - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2018-06-16-htb_chatterbox_writeups/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2018-06-16-htb_chatterbox_writeups/</guid>
+      <description>IP: 10.10.10.74 OS: Windows
+Nmap As my standard nmap run did not find any open ports, I ran a full scan:
+Standard ports:
+root@kali:~/HTB/Chatterbox# nmap -sC -sC -oA nmap 10.10.10.74 # Nmap 7.70 scan initiated Sun May 13 08:22:39 2018 as: nmap -sC -sC -oA nmap 10.10.10.74 Nmap scan report for 10.10.10.74 Host is up (0.024s latency). All 1000 scanned ports on 10.10.10.74 are filtered # Nmap done at Sun May 13 08:23:05 2018 -- 1 IP address (1 host up) scanned in 26.</description>
+    </item>
+    
+    <item>
+      <title>HTB Bashed - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2018-04-28-htb_bashed_writeups/</link>
+      <pubDate>Sat, 28 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2018-04-28-htb_bashed_writeups/</guid>
+      <description>IP: 10.10.10.68 OS: Linux
+Nmap root@kali:~/HTB/Bashed# nmap -v -A -O -p- -oA nmap 10.10.10.68 Starting Nmap 7.60 ( https://nmap.org ) at 2018-01-04 10:32 EST Nmap scan report for 10.10.10.68 Host is up (0.019s latency). Not shown: 65534 closed ports PORT STATE SERVICE VERSION 80/tcp open http Apache httpd 2.4.18 ((Ubuntu)) |_http-favicon: Unknown favicon MD5: 6AA5034A553DFA77C3B2C7B4C26CF870 | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS |_http-server-header: Apache/2.4.18 (Ubuntu) |_http-title: Arrexel&#39;s Development Site No exact OS matches for host (If you know what OS is running on it, see https://nmap.</description>
+    </item>
+    
+    <item>
+      <title>HTB SolidState - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2018-01-27-htb_solidstate_writeups/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2018-01-27-htb_solidstate_writeups/</guid>
+      <description>IP: 10.10.10.51 OS: Linux
+Nmap root@kali:~/HTB/Valentine# nmap -sC -sV 10.10.10.51 -oA nmap Starting Nmap 7.60 ( https://nmap.org ) at 2018-01-23 15:45 EST Nmap scan report for 10.10.10.51 Host is up (0.050s latency). Not shown: 995 closed ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0) | ssh-hostkey: | 2048 77:00:84:f5:78:b9:c7:d3:54:cf:71:2e:0d:52:6d:8b (RSA) | 256 78:b8:3a:f6:60:19:06:91:f5:53:92:1d:3f:48:ed:53 (ECDSA) |_ 256 e4:45:e9:ed:07:4d:73:69:43:5a:12:70:9d:c4:af:76 (EdDSA) 25/tcp open smtp JAMES smtpd 2.</description>
+    </item>
+    
+    <item>
+      <title>HTB Blue - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2018-01-13-htb_blue_writeups/</link>
+      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2018-01-13-htb_blue_writeups/</guid>
+      <description>IP: 10.10.10.40 OS: Windows
+Nmap First things first, so let&amp;rsquo;s just execute
+1 nmap -v -A 10.10.10.40     The name indicates the probable vulnerability, so we execute msfconsole.</description>
+    </item>
+    
+    <item>
+      <title>HTB Blocky - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2017-12-09-htb_blocky_writeups/</link>
+      <pubDate>Sat, 09 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2017-12-09-htb_blocky_writeups/</guid>
+      <description>IP: 10.10.10.37 OS: Linux
+Nmap root@kali:~/HTB/Blocky# nmap -sC -sV -oA nmap 10.10.10.37 Starting Nmap 7.40 ( https://nmap.org ) at 2017–12–04 21:15 EST Nmap scan report for 10.10.10.37 Host is up (0.15s latency). Not shown: 996 filtered ports PORT STATE SERVICE VERSION 21/tcp open ftp ProFTPD 1.3.5a 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 d6:2b:99:b4:d5:e7:53:ce:2b:fc:b5:d7:9d:79:fb:a2 (RSA) |_ 256 5d:7f:38:95:70:c9:be:ac:67:a0:1e:86:e7:97:84:03 (ECDSA) 80/tcp open http Apache httpd 2.</description>
     </item>
     
     <item>
@@ -50,16 +164,6 @@ from PIL import Imagei1 = Image.open(&amp;#34;A.png&amp;#34;)i2 = Image.open(&
       
       <guid>https://0x23b.github.io/posts/microcorruption/sydney/</guid>
       <description>Sydney Here we have four &amp;lsquo;cmp&amp;rsquo; instructions on two bytes of r15, respectively incrementing the offset by two each time. The first &amp;lsquo;cmp&amp;rsquo; checks, whether the first two bytes are 0x466a, the next two #0x6158 and so on. 448a &amp;lt;check_password&amp;gt;448a: bf90 6a46 0000 cmp	#0x466a, 0x0(r15)4490: 0d20 jnz	$+0x1c4492: bf90 5861 0200 cmp	#0x6158, 0x2(r15)4498: 0920 jnz	$+0x14449a: bf90 6741 0400 cmp	#0x4167, 0x4(r15)44a0: 0520 jne	#0x44ac &amp;lt;check_password+0x22&amp;gt;44a2: 1e43 mov	#0x1, r1444a4: bf90 6363 0600 cmp	#0x6363, 0x6(r15)44aa: 0124 jeq	#0x44ae &amp;lt;check_password+0x24&amp;gt;44ac: 0e43 clr	r1444ae: 0f4e mov	r14, r1544b0: 3041 ret</description>
-    </item>
-    
-    <item>
-      <title>Training Resources</title>
-      <link>https://0x23b.github.io/posts/2017-02-17-training_resources/</link>
-      <pubDate>Tue, 21 Mar 2017 19:25:00 +0100</pubDate>
-      
-      <guid>https://0x23b.github.io/posts/2017-02-17-training_resources/</guid>
-      <description>Here I want to share the resources, which I&amp;rsquo;am using for practice.
- http://www.overthewire.org/wargames/ http://vulnhub.com/ http://smashthestack.org/wargames.html https://pwnable.kr https://pwnable.tw https://exploit-exercises.com https://microcorruption.com https://backdoor.sdslabs.co</description>
     </item>
     
     <item>

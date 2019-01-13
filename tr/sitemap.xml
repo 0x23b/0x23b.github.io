@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://0x23b.github.io/tr/about/</loc>
+    <lastmod>2019-01-01T00:00:00+01:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x23b.github.io/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="tr"
+                href="https://0x23b.github.io/tr/about/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://0x23b.github.io/tr/</loc>
+    <lastmod>2019-01-01T00:00:00+01:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x23b.github.io/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="tr"
+                href="https://0x23b.github.io/tr/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://0x23b.github.io/tr/categories/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x23b.github.io/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="tr"
+                href="https://0x23b.github.io/tr/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://0x23b.github.io/tr/tags/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x23b.github.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="tr"
+                href="https://0x23b.github.io/tr/tags/"
+                />
+  </url>
+  
+</urlset>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vulnhub on 0x23b&#39;s blog</title>
+    <link>https://0x23b.github.io/tags/vulnhub/</link>
+    <description>Recent content in Vulnhub on 0x23b&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 18 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://0x23b.github.io/tags/vulnhub/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kioptrix 3 - Write Up</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_3_writeups/</link>
+      <pubDate>Wed, 18 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_3_writeups/</guid>
+      <description>Summary asdasd
+Netdiscover root@kali:~# netdiscover Currently scanning: 192.168.60.0/16 | Screen View: Unique Hosts 3 Captured ARP Req/Rep packets, from 3 hosts. Total size: 180 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.56.1 0a:00:27:00:00:04 1 60 Unknown vendor 192.168.56.11 08:00:27:5f:6f:ed 1 60 PCS Systemtechnik GmbH 192.168.56.12 08:00:27:40:1a:b5 1 60 PCS Systemtechnik GmbH  Nmap root@kali:~/vulnhub/kioptrix3# nmap -sC -sV -oA nmap 192.168.56.12 Starting Nmap 7.70 ( https://nmap.</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 2 - Write Up</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_2_writeups/</link>
+      <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_2_writeups/</guid>
+      <description>Summary Easy machine, which is vulnerable to SQL injection, that gives the possibility to get a reverse shell. While on the machine, we can execute a kernel exploit, that gives us root privileges.
+Netdiscover root@kali:~# netdiscover Currently scanning: 192.168.81.0/16 | Screen View: Unique Hosts 4 Captured ARP Req/Rep packets, from 3 hosts. Total size: 240 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.56.13 08:00:27:07:11:52 2 120 PCS Systemtechnik GmbH 192.</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 1 - Write Up</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_1_writeups/</link>
+      <pubDate>Mon, 16 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_1_writeups/</guid>
+      <description>Summary Very easy machine which is vulnerable to remote code exeuction on samba. Maybe there are different ways too, but I haven&amp;rsquo;t tried out right now.
+Netdiscover root@kali:~# netdiscover Currently scanning: 192.168.116.0/16 | Screen View: Unique Hosts 6 Captured ARP Req/Rep packets, from 4 hosts. Total size: 360 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.56.1 0a:00:27:00:00:04 1 60 Unknown vendor 192.168.56.11 08:00:27:6d:28:27 2 120 PCS Systemtechnik GmbH 192.</description>
+    </item>
+    
+  </channel>
+</rss>
