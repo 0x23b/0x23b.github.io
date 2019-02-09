@@ -182,6 +182,8 @@
 
 <h2 id="summary">Summary</h2>
 
+<p>Interesting machine, which leaks username and a smbhash over ldap. This smbhash is used to logon via smbclient, to obtain a private key in ppk format. After this is converted to OpenSSL format, we can login to the system. For privilege escalation, we can use the OpenBSD equivalent for sudo, which allows us to use ssh-keygen. We get the root user password as CA principle through an intended misconfiguration and can sign the ssh-key with the root user.</p>
+
 <h2 id="nmap">Nmap</h2>
 
 <p>First of all, lets do a mandatory port scan with nmap:</p>
@@ -422,11 +424,14 @@ ypuffy$ curl &quot;http://localhost/sshauth?type=principals&amp;username=root&qu
 3m3rgencyB4ckd00r
 </code></pre>
 
-<p>3m3rgencyB4ckd00r looks like the password for the root user to sign. That’s the way to escalate privileges!
-1.  Create a new ssh key
-2.  Sign it with doas command as user userca and the root password
-3.  Put the public key in authorized_keys
-4.  ssh as root on localhost</p>
+<p>3m3rgencyB4ckd00r looks like the password for the root user to sign. That’s the way to escalate privileges!</p>
+
+<ol>
+<li>Create a new ssh key<br /></li>
+<li>Sign it with doas command as user userca and the root password<br /></li>
+<li>Put the public key in authorized_keys<br /></li>
+<li>ssh as root on localhost<br /></li>
+</ol>
 
 <pre><code class="language-bash">ypuffy$ cd /tmp
 ypuffy$ ssh-keygen                                                                                     

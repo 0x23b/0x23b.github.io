@@ -16,8 +16,7 @@
       <pubDate>Sat, 09 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/</guid>
-      <description>Ypuffy - Writeup    OS Difficulty Points Release IP     OpenBSD Medium 30 15 Sep 2018 10.10.10.107    Summary Nmap First of all, lets do a mandatory port scan with nmap:
-root@kali:~/HTB/Ypuffy# nmap -sC -sV -oA nmap 10.10.10.107 # Nmap 7.70 scan initiated Sat Sep 15 15:26:06 2018 as: nmap -sC -sV -oA nmap 10.10.10.107 Nmap scan report for 10.10.10.107 Host is up (0.</description>
+      <description>Ypuffy - Writeup    OS Difficulty Points Release IP     OpenBSD Medium 30 15 Sep 2018 10.10.10.107    Summary Interesting machine, which leaks username and a smbhash over ldap. This smbhash is used to logon via smbclient, to obtain a private key in ppk format. After this is converted to OpenSSL format, we can login to the system. For privilege escalation, we can use the OpenBSD equivalent for sudo, which allows us to use ssh-keygen.</description>
     </item>
     
     <item>
