@@ -5,10 +5,29 @@
     <link>https://0x23b.github.io/</link>
     <description>Recent content on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 19 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x23b.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ypuffy - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/</link>
+      <pubDate>Sat, 09 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/</guid>
+      <description>Ypuffy - Writeup    OS Difficulty Points Release IP     OpenBSD Medium 30 15 Sep 2018 10.10.10.107    Summary Nmap First of all, lets do a mandatory port scan with nmap:
+root@kali:~/HTB/Ypuffy# nmap -sC -sV -oA nmap 10.10.10.107 # Nmap 7.70 scan initiated Sat Sep 15 15:26:06 2018 as: nmap -sC -sV -oA nmap 10.10.10.107 Nmap scan report for 10.10.10.107 Host is up (0.</description>
+    </item>
+    
+    <item>
+      <title>Dab - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-02-02-htb_dab_writeup/</link>
+      <pubDate>Sat, 02 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-02-02-htb_dab_writeup/</guid>
+      <description>Dab - Writeup    OS Difficulty Points Release IP     Linux Hard 40 18 Aug 2018 10.10.10.86    Summary Writeup not finished yet</description>
+    </item>
     
     <item>
       <title>SecNotes - Writeup</title>

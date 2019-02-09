@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/</loc>
+    <lastmod>2019-02-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x23b.github.io/posts/hackthebox/2019-02-02-htb_dab_writeup/</loc>
+    <lastmod>2019-02-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://0x23b.github.io/posts/hackthebox/2019-01-19-htb_secnotes_writeup/</loc>
     <lastmod>2019-01-19T00:00:00+00:00</lastmod>
   </url>
@@ -114,7 +124,7 @@
   
   <url>
     <loc>https://0x23b.github.io/</loc>
-    <lastmod>2019-01-19T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -151,7 +161,7 @@
   
   <url>
     <loc>https://0x23b.github.io/tags/hackthebox/</loc>
-    <lastmod>2019-01-19T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -163,7 +173,7 @@
   
   <url>
     <loc>https://0x23b.github.io/posts/</loc>
-    <lastmod>2019-01-19T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -197,7 +207,7 @@
   
   <url>
     <loc>https://0x23b.github.io/tags/writeups/</loc>
-    <lastmod>2019-01-19T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
