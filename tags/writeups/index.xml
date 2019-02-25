@@ -5,28 +5,21 @@
     <link>https://0x23b.github.io/tags/writeups/</link>
     <description>Recent content in Writeups on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-<<<<<<< HEAD
-    <lastBuildDate>Mon, 25 Feb 2019 00:00:00 +0000</lastBuildDate>
-=======
-    <lastBuildDate>Sat, 09 Feb 2019 00:00:00 +0000</lastBuildDate>
->>>>>>> dea94fcb082ff877c4597c810c2199ea5a79c6b7
+    <lastBuildDate>Mon, 25 Feb 2019 01:00:01 +0000</lastBuildDate>
     
 	<atom:link href="https://0x23b.github.io/tags/writeups/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-<<<<<<< HEAD
       <title>Matrix: 1 - Writeup</title>
       <link>https://0x23b.github.io/posts/vulnhub/2019-20-25-vulnhub_matrix_1_writeup/</link>
-      <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 25 Feb 2019 01:00:01 +0000</pubDate>
       
       <guid>https://0x23b.github.io/posts/vulnhub/2019-20-25-vulnhub_matrix_1_writeup/</guid>
       <description>Matrix: 1 - Writeup Summary I am a big Matrix fan and hoped to have funny hours with this machine, as this machine was labelled with intermediate difficulty. Unfortunately, it took me about 30 minutes to read root.txt. Anyhow, in the end I enjoyed the machine. We are given 3 open ports, whereas two of them are web servers. On one of the web servers we can see a comment in base64, pointing us to a file, which is encoded in Brainfuck.</description>
     </item>
     
     <item>
-=======
->>>>>>> dea94fcb082ff877c4597c810c2199ea5a79c6b7
       <title>Ypuffy - Writeup</title>
       <link>https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/</link>
       <pubDate>Sat, 09 Feb 2019 00:00:00 +0000</pubDate>
