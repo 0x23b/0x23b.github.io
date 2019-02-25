@@ -5,28 +5,21 @@
     <link>https://0x23b.github.io/tags/training/</link>
     <description>Recent content in Training on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 13 Jan 2018 19:58:40 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 03 Jul 2018 23:36:00 +0100</lastBuildDate>
     
 	<atom:link href="https://0x23b.github.io/tags/training/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Microcorruption</title>
-      <link>https://0x23b.github.io/posts/microcorruption/</link>
-      <pubDate>Sat, 13 Jan 2018 19:58:40 +0100</pubDate>
-      
-      <guid>https://0x23b.github.io/posts/microcorruption/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Training Resources</title>
-      <link>https://0x23b.github.io/posts/2017-02-17-training_resources/</link>
-      <pubDate>Tue, 21 Mar 2017 19:25:00 +0100</pubDate>
+      <link>https://0x23b.github.io/posts/2018-07-04-training_resources/</link>
+      <pubDate>Tue, 03 Jul 2018 23:36:00 +0100</pubDate>
       
-      <guid>https://0x23b.github.io/posts/2017-02-17-training_resources/</guid>
-      <description>Here I want to share the resources, which I&amp;rsquo;am using for practice.
- http://www.overthewire.org/wargames/ http://vulnhub.com/ http://smashthestack.org/wargames.html https://pwnable.kr https://pwnable.tw https://exploit-exercises.com https://microcorruption.com https://backdoor.sdslabs.co</description>
+      <guid>https://0x23b.github.io/posts/2018-07-04-training_resources/</guid>
+      <description>Here I want to share the resources, which I&amp;rsquo;am using for practice:
+Hacking  Hack The Box VulnHub Root Me CTF Time OverTheWire Exploit Exercises Microcorruption PentesterLab 
+Coding  Hackerrank Coding Game Code Fights 
+Others  Cybrary Linux Journey</description>
     </item>
     
   </channel>

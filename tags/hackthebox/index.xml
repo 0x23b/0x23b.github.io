@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hackthebox on 0x23b&#39;s blog</title>
+    <link>https://0x23b.github.io/tags/hackthebox/</link>
+    <description>Recent content in Hackthebox on 0x23b&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 09 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://0x23b.github.io/tags/hackthebox/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ypuffy - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/</link>
+      <pubDate>Sat, 09 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/</guid>
+      <description>Ypuffy - Writeup    OS Difficulty Points Release IP     OpenBSD Medium 30 15 Sep 2018 10.10.10.107    Summary Interesting machine, which leaks username and a smbhash over ldap. This smbhash is used to logon via smbclient, to obtain a private key in ppk format. After this is converted to OpenSSL format, we can login to the system. For privilege escalation, we can use the OpenBSD equivalent for sudo, which allows us to use ssh-keygen.</description>
+    </item>
+    
+    <item>
+      <title>Dab - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-02-02-htb_dab_writeup/</link>
+      <pubDate>Sat, 02 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-02-02-htb_dab_writeup/</guid>
+      <description>Dab - Writeup    OS Difficulty Points Release IP     Linux Hard 40 18 Aug 2018 10.10.10.86    Summary Writeup not finished yet</description>
+    </item>
+    
+    <item>
+      <title>SecNotes - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-01-19-htb_secnotes_writeup/</link>
+      <pubDate>Sat, 19 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-01-19-htb_secnotes_writeup/</guid>
+      <description>SecNotes - Writeup    OS Difficulty Points Release IP     Windows Medium 30 25 Aug 2018 10.10.10.97    Summary A medium machine which I solved the unintended way with a second order SQL injection vulnerability to get a initial foothold. This gives us credentials for the SMB share. There we can upload nc.exe and a php reverse shell. While on the box, we encounter a Windows Subsystem for Linux, which has .</description>
+    </item>
+    
+    <item>
+      <title>Mischief - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-01-05-htb-mischief-writeup/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-01-05-htb-mischief-writeup/</guid>
+      <description>Mischief - Writeup    OS Difficulty Points Release IP     Linux Insane 50 07 Jul 2018 10.10.10.92    Summary The first 50 points machine I was able to solve on HackTheBox! First we find login credentials for a web server over SNMP. This gives us another pair of credentials. We have to use IPv6 in order to get a new login page, where we have to guess/fuzz the username, as we already have the correct password, but the user is not matching.</description>
+    </item>
+    
+    <item>
+      <title>HTB Valentine - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2018-07-29-htb_valentine_writeup/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2018-07-29-htb_valentine_writeup/</guid>
+      <description>Valentine - Writeup    OS Difficulty Points Release IP     Linux Easy 20 17 Feb 2018 10.10.10.79    Summary Nmap root@kali:~/HTB/Valentine# nmap -sC -sV 10.10.10.79 -oA nmap Starting Nmap 7.70 ( https://nmap.org ) at 2018-05-10 17:07 EDT Nmap scan report for 10.10.10.79 Host is up (0.042s latency). Not shown: 997 closed ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 5.9p1 Debian 5ubuntu1.</description>
+    </item>
+    
+    <item>
+      <title>HTB Chatterbox - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2018-06-16-htb_chatterbox_writeup/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2018-06-16-htb_chatterbox_writeup/</guid>
+      <description>IP: 10.10.10.74 OS: Windows
+Nmap As my standard nmap run did not find any open ports, I ran a full scan:
+Standard ports:
+root@kali:~/HTB/Chatterbox# nmap -sC -sC -oA nmap 10.10.10.74 # Nmap 7.70 scan initiated Sun May 13 08:22:39 2018 as: nmap -sC -sC -oA nmap 10.10.10.74 Nmap scan report for 10.10.10.74 Host is up (0.024s latency). All 1000 scanned ports on 10.10.10.74 are filtered # Nmap done at Sun May 13 08:23:05 2018 -- 1 IP address (1 host up) scanned in 26.</description>
+    </item>
+    
+    <item>
+      <title>HTB Blocky - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2017-12-09-htb_blocky_writeup/</link>
+      <pubDate>Sat, 09 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2017-12-09-htb_blocky_writeup/</guid>
+      <description>IP: 10.10.10.37 OS: Linux
+Nmap root@kali:~/HTB/Blocky# nmap -sC -sV -oA nmap 10.10.10.37 Starting Nmap 7.40 ( https://nmap.org ) at 2017–12–04 21:15 EST Nmap scan report for 10.10.10.37 Host is up (0.15s latency). Not shown: 996 filtered ports PORT STATE SERVICE VERSION 21/tcp open ftp ProFTPD 1.3.5a 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 d6:2b:99:b4:d5:e7:53:ce:2b:fc:b5:d7:9d:79:fb:a2 (RSA) |_ 256 5d:7f:38:95:70:c9:be:ac:67:a0:1e:86:e7:97:84:03 (ECDSA) 80/tcp open http Apache httpd 2.</description>
+    </item>
+    
+  </channel>
+</rss>

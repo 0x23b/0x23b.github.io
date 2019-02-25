@@ -20,6 +20,15 @@
     </item>
     
     <item>
+      <title>Hackthebox</title>
+      <link>https://0x23b.github.io/tags/hackthebox/</link>
+      <pubDate>Sat, 09 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/tags/hackthebox/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Microcorruption</title>
       <link>https://0x23b.github.io/tags/microcorruption/</link>
       <pubDate>Wed, 22 Mar 2017 11:48:00 +0100</pubDate>
@@ -31,9 +40,27 @@
     <item>
       <title>Training</title>
       <link>https://0x23b.github.io/tags/training/</link>
-      <pubDate>Sat, 13 Jan 2018 19:58:40 +0100</pubDate>
+      <pubDate>Tue, 03 Jul 2018 23:36:00 +0100</pubDate>
       
       <guid>https://0x23b.github.io/tags/training/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vulnhub</title>
+      <link>https://0x23b.github.io/tags/vulnhub/</link>
+      <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/tags/vulnhub/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Writeups</title>
+      <link>https://0x23b.github.io/tags/writeups/</link>
+      <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/tags/writeups/</guid>
       <description></description>
     </item>
     

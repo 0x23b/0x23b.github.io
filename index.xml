@@ -5,19 +5,158 @@
     <link>https://0x23b.github.io/</link>
     <description>Recent content on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 12 Jan 2018 23:59:00 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 25 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x23b.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Matrix: 1 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2019-20-25-vulnhub_matrix_1_writeup/</link>
+      <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2019-20-25-vulnhub_matrix_1_writeup/</guid>
+      <description>Matrix: 1 - Writeup Summary I am a big Matrix fan and hoped to have funny hours with this machine, as this machine was labelled with intermediate difficulty. Unfortunately, it took me about 30 minutes to read root.txt. Anyhow, in the end I enjoyed the machine. We are given 3 open ports, whereas two of them are web servers. On one of the web servers we can see a comment in base64, pointing us to a file, which is encoded in Brainfuck.</description>
+    </item>
+    
+    <item>
+      <title>Ypuffy - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/</link>
+      <pubDate>Sat, 09 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/</guid>
+      <description>Ypuffy - Writeup    OS Difficulty Points Release IP     OpenBSD Medium 30 15 Sep 2018 10.10.10.107    Summary Interesting machine, which leaks username and a smbhash over ldap. This smbhash is used to logon via smbclient, to obtain a private key in ppk format. After this is converted to OpenSSL format, we can login to the system. For privilege escalation, we can use the OpenBSD equivalent for sudo, which allows us to use ssh-keygen.</description>
+    </item>
+    
+    <item>
+      <title>Dab - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-02-02-htb_dab_writeup/</link>
+      <pubDate>Sat, 02 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-02-02-htb_dab_writeup/</guid>
+      <description>Dab - Writeup    OS Difficulty Points Release IP     Linux Hard 40 18 Aug 2018 10.10.10.86    Summary Writeup not finished yet</description>
+    </item>
+    
+    <item>
+      <title>SecNotes - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-01-19-htb_secnotes_writeup/</link>
+      <pubDate>Sat, 19 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-01-19-htb_secnotes_writeup/</guid>
+      <description>SecNotes - Writeup    OS Difficulty Points Release IP     Windows Medium 30 25 Aug 2018 10.10.10.97    Summary A medium machine which I solved the unintended way with a second order SQL injection vulnerability to get a initial foothold. This gives us credentials for the SMB share. There we can upload nc.exe and a php reverse shell. While on the box, we encounter a Windows Subsystem for Linux, which has .</description>
+    </item>
+    
+    <item>
+      <title>Mischief - Writeup</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2019-01-05-htb-mischief-writeup/</link>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2019-01-05-htb-mischief-writeup/</guid>
+      <description>Mischief - Writeup    OS Difficulty Points Release IP     Linux Insane 50 07 Jul 2018 10.10.10.92    Summary The first 50 points machine I was able to solve on HackTheBox! First we find login credentials for a web server over SNMP. This gives us another pair of credentials. We have to use IPv6 in order to get a new login page, where we have to guess/fuzz the username, as we already have the correct password, but the user is not matching.</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>https://0x23b.github.io/about/</link>
-      <pubDate>Fri, 12 Jan 2018 23:59:00 +0100</pubDate>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0100</pubDate>
       
       <guid>https://0x23b.github.io/about/</guid>
-      <description>I am currently working as a Senior Security Tester at one of the biggest software vendors in the world. I started my career after graduating from university as a Developer, doing some low level networking and configuration stuff in the kernel, where I developed in C/C++, Java and some Python.
-Most of my spare time I am spending on CTF&amp;rsquo;s and/or further education. CTF&amp;rsquo;s offer a great opportunity to educate one in this area in a short time.</description>
+      <description>Senior penetration tester and Capture The Flag player Former developer Hack The Box and Vulnhub addict</description>
+    </item>
+    
+    <item>
+      <title>Mr. Robot - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-12-31-vulnhub_mrrobot_1_writeup/</link>
+      <pubDate>Fri, 30 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-12-31-vulnhub_mrrobot_1_writeup/</guid>
+      <description>Mr. Robot - Writeup Summary For initial foothold, I had to get access to Wordpress as admin user and edit the php file of a plugin in order to get a reverse shell. For root user, there was an old nmap with suid bit, which allowed executing commands in interactive mode.
+Netdiscover First, find out the IP address of the victim machine. Therefore I’am using netdiscover:
+Currently scanning: 192.168.66.0/16 | Screen View: Unique Hosts 3 Captured ARP Req/Rep packets, from 3 hosts.</description>
+    </item>
+    
+    <item>
+      <title>HTB Valentine - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2018-07-29-htb_valentine_writeup/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2018-07-29-htb_valentine_writeup/</guid>
+      <description>Valentine - Writeup    OS Difficulty Points Release IP     Linux Easy 20 17 Feb 2018 10.10.10.79    Summary Nmap root@kali:~/HTB/Valentine# nmap -sC -sV 10.10.10.79 -oA nmap Starting Nmap 7.70 ( https://nmap.org ) at 2018-05-10 17:07 EDT Nmap scan report for 10.10.10.79 Host is up (0.042s latency). Not shown: 997 closed ports PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 5.9p1 Debian 5ubuntu1.</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 4 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-19-vulnhub_kioptrix_4_writeup/</link>
+      <pubDate>Thu, 19 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-19-vulnhub_kioptrix_4_writeup/</guid>
+      <description>Kioptrix 4 - Writeup Summary In order to have a foothold into this machine, I had to use SQL injection. This allowed me to gather logon credentials over ssh. After logging in over ssh, I landed in a restricted shell, which was easily escaped with os.system. I discovered, that MySQL is running as root, which also allowed us to execute system commands through MySQL User Defined Functions.
+Netdiscover First of all, lets find the ip address of the vulnerable machine:</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 3 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-18-vulnhub_kioptrix_3_writeup/</link>
+      <pubDate>Wed, 18 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-18-vulnhub_kioptrix_3_writeup/</guid>
+      <description>Kioptrix 3 - Writeup Summary An easy machine, which can be exploited with a remote code execution vulnerability. While on the machine, we can gather logon credentials from the database, which can be used for ssh login. Privilege escalation can be done with executing a command with sudo.
+Netdiscover First of all, lets find the ip address of the vulnerable machine:
+root@kali:~# netdiscover Currently scanning: 192.168.60.0/16 | Screen View: Unique Hosts 3 Captured ARP Req/Rep packets, from 3 hosts.</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 2 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-17-vulnhub_kioptrix_2_writeup/</link>
+      <pubDate>Tue, 17 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-17-vulnhub_kioptrix_2_writeup/</guid>
+      <description>Kioptrix 2 - Writeup Summary Easy machine, which is vulnerable to SQL injection, that gives the possibility to get a reverse shell. While on the machine, we can execute a kernel exploit, that gives us root privileges.
+Netdiscover root@kali:~# netdiscover Currently scanning: 192.168.81.0/16 | Screen View: Unique Hosts 4 Captured ARP Req/Rep packets, from 3 hosts. Total size: 240 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.</description>
+    </item>
+    
+    <item>
+      <title>Kioptrix 1 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_1_writeup/</link>
+      <pubDate>Mon, 16 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2018-07-16-vulnhub_kioptrix_1_writeup/</guid>
+      <description>Kioptrix 1 - Writeup Summary Very easy machine which is vulnerable to remote code exeuction on samba. Maybe there are different ways too, but I haven&amp;rsquo;t tried out right now.
+Netdiscover root@kali:~# netdiscover Currently scanning: 192.168.116.0/16 | Screen View: Unique Hosts 6 Captured ARP Req/Rep packets, from 4 hosts. Total size: 360 _____________________________________________________________________________ IP At MAC Address Count Len MAC Vendor / Hostname ----------------------------------------------------------------------------- 192.168.56.1 0a:00:27:00:00:04 1 60 Unknown vendor 192.</description>
+    </item>
+    
+    <item>
+      <title>Training Resources</title>
+      <link>https://0x23b.github.io/posts/2018-07-04-training_resources/</link>
+      <pubDate>Tue, 03 Jul 2018 23:36:00 +0100</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/2018-07-04-training_resources/</guid>
+      <description>Here I want to share the resources, which I&amp;rsquo;am using for practice:
+Hacking  Hack The Box VulnHub Root Me CTF Time OverTheWire Exploit Exercises Microcorruption PentesterLab 
+Coding  Hackerrank Coding Game Code Fights 
+Others  Cybrary Linux Journey</description>
+    </item>
+    
+    <item>
+      <title>HTB Chatterbox - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2018-06-16-htb_chatterbox_writeup/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2018-06-16-htb_chatterbox_writeup/</guid>
+      <description>IP: 10.10.10.74 OS: Windows
+Nmap As my standard nmap run did not find any open ports, I ran a full scan:
+Standard ports:
+root@kali:~/HTB/Chatterbox# nmap -sC -sC -oA nmap 10.10.10.74 # Nmap 7.70 scan initiated Sun May 13 08:22:39 2018 as: nmap -sC -sC -oA nmap 10.10.10.74 Nmap scan report for 10.10.10.74 Host is up (0.024s latency). All 1000 scanned ports on 10.10.10.74 are filtered # Nmap done at Sun May 13 08:23:05 2018 -- 1 IP address (1 host up) scanned in 26.</description>
+    </item>
+    
+    <item>
+      <title>HTB Blocky - Write Up</title>
+      <link>https://0x23b.github.io/posts/hackthebox/2017-12-09-htb_blocky_writeup/</link>
+      <pubDate>Sat, 09 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/hackthebox/2017-12-09-htb_blocky_writeup/</guid>
+      <description>IP: 10.10.10.37 OS: Linux
+Nmap root@kali:~/HTB/Blocky# nmap -sC -sV -oA nmap 10.10.10.37 Starting Nmap 7.40 ( https://nmap.org ) at 2017–12–04 21:15 EST Nmap scan report for 10.10.10.37 Host is up (0.15s latency). Not shown: 996 filtered ports PORT STATE SERVICE VERSION 21/tcp open ftp ProFTPD 1.3.5a 22/tcp open ssh OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 2048 d6:2b:99:b4:d5:e7:53:ce:2b:fc:b5:d7:9d:79:fb:a2 (RSA) |_ 256 5d:7f:38:95:70:c9:be:ac:67:a0:1e:86:e7:97:84:03 (ECDSA) 80/tcp open http Apache httpd 2.</description>
     </item>
     
     <item>
@@ -50,16 +189,6 @@ from PIL import Imagei1 = Image.open(&amp;#34;A.png&amp;#34;)i2 = Image.open(&
       
       <guid>https://0x23b.github.io/posts/microcorruption/sydney/</guid>
       <description>Sydney Here we have four &amp;lsquo;cmp&amp;rsquo; instructions on two bytes of r15, respectively incrementing the offset by two each time. The first &amp;lsquo;cmp&amp;rsquo; checks, whether the first two bytes are 0x466a, the next two #0x6158 and so on. 448a &amp;lt;check_password&amp;gt;448a: bf90 6a46 0000 cmp	#0x466a, 0x0(r15)4490: 0d20 jnz	$+0x1c4492: bf90 5861 0200 cmp	#0x6158, 0x2(r15)4498: 0920 jnz	$+0x14449a: bf90 6741 0400 cmp	#0x4167, 0x4(r15)44a0: 0520 jne	#0x44ac &amp;lt;check_password+0x22&amp;gt;44a2: 1e43 mov	#0x1, r1444a4: bf90 6363 0600 cmp	#0x6363, 0x6(r15)44aa: 0124 jeq	#0x44ae &amp;lt;check_password+0x24&amp;gt;44ac: 0e43 clr	r1444ae: 0f4e mov	r14, r1544b0: 3041 ret</description>
-    </item>
-    
-    <item>
-      <title>Training Resources</title>
-      <link>https://0x23b.github.io/posts/2017-02-17-training_resources/</link>
-      <pubDate>Tue, 21 Mar 2017 19:25:00 +0100</pubDate>
-      
-      <guid>https://0x23b.github.io/posts/2017-02-17-training_resources/</guid>
-      <description>Here I want to share the resources, which I&amp;rsquo;am using for practice.
- http://www.overthewire.org/wargames/ http://vulnhub.com/ http://smashthestack.org/wargames.html https://pwnable.kr https://pwnable.tw https://exploit-exercises.com https://microcorruption.com https://backdoor.sdslabs.co</description>
     </item>
     
     <item>
