@@ -5,12 +5,17 @@
     <link>https://0x23b.github.io/tags/writeups/</link>
     <description>Recent content in Writeups on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
+<<<<<<< HEAD
     <lastBuildDate>Mon, 25 Feb 2019 00:00:00 +0000</lastBuildDate>
+=======
+    <lastBuildDate>Sat, 09 Feb 2019 00:00:00 +0000</lastBuildDate>
+>>>>>>> dea94fcb082ff877c4597c810c2199ea5a79c6b7
     
 	<atom:link href="https://0x23b.github.io/tags/writeups/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+<<<<<<< HEAD
       <title>Matrix: 1 - Writeup</title>
       <link>https://0x23b.github.io/posts/vulnhub/2019-20-25-vulnhub_matrix_1_writeup/</link>
       <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
@@ -20,6 +25,8 @@
     </item>
     
     <item>
+=======
+>>>>>>> dea94fcb082ff877c4597c810c2199ea5a79c6b7
       <title>Ypuffy - Writeup</title>
       <link>https://0x23b.github.io/posts/hackthebox/2019-02-09-htb_ypuffy_writeup/</link>
       <pubDate>Sat, 09 Feb 2019 00:00:00 +0000</pubDate>
