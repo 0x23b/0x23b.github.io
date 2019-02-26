@@ -5,10 +5,19 @@
     <link>https://0x23b.github.io/</link>
     <description>Recent content on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 25 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x23b.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Raven: 1 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2019-02-26-vulnhub_raven_1_writeup/</link>
+      <pubDate>Tue, 26 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2019-02-26-vulnhub_raven_1_writeup/</guid>
+      <description>Raven: 1 - Writeup Summary This machine was well constructed and straight forward, therefore I really enjoyed it. After finding wordpress on the web server, it can be enumerated in order to find out valid usernames. The usernames can then be used to bruteforce the password for the ssh login. While on the machine, we can find mysql credentials in the wordpress config file. Inside the database, we can find the password hash for the other user, which can be cracked within seconds.</description>
+    </item>
     
     <item>
       <title>Matrix: 1 - Writeup</title>
