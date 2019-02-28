@@ -5,10 +5,19 @@
     <link>https://0x23b.github.io/tags/vulnhub/</link>
     <description>Recent content in Vulnhub on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 26 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 27 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x23b.github.io/tags/vulnhub/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Raven: 2 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2019-02-27-vulnhub_raven_2_writeup/</link>
+      <pubDate>Wed, 27 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2019-02-27-vulnhub_raven_2_writeup/</guid>
+      <description>Raven: 2 - Writeup Summary Very similar to Raven: 1, as I discovered all vulnerabilities also with the previous machine, but went for the low hanging fruits. This time I had to take the harder part with exploiting PHP Mailer to have remote code execution. While on the machine, I saw that the MySQL database is still running as root. I was also able to use user defined functions, which gave me root.</description>
+    </item>
     
     <item>
       <title>Raven: 1 - Writeup</title>
