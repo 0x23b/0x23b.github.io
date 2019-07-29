@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://0x23b.github.io/tr/posts/2019-05-25-oscp-review/</loc>
+    <lastmod>2019-07-29T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x23b.github.io/posts/2019-05-25-oscp-review/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="tr"
+                href="https://0x23b.github.io/tr/posts/2019-05-25-oscp-review/"
+                />
+  </url>
+  
+  <url>
     <loc>https://0x23b.github.io/tr/about/</loc>
     <lastmod>2019-01-01T00:00:00+01:00</lastmod>
     <xhtml:link
@@ -19,7 +34,7 @@
   
   <url>
     <loc>https://0x23b.github.io/tr/</loc>
-    <lastmod>2019-01-01T00:00:00+01:00</lastmod>
+    <lastmod>2019-07-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -49,7 +64,56 @@
   </url>
   
   <url>
+    <loc>https://0x23b.github.io/tr/tags/oscp/</loc>
+    <lastmod>2019-07-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x23b.github.io/tags/oscp/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="tr"
+                href="https://0x23b.github.io/tr/tags/oscp/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://0x23b.github.io/tr/posts/</loc>
+    <lastmod>2019-07-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x23b.github.io/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="tr"
+                href="https://0x23b.github.io/tr/posts/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://0x23b.github.io/tr/tags/review/</loc>
+    <lastmod>2019-07-29T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x23b.github.io/tags/review/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="tr"
+                href="https://0x23b.github.io/tr/tags/review/"
+                />
+  </url>
+  
+  <url>
     <loc>https://0x23b.github.io/tr/tags/</loc>
+    <lastmod>2019-07-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"

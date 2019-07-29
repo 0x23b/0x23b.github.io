@@ -349,7 +349,7 @@ Query OK, 1 row affected (0.01 sec)
 mysql&gt; select * from foo into dumpfile '/usr/lib/mysql/plugin/ raptor_udf2.so';
 Query OK, 1 row affected (0.00 sec)
 
-mysql&gt; create function do_system returns integer soname raptor_udf2.so';
+mysql&gt; create function do_system returns integer soname 'raptor_udf2.so';
 Query OK, 0 rows affected (0.00 sec)
 
 mysql&gt; select * from mysql.func;

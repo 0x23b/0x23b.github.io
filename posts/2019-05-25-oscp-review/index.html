@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>OSCP Review</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">OSCP Review</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon">
+	<a href="https://0x23b.github.io/tr/posts/2019-05-25-oscp-review/">tr</a>
+</li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/2019-05-25-oscp-review/">OSCP Review</a></h4>
+    <h5>July 29, 2019</h5>
+    
+    <a href="https://0x23b.github.io/tags/oscp"><kbd class="item-tag">OSCP</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/review"><kbd class="item-tag">Review</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="an-amazing-journey-comes-to-an-end">An amazing journey comes to an end</h1>
+
+<p>After a year of preparing, two months of lab access with over 300 hours of study it is now official: I&rsquo;am an Offensive Security Certified Professional (OSCP)! But what does that mean and how was my journey? It took me about three months, to get my things together and write this blog post. Hopefully, while telling you about my journey I can provide you some information, that will help you preparing for OSCP.</p>
+
+<h1 id="what-is-oscp">What is OSCP?</h1>
+
+<p>You&rsquo;ve probably read already a ton of other reviews about what OSCP is, but I want to take a few lines to describe it in my own words: It is one of the most well-recognized and respected, but challenging certificates available in the field of IT security. To receive the certificate, you have to take the Penetration Testing with Kali (PWK) course, opt in for 30, 60 or 90 days and take part in a proctored exam, lasting 2x24 hours. The course itself provides you a pdf, video material and lab access, which makes OSCP such a great cert.</p>
+
+<h1 id="pdf-and-video-material">PDF and video material</h1>
+
+<p>Both pdf and video material are more entry level, teaching basic stuff like  essential tools, reverse shells and file transfer, but also some more advanced topics like client side attacks, port tunneling and bypassing antivirus software. I rushed through the pdf and skipped a lot of stuff so I was done on my third day. I haven&rsquo;t even touched the videos for almost the first 5 weeks, but in the end, I still learned from them. I was just too excited for the labs.</p>
+
+<h1 id="lab">Lab</h1>
+
+<p>The lab is that part of OSCP, which makes this certificate outstanding. Along with the course materials, you will receive a VPN connection pack, allowing you to access the OSCP network. In this network you have direct access to a  &ldquo;public network&rdquo; with a lot of machines with different operating systems and vulnerabilities. Some of the machines in the public network allow you to dig deeper in the network and access the IT and Development network. Again behind the IT network, you will face the Admin network, which should be your final destination.</p>
+
+<p>As you are facing a (fake) company network, some machines are linked together. There are machines, which can only be rooted through other machiens. Some  machines require client side attacks, others have credentials stored somewhere. Except for a few machines, rooting should not be the problem. The main difficulty is the post exploitation step. Have you looked everywhere? Have you checked every folder? Gathered all credentials? I had to go through each and every machine multiple times to collect everything necessary, to get further in the lab.</p>
+
+<p>You are not required to root every machine to get ready for the exam, but the more you root the more you get familiar with the process and the tools required. Also you will develop a sense to spot the correct vulnerable service.</p>
+
+<p>I rooted every machine in the lab except for one by day 59. The only remaining machine I got on the day I received my certificate. You can read  <a href="https://twitter.com/0x23B/status/1101980855906508801">here</a> my progress on twitter.</p>
+
+<h1 id="exam">Exam</h1>
+
+<p>The exam is another great and the most important component on the way to become an OSCP. You have to root 5 machines with different scores within 24 hours, where you need at least 70 points to pass. After the first 24 hours, you will have another 24 hours to deliver a professional penetration testing report and document your approach, so that a technically skilled reader can apply your path.</p>
+
+<p>I was freaking excited for the exam. I opted for 90 days, but took the exam on day 61, so that I have additional days to prepare for the second attempt. Although I had almost all machines in the lab, I was sure to fail the exam due to my anxiety. What if I fall into a rabbit hole? What if I can&rsquo;t spot the vulnerability? What if I forget to add necessary information? What if my report is not detailed enough? These kind of questions bothered me. So I wrote small notes on post-it&rsquo;s and had them on my monitor. Also I had a rough agenda about which order I want to take the machines and the time I want to use for each of them.</p>
+
+<p>At 09:45 AM I was ready to tackle my exam and did the initial steps with my proctor. I had to identify myself and realized that my ID was not valid anymore!!! I started to panic - but then I remembered, that I have my passport somewhere. After the first shock, I had to scan the room and was ready to go. 10:05, I still did not received any email with the exam connection pack for the dedicated exam network. I quickly informed the support and got the mail shortly after that. At about 10:10 I launched the port scans for all machines and started with the first machine, the BOF. 45 minutes in and that machine was rooted. After that, I took the 10 pointer and rooted that in under 10 minutes&hellip; Uhm&hellip; I was shocked again, but this time positively. Could it be that easy? I took a small break and went for one of the 20 pointer. It took me about an hour to root that machine as well. It was about 12:30 and I already had about 55 points. For the both remaining machines, I needed about an hour to get a low priv shell and had enough points to pass by about only 5 hours. I couldn&rsquo;t believe it, that I did the exam in that time! But that was not enough for me - I wanted to complete the journey without leaving anything behind. I took another break and started to root both remaining machines. My adrenaline level decreased and at that time I realized, that I was either blind or just lucky with the machines I rooted before. I was not able to get any further information in order to root the last machines. At 02:00 AM I gave up. I got enough points to pass in 5 hours, but was not able to root two machines in 10 hours. The euphory from the beginning transformed into frustration. I made sure to have collected everything necessary and informed my proctor that I want to terminate the exam. After confirming that I was sure, I went to bed, did the report the next day and submitted it.</p>
+
+<p>Only 3 days later I received the confirmatation, that I passed:</p>
+
+<blockquote>
+<p>Dear &hellip;,</p>
+
+<p>We are happy to inform you that you have successfully completed the Penetration Testing with Kali Linux certification exam and have obtained your Offensive Security Certified Professional (OSCP) certification.</p>
+</blockquote>
+
+<h1 id="preparation">Preparation</h1>
+
+<p>As written initially, I did a year of extensive preparation before taking OSCP. I did a lot of <a href="https://hackthebox.eu">HTB</a> and a few <a href="https://vulnhub.com">vulnhub</a> machines. I even took eJPT from <a href="https://www.elearnsecurity.com/certification/ejpt/">eLearnSecurity</a> when it had a big discount (it was not really necessary as OSCP also covers everything relevant). I almost watched every HTB video from <a href="https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA">ippsec</a>, read a ton of great OSCP reviews, watched OSCP Vlogs and took part in several <a href="https://ctftime.org">CTF&rsquo;s</a>. Some can tell, that this was an overkill of preparation and they might be right. But if you have absolutely no idea how the process and the tools are working, then you should not directly jump into OSCP. For me, it was more than enough preparation, so I had a relaxed time doing the lab.</p>
+
+<h1 id="tips">Tips</h1>
+
+<ul>
+<li>If you have a family and even children, plan your time wisely. Can you do OSCP during working hours? Do it! Can you sacrifice some sleep? Do it! But please, do not sacrifice your time with your family! Family comes first!</li>
+<li>You can do a lab report, explaining how you rooted 10 different machines along with the course exercises. This will give you 5 points for the exam. Do the lab report! You don&rsquo;t know, if you need those 5 points. I know a lot of people, who didn&rsquo;t do the lab report and failed, just becaused they missed 5 points. Do the lab report! Again, do it!</li>
+<li>Take a lot of notes and organize them accordingly. When I compare my first HTB notes and my last OSCP notes, there are universes in between. Actually, note taking is another skill, which you will learn during the journey.</li>
+<li>Don&rsquo;t fear the Buffer Overflow! The content is amazingly good! Before I took OSCP, I didn&rsquo;t liked BO that much, but now, it is one of my favorite type of vulnerability.</li>
+<li>The more machines you root, the more you will get familiar with the process and the tools. Focus on the public network first, before touching the other networks. Having done most of the public network will get you ready for the exam.</li>
+<li>Use the official forum and IRC. Don&rsquo;t hesitate in case of questions or if you don&rsquo;t know, how to tackle a machine. Most of the time, you will get an answer without any spoiler. Also you will make some great new friends!</li>
+<li>Write an agenda before taking the exam. When do you want to take which machine? Plan your breaks and USE THEM!</li>
+<li>You are allowed to use a screen recorder during your exam. Inform your proctor about it and use your favorite tool. You will be much more relaxed, as you can&rsquo;t miss anything. I used Snagit and configured it to take a screenshot every 2 seconds. I just uses 2 GB of space.</li>
+<li>Read different blogs from other OSCP&rsquo;s to get their view on this.</li>
+<li>Do a lot of backups of your VM and notes.</li>
+</ul>
+
+<h1 id="thanks">Thanks!</h1>
+
+<p>I want to thank my wife for supporting me, my colleagues for giving me some great tips, Offensive Security for delivering such a great content and you for reading this blog post!</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

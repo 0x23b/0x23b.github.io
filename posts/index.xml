@@ -5,10 +5,19 @@
     <link>https://0x23b.github.io/posts/</link>
     <description>Recent content in Posts on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 27 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x23b.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>OSCP Review</title>
+      <link>https://0x23b.github.io/posts/2019-05-25-oscp-review/</link>
+      <pubDate>Mon, 29 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/2019-05-25-oscp-review/</guid>
+      <description>An amazing journey comes to an end After a year of preparing, two months of lab access with over 300 hours of study it is now official: I&amp;rsquo;am an Offensive Security Certified Professional (OSCP)! But what does that mean and how was my journey? It took me about three months, to get my things together and write this blog post. Hopefully, while telling you about my journey I can provide you some information, that will help you preparing for OSCP.</description>
+    </item>
     
     <item>
       <title>Raven: 2 - Writeup</title>

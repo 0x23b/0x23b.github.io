@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>OSCP yorumum</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">OSCP yorumum</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/tr/">Anasayfa</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tr/about">Hakkımda</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tr/tags/">Etiketler</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tr/posts/">Yazılarım</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon">
+	<a href="https://0x23b.github.io/posts/2019-05-25-oscp-review/">en</a>
+</li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/tr/posts/2019-05-25-oscp-review/">OSCP yorumum</a></h4>
+    <h5>July 29, 2019</h5>
+    
+    <a href="https://0x23b.github.io/tags/oscp"><kbd class="item-tag">OSCP</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/review"><kbd class="item-tag">Review</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="muazzam-bir-serüvenin-sonunda">Muazzam bir serüvenin sonunda</h1>
+
+<p>Tam bir yıllık hazırlığın ve 300 saatin üzerinde geçirdiğim iki aylık lab erişimimin sonunda karar resmîleşti: Artık ben de Offensive Security Certified Professional (OSCP) oldum. Ama bu ne demek oluyor ve serüvenim nasıl geçti? Bu blogu yazmaya üç aydan sonra anca fırsat buldum ve umarım sizlere serüvenimden bahsederken hem OSCP hakkında bilgilendirmiş hem de hazırlıklarınızda yardımcı olmuş olurum.</p>
+
+<h1 id="oscp-nedir">OSCP nedir?</h1>
+
+<p>Muhtemeldir ki şimdiye kadar OSCP hakkında birçok yorum okumuşsunuzdur. Bana OSCP&rsquo;nin ne olduğuna dair kendi ifademle açıklık getirmeme izin verin: Siber güvenlik sektörünün belki de en tanınan, en saygın ve en zorlu sertifikalarından biridir OSCP. Bu sertifikayı elde edebilmek için 30, 60 veya 90 günlük Penetration Testing with Kali (PWK) hazırlık kursuna katılmak zorundasınız. Kursu tamamladıktan sonra, 2x24 saat süren bir denetimli sınava tabi tutuluyorsunuz. Kursun kendisi sizlere pdf, video ve lab erişimi veriyor ve böylece mükemmel bir sertifika elde etmiş oluyorsunuz.</p>
+
+<h1 id="pdf-ve-videolar">PDF ve videolar</h1>
+
+<p>Hem pdf&rsquo;in içeriği hem de videolar daha çok başlangıç seviyesinde bilgiler sunuyor. Mesela hangi tool&rsquo;lar nerede nasıl kullanılır, reverse shell nedir ve file transfer nasıl yapılır. Fakat bazı bilgiler de vardır ki, bunlar da üst seviye bilgileridir: Örneğin kullanıcı taraflı saldırılar, port tunneling ve anti virüs atlatma.</p>
+
+<p>Ben pdf&rsquo;i hızlıca es geçtim ve bazı yerleri okumadım bile. Böylece üçüncü günümde pdf&rsquo;i bitirmiş oldum. Videoları neredeyse besinci haftaya kadar hiç izlemedim bile ama neticede onlardan da bir şeyler öğrenmiş oldum. En kısa zaman içinde Lab&rsquo;e erişmeye çok istedim.</p>
+
+<h1 id="lab">Lab</h1>
+
+<p>Bu sertifikayı bu kadar seçkin kılan bölümlerden biridir lab erişimi. Kurs malzemeleri ile sizlere VPN bağlantı paketi veriliyor ve böylece OSCP ağına bağlanabiliyorsunuz. Bu ağa girdiğinizde sizlere direk erişilebilen bir sürü makine sunuluyor. Bu makineler farklı işletme sistemleri olmak üzere farklı güvenlik açıkları içeriyorlar. Bu ağda bazı makineler da var ki, bunlar size daha derinlere dalmanıza imkân veriyor. Acık ayin arkasında hem IT ağı hem de Developer ağı ve yine IT ağının ardında son durak olan Admin ağı bulunuyor.</p>
+
+<p>Ağ (sahte) bir şirket ağı gibi tasarlanmış ve böylece bazı makineler birbirine bağlı oluyor. Dolaysı ile bazı makineleri belirli sırada ele zorunda oluyorsunuz. Bazı makinelerde kullanıcıya saldırmalı, diğerlerinde ise kimlikleri ele geçirmelisiniz. Birkaç makine hariç, makineleri ele geçirmek o kadar da zor değil aslında. Asil sorun, makineyi ele geçirdikten sonra edindiğiniz bilgiler. Her yere baktınız mı? Her klasörü açtınız mı? Her kimliği ele geçirdiniz mi? Bütün bilgileri ele geçirmek için her makineyi birkaç defa ziyaret etmeliydim. Böylece bir sürü bilgi topladım ve lab&rsquo;de devam edebildim.</p>
+
+<p>Sınava hazırlanmanız için her makineyi ele geçirmenize gerek yok fakat ne kadar çok makine ele geçirirseniz o kadar kârlısınız demektir. Böylece hem eliniz hem isleme hem de tool&rsquo;lara daha yatkın olur. Ayrıca zafiyetleri tespit etmeye gözünüz aşina olur.</p>
+
+<p>Ben biri hariç, tüm makineleri 59&rsquo;uncu günümde ele geçirdim. Sona kalan makineyi da sertifikayı elde ettiğim gün düşürdüm. Twitter&rsquo;da serüvenimi an be an yazdım. <a href="https://twitter.com/0x23B/status/1101980855906508801">Buradan</a> okuyabilirsiniz.</p>
+
+<h1 id="sınav">Sınav</h1>
+
+<p>Sınav bu sertifikanın en önemli bölümü. 24 saat içinde farklı puanlar veren 5 makineyi ele geçirmeniz gerekiyor. Sınavı kazanmanız için ise, en az 70 puan almak zorundasınız. İlk 24 saat ‘den sonra, ikinci bir aşamada yine 24 saat içinde yaptıklarınızı profesyonel bir penetrataion test raporu halinde sunmanız gerekiyor.</p>
+
+<p>Sınav için bir hayli heyecanlıydım. Öyle ki, 90 günlük maceranın 61. gününde sınava katildim ve ikinci bir girişim halinde hazırlık için biraz zamanım olsun dedim. Lab&rsquo;de her makineyi ele geçirmeme rağmen sınavı kaybedeceğimden emindim. O kadar heyecan yani&hellip; Ya tavsan deliğine düşersem? Ya zafiyeti göremezsem? Ya rapora yeterli bilgi eklemezsem? Bu sorular beni rahat bırakmıyordu. Böylece küçük notlar yazıp ekranımın kenarına yapıştırdım. Ayrıca kaba bir gündem halinde hangi makineyi ne zaman yapacağıma ve ne zaman mola vereceğime dair not aldım.</p>
+
+<p>Sabah saat 09:45&rsquo;de sınav için hazırdım. Denetleyici ile ilk işlemleri tamamlarken, kimlik tespitinde kimliğimin geçersiz olduğunu fark ettim! Eyvahlar olsun! Birden panik oldum ama kısa bir müddet sonra bir yerlerde pasaportumun olduğunu hatırladım. İlk soku atlatıp odayı taradıktan sonra sınava başlayabilirdim. 10:05&rsquo;de hala sınav için erişim paketi gelmemişti ve bunu hemen support&rsquo;a bildirdim ve kısa bir süre sonra sınava nihayet başlayabildim. Saat 10:10 civarı tüm makineler için port taramasını başlattım ve direk buffer overflow makinesini ele aldım. 45 dakika sürmedi ve ilk makinemi ele geçirdim. Ardından 10 puanlık makineye başladım ve 10 dakikada bu makineyi da düşürdüm&hellip; Yine bir sok yaşadım, fakat bu sefer olumlu bir sok&hellip; O kadar korktuğum sınav bu kadar kolay mıydı? Kısa bir mola vermeye karar verdim ve ardından 20 puanlık makineye başladım. Bir saat içinde üçüncü makinemi ele geçirdim. Saat 12:30 civarı idi ve elimde 55 puan vardı. Geriye kalan her iki makine için bir Saat’te düşük yetkili kullanıcıyı ele geçirdim. Böylece 5 saat içinde sınavı geçmek için yeterince puana sahip oldum. Sınavı bu kadar kısa bir sürede geçtiğime inanamadım. Ama bu benim için yeterli değildi ve bu serüveni tamamıyla bitirmek istiyordum. Üzerime bir rahatlık çöktü ve o anda sunu fark ettim: Ya kördüm ya da diğer makinelerle çok şanslı. Geriye kalan makineleri ele geçirmeye dair hiçbir ip ucu bulamadım. Gece saat 02:00 sularında pes ettim. Sınavı geçmeye yeterli puanı 5 Saat’te elde etmeme rağmen geriye kalan iki makineyi 10 saat içinde ele geçiremedim. Bastaki coşku birden bezginliğe dönüştü. Tüm gerekli bilgileri topladıktan sonra denetleyiciyi sınavı bitirmek istediğime dair bildirdim. Son bir kez onayladıktan sonra, sınavı bitirdim, yatağa girdim ve ertesi gün raporu yazıp gönderdim.</p>
+
+<p>Üç gün sonra sınavı geçtiğime dair mail ulaştı:</p>
+
+<blockquote>
+<p>Dear &hellip;,</p>
+
+<p>We are happy to inform you that you have successfully completed the Penetration Testing with Kali Linux certification exam and have obtained your Offensive Security Certified Professional (OSCP) certification.</p>
+</blockquote>
+
+<h1 id="hazırlıklar">Hazırlıklar</h1>
+
+<p>Basta yazdığım üzere, OSCP&rsquo;ye başlamadan önce tam bir yıllık yoğun bir hazırlık geçirdim. Birçok <a href="https://hackthebox.eu">HTB</a> ve <a href="https://vulnhub.com">vulnhub</a> makinelerini ele geçirdim. Hatta kampanyada olan eJPT <a href="https://www.elearnsecurity.com/certification/ejpt/">eLearnSecurity</a> sertifikasını elde ettim (neticede OSCP de ayni ve daha fazla bilgileri veriyor). Hemen hemen her <a href="https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA">ippsec&rsquo;in</a> her HTB videosunu izledim, birçok mükemmel OSCP yorumu okudum, VLOG izledim ve birkaç <a href="https://ctftime.org">CTF&rsquo;e</a> katildim. Kimi için gereğinden fazla hazırlık yaptım ve bunu söylemekte haklı olabilirler. Ama bu konuya dair hiçbir bilginiz yoksa, hazırlık yapmadan önce OSCP&rsquo;ye başlamanızı tavsiye etmem. Benim için yeterince hazırlık oldu ve böylece rahat bir serüven geçirdim.</p>
+
+<h1 id="öğütler">Öğütler</h1>
+
+<ul>
+<li>Aileniz ve hatta çocuklarınız varsa, vaktinizi ona göre ayarlayın. OSCP&rsquo;yi is yerinde yapma imkânınız var mı? Varsa yapın. Uykunuzu kurban edebilirmisiniz? Edebilirseniz edin. Bir şeyleri kurban edin, ama lütfen hiçbir koşulda ailenizi ihmal etmeyin.</li>
+<li>Muhakkak Lab raporu hazırlayın. Ödevlerle beraber 10 farklı makineyi ele geçirdiğinize dair rapor hazırladığınızda sınav için 5 puan kazanmış oluyorsunuz. Muhakkak bunu yapın. Aksi taktirde 5 puana muhtaç olabilirsiniz. Tanıdığım birçok kişi bu 5 puan yüzünden sınavı kaybetti. Raporu hazırlayın!</li>
+<li>Birçok not alin ve bunları güzelce organize edin. İlk yazdığım HTB notları ile son yazdığım OSCP notları karşılaştırdığımda dağlar kadar fark olduğunu gördüm. Bu yeteneği de serüveninizde elde edeceksinizdir.</li>
+<li>Buffer overflow&rsquo;dan korkmayın. Bu konuda size verilen bilgiler gerçekten mükemmel. OSCP&rsquo;ye başlamadan önce, buffer overflow&rsquo;u sevmezdim. Fakat şimdi en sevdiğim zafiyet türlerinden biri oldu.</li>
+<li>Ne kadar çok makineyi ele geçirirseniz, eliniz o kadar yatkın olur. Diğer ağlara dalmadan önce, açık ağa öncülük verin. Açık ağda çoğu makineyi ele geçirmeniz sizi sınava iyi bir şekilde hazırlayacaktır.</li>
+<li>Forum&rsquo;u ve IRC&rsquo;yi kullanın. Sorunuz olduğunda veya bir yerde takıldığınızda oraya bildirmenizden çekinmeyin. Yüksek olasılıkla sizlere yardımcı olunacaktır. Ayrıca birkaç yeni arkadaş da edineceksinizdir.</li>
+<li>Sınava başlamadan önce bir gündem oluşturun. Ne zaman hangi makineyi yapmak istiyorsunuz? Ne zaman mola vereceksiniz? Kesinlikle molalarınızı kullanın.</li>
+<li>Sınav esnasında ekranınızı kaydetmeye ruhsatlısınız. Denetleyicinizi bunu bildirin ve en sevdiğiniz tool&rsquo;u kullanın. Sınav’da çok daha rahat olacaksınız, çünkü yeterince görüntü kaydı yaptığınıza dair endişeniz olmayacak. Ben Snagit kullandım ve her iki saniyede görüntü kaydı aldım. Sadece 2 GB harcadım.</li>
+<li>Farklı OSCP yorumları okuyun.</li>
+<li>Sik sik hem VM hem de notlarınızı backup yapın</li>
+</ul>
+
+<h1 id="şükranlarım">Şükranlarım!</h1>
+
+<p>Basta beni destekleyen eşim olmak üzere, bana birçok öğüt veren is arkadaşlarıma, böylece mükemmel içerik hazırlayan Offensive Security&rsquo;ye ve bu yorumu okuyan sizlere şükranlarımı arz etmek istiyorum!</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

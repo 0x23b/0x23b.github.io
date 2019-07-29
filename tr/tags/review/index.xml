@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>0x23b&#39;nin blogu</title>
-    <link>https://0x23b.github.io/tr/</link>
-    <description>Recent content on 0x23b&#39;nin blogu</description>
+    <title>Review on 0x23b&#39;nin blogu</title>
+    <link>https://0x23b.github.io/tr/tags/review/</link>
+    <description>Recent content in Review on 0x23b&#39;nin blogu</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 29 Jul 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://0x23b.github.io/tr/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://0x23b.github.io/tr/tags/review/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       <guid>https://0x23b.github.io/tr/posts/2019-05-25-oscp-review/</guid>
       <description>Muazzam bir serüvenin sonunda Tam bir yıllık hazırlığın ve 300 saatin üzerinde geçirdiğim iki aylık lab erişimimin sonunda karar resmîleşti: Artık ben de Offensive Security Certified Professional (OSCP) oldum. Ama bu ne demek oluyor ve serüvenim nasıl geçti? Bu blogu yazmaya üç aydan sonra anca fırsat buldum ve umarım sizlere serüvenimden bahsederken hem OSCP hakkında bilgilendirmiş hem de hazırlıklarınızda yardımcı olmuş olurum.
 OSCP nedir? Muhtemeldir ki şimdiye kadar OSCP hakkında birçok yorum okumuşsunuzdur.</description>
-    </item>
-    
-    <item>
-      <title>Hakkımda</title>
-      <link>https://0x23b.github.io/tr/about/</link>
-      <pubDate>Tue, 01 Jan 2019 00:00:00 +0100</pubDate>
-      
-      <guid>https://0x23b.github.io/tr/about/</guid>
-      <description>OSCP, eJPT Kıdemli sızma testi uzmanı ve Capture The Flag oyuncusu Eski yazılımcı (C, C++) Hack The Box ve Vulnhub bağımlısı</description>
     </item>
     
   </channel>
