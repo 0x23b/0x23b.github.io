@@ -5,10 +5,28 @@
     <link>https://0x23b.github.io/tags/vulnhub/</link>
     <description>Recent content in Vulnhub on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 27 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x23b.github.io/tags/vulnhub/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Matrix: 3 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2019-08-06-vulnhub_matrix_3_writeup/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2019-08-06-vulnhub_matrix_3_writeup/</guid>
+      <description>Matrix: 3 - Writeup Summary This is the 3rd machine of the Matrix series, which I really enjoyed. Although it should be pretty straight forward, it took me quite a while, to finish this machine. First, we have to find credentials running through several directories on a web server. With those credentials, we can access another web server and download an executable, that includes username and password. With those credentials, we can access the system through ssh.</description>
+    </item>
+    
+    <item>
+      <title>Matrix: 2 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2019-07-30-vulnhub_matrix_2_writeup/</link>
+      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2019-07-30-vulnhub_matrix_2_writeup/</guid>
+      <description>Matrix: 2 - Writeup Summary This box has several port open, which almost all needs to be exploited in order to get root user. First we have to use directory traversal on a web server to get user names, which we can use to login through ShellInABox. Once on the system, we can find and crack the credentials of another user, which can be used to authenticate on another web server.</description>
+    </item>
     
     <item>
       <title>Raven: 2 - Writeup</title>
