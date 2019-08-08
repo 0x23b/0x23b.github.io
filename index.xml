@@ -5,10 +5,19 @@
     <link>https://0x23b.github.io/</link>
     <description>Recent content on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 06 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x23b.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Symfonos: 1 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2019-08-08-vulnhub_symfonos1_writeup/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2019-08-08-vulnhub_symfonos1_writeup/</guid>
+      <description>Symfonos: 1 - Writeup Summary A great OSCP-like machine! It requires anonymous authentication on SMB, which leads to a hint. With that hint, a directory can be found on the web server, that leads to a Wordpress blog. This blog has several plugins installed, where two of them lead to local file inclusion. With log injection, the LFI turns into a remote code execution and system access is granted. Privilege escalation is done via an SUID bit enabled binary, that calls curl within.</description>
+    </item>
     
     <item>
       <title>Matrix: 3 - Writeup</title>

