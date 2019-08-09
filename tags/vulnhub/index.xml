@@ -5,10 +5,19 @@
     <link>https://0x23b.github.io/tags/vulnhub/</link>
     <description>Recent content in Vulnhub on 0x23b&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 08 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x23b.github.io/tags/vulnhub/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Symfonos: 2 - Writeup</title>
+      <link>https://0x23b.github.io/posts/vulnhub/2019-08-09-vulnhub_symfonos_2_writeup/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x23b.github.io/posts/vulnhub/2019-08-09-vulnhub_symfonos_2_writeup/</guid>
+      <description>Symfonos: 2 - Writeup Summary This was an awesome and fun machine - absolutely OSCP like! Like in the 1st version, we have to login anonymously to SMB in order to read a log file, which includes a username. After bruteforcing the password of that user, we can login via ssh. While on the system, we find out, that a webserver is running locally, which we have to access remotely via port forwarding.</description>
+    </item>
     
     <item>
       <title>Symfonos: 1 - Writeup</title>
